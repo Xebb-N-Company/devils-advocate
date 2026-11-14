@@ -1257,13 +1257,2936 @@ var TERMS_KEY="xebb-keel-terms";function termsOk(){try{return __xebbLocal.getIte
 function UQ(e){TQ(),$Z=e,e&&(MKT.nextAt=Math.min(MKT.nextAt,Date.now()+1500)),__xebbLocal.setItem(FZ,e?"1":"0"),liveNote(e?"Live armed in "+(keelMode==="flow"?"Flow":keelMode==="classic"?"Classic":keelMode==="fiveten"?"5/10":keelMode==="inferno"?"Inferno":"Devil")+" mode, same rules as paper"+(L2.flow?": buy on buy pressure plus volume acceleration, 25% of equity each (max 4), 6% stop, 4% trail, out when flow flips.":L2.classic?": up "+(L2.entry*100).toFixed(1)+"% from the reference = buy, full cash split, sell "+(L2.stop*100).toFixed(1)+"% under entry"+(L2.trailArm<1?", "+(L2.trail*100).toFixed(0)+"% trail once up "+(L2.trailArm*100).toFixed(0)+"%.":"."):": breakout entries, a third of equity per position (max 3), ladder exits, volatility stops, confirmed launches at 10%."):"Live stopped.","gold"),bQ(),xQ()}
 async function WQ(e){TQ();let t=deskAcct();if(!t)throw Error("Desk key is not ready.");if(sQ)throw Error("Wait for the current trade to finish.");sQ=!0,$Z=!1,__xebbLocal.setItem(FZ,"0"),eQ="Withdrawing",tQ="",xQ();let n=[];try{await AQ(),lQ-=uQ,bQ();for(let r of liveAllCoins()){let i=await liveBalance(r.address,t.address);if(i<=0n)continue;if(r.symbol==="WETH"){let e=await OQ().writeContract({address:zZ,abi:qZ,functionName:"withdraw",args:[i]});await XZ.waitForTransactionReceipt({hash:e}),n.push("Unwrapped WETH.");continue}let a=await OQ().writeContract({address:r.address,abi:KZ,functionName:"transfer",args:[e,i]});await XZ.waitForTransactionReceipt({hash:a}),n.push("Sent "+r.symbol+" to "+e+".")}let r=await liveBalance(BZ,t.address);if(r>0n){let i=await OQ().writeContract({address:BZ,abi:KZ,functionName:"transfer",args:[e,r]});await XZ.waitForTransactionReceipt({hash:i}),n.push("Sent USDC to "+e+".")}let i=await XZ.getBalance({address:t.address}),a=await XZ.getGasPrice()*21000n*2n;if(!t.cbw&&i>a){let t=await OQ().sendTransaction({to:e,value:i-a});await XZ.waitForTransactionReceipt({hash:t}),n.push("Sent ETH to "+e+".")}return liveEntries={},liveRef={},liveLots={},n.length===0&&n.push("Nothing on the desk to withdraw."),liveNote("Withdrew the desk to "+e+".","gold"),bQ(),n}catch(e){throw tQ=e instanceof Error?e.message:"Withdraw failed.",e}finally{sQ=!1,eQ="",await AQ()}}
 
-function GQ({className:e,alt:t}){return(0,V.jsx)(`span`,{className:`inline-block overflow-hidden rounded-full bg-ps-chrome ${e??``}`,children:(0,V.jsx)(`img`,{src:Mq,alt:t,className:`size-full object-cover`})})}function KQ({children:e}){return(0,V.jsxs)(`p`,{className:`text-ps-gold text-sm leading-relaxed text-pretty`,children:[`WARNING: `,e]})}function $({k:e,v:t,tone:n=`bright`}){let r={bright:`text-ps-bright`,ok:`text-ps-ok`,bad:`text-ps-bad`,gold:`text-ps-gold`,info:`text-ps-info`}[n];return(0,V.jsxs)(`div`,{className:`flex flex-col gap-0.5 border-b border-ps-fg/10 py-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/75 text-sm`,children:e}),(0,V.jsx)(`span`,{className:`${r} text-sm tabular-nums sm:text-right`,children:t})]})}function qQ({label:e,value:t,onChange:n,suffix:r}){return(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 mb-1 block`,children:e}),(0,V.jsxs)(`span`,{className:`flex min-h-11 items-center border border-ps-fg/25 bg-black/25`,children:[(0,V.jsx)(`input`,{value:t,onChange:e=>n(e.target.value),inputMode:`decimal`,className:`min-w-0 flex-1 bg-transparent px-3 py-2 text-ps-bright outline-none placeholder:text-ps-fg/40`}),r?(0,V.jsx)(`span`,{className:`pr-3 text-ps-fg/60`,children:r}):null]})]})}function JQ({children:e,onClick:t,tone:n=`gold`,disabled:r}){let i={gold:`border-ps-gold text-ps-gold hover:bg-ps-gold/10`,bad:`border-ps-bad text-ps-bad hover:bg-ps-bad/10`,plain:`border-ps-fg/30 text-ps-fg hover:bg-ps-fg/10`}[n];return(0,V.jsx)(`button`,{type:`button`,disabled:r,onClick:t,className:`min-h-11 border px-3 py-2 text-left text-sm disabled:opacity-40 ${i}`,children:e})}function YQ({result:e}){return e?(0,V.jsx)(`p`,{className:`text-sm leading-relaxed ${e.ok?`text-ps-ok`:`text-ps-bad`}`,children:e.detail}):null}function XQ(e){return Number(e.trim())}var ZQ=[[`Start-Welcome`,`Banner and what this host is`],[`Connect-Wallet`,`Connect a wallet and withdraw LUCIFER`],[`Invoke-AgenticTrading`,`Wallet trading bot`],[`Invoke-LuciferMiner`,`Proof-of-work benchmark`],[`Invoke-LuciferBurn`,`Pyre — burn LUCIFER and keep a note`],[`Get-Art`,`One handmade NFT after the mine and burn goals`],[`Get-Tokenomics`,`Allocations`],[`Get-Contract`,`Source. Optional name, e.g. Get-Contract LuciferPyre`],[`Get-WhitePaper`,`White paper`]];function QQ({onRun:e}){return(0,V.jsxs)(`div`,{className:`flex flex-col gap-4`,children:[(0,V.jsxs)(`div`,{className:`flex flex-col gap-4 sm:flex-row sm:items-center`,children:[(0,V.jsx)(GQ,{className:`size-28 shrink-0 border border-ps-fg/30`,alt:`Devil's Advocate emblem: a grinning blond kid with red horns and a pitchfork in a grey hoodie, ringed in green.`}),(0,V.jsxs)(`div`,{children:[(0,V.jsx)(`p`,{className:`text-ps-info text-sm`,children:`Devil's Advocate · $LUCIFER token cover`}),(0,V.jsx)(`h1`,{className:`text-ps-bright text-2xl font-bold text-balance`,children:`Devil's Advocate`}),(0,V.jsx)(`p`,{className:`text-ps-gold`,children:`$LUCIFER — Mine. Burn. Trade.`})]})]}),(0,V.jsxs)(`p`,{className:`max-w-3xl text-sm leading-relaxed text-pretty`,children:[`$LUCIFER is a hard-capped ERC-20 on Base. `,c_(Qg),` total, `,18,` decimals. `,c_($g),` is mined, `,65,` percent, at `,100,` LUCIFER a solution. `,c_(e_),` is minted to the treasury at launch. Supply leaves through burn and the pyre. A wallet that mines `,c_(n_),` solutions and burns `,c_(r_),` `,`LUCIFER is written to the handmade ledger. The NFT is made by hand and sent to that address.`]}),(0,V.jsx)(KQ,{children:`Pre-launch. The Base contracts, deploy script and liquidity script are written, tested, and shown here. Nothing is deployed yet. Wallet actions are a local preview ledger.`}),(0,V.jsx)(`ul`,{className:`flex flex-col gap-1`,children:ZQ.map(([t,n])=>(0,V.jsx)(`li`,{children:(0,V.jsxs)(`button`,{type:`button`,onClick:()=>e(t),className:`min-h-11 w-full text-left text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-gold`,children:t}),(0,V.jsxs)(`span`,{className:`text-ps-fg/80`,children:[` — `,n]})]})},t))})]})}var $Q=8;function e$({label:e,value:t,goal:n,unit:r}){let i=o_(t,n),a=Math.min(t,n);return(0,V.jsxs)(`div`,{children:[(0,V.jsxs)(`div`,{className:`mb-1 flex items-baseline justify-between gap-3 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright`,children:e}),(0,V.jsxs)(`span`,{className:`text-ps-fg/80 tabular-nums`,children:[s_(a,a>=100?0:2),` / `,c_(n),` `,r]})]}),(0,V.jsx)(`div`,{className:`border-ps-fg/30 h-4 border bg-black`,role:`progressbar`,"aria-valuemin":0,"aria-valuemax":100,"aria-valuenow":Math.round(i*100),"aria-label":e,children:(0,V.jsx)(`div`,{className:`bg-ps-gold h-full`,style:{width:`${i*100}%`}})})]})}function t$({address:e}){let[t,n]=(0,B.useState)(!1);return(0,V.jsx)(`button`,{type:`button`,className:`border-ps-fg/30 text-ps-gold hover:border-ps-gold min-h-11 shrink-0 border px-3 text-sm`,onClick:()=>{navigator.clipboard.writeText(e).then(()=>{n(!0),window.setTimeout(()=>n(!1),1200)})},children:t?`Copied`:`Copy`})}function n$(){return(0,V.jsx)(`div`,{className:`lu-stage flex w-full justify-center py-2`,children:(0,V.jsxs)(`div`,{className:`lu-coin relative size-56`,children:[Array.from({length:72},(e,t)=>(0,V.jsx)(`span`,{className:t%2==0?`lu-ridge`:`lu-ridge is-groove`,style:{transform:`rotateZ(${t*5}deg) translateY(-7rem) rotateX(90deg)`}},t)),(0,V.jsx)(GQ,{className:`lu-face lu-obverse size-full`,alt:`Concept NFT, obverse: the Devil's Advocate mascot, a grinning blond kid with red horns and a pitchfork, ringed in green.`}),(0,V.jsxs)(`div`,{className:`lu-face lu-reverse`,children:[(0,V.jsxs)(`svg`,{viewBox:`0 0 100 100`,className:`lu-fork`,"aria-hidden":!0,children:[(0,V.jsx)(`path`,{d:`M50 92V38`}),(0,V.jsx)(`path`,{d:`M30 14v18q0 10 10 10h20q10 0 10-10V14`}),(0,V.jsx)(`path`,{d:`M50 10v32`}),(0,V.jsx)(`path`,{d:`M26 20l4-8 4 8M46 16l4-8 4 8M66 20l4-8 4 8`})]}),(0,V.jsx)(`p`,{className:`lu-ticker`,children:`$LUCIFER`}),(0,V.jsx)(`p`,{className:`lu-sub`,children:`MINE · BURN · TRADE`}),(0,V.jsx)(`p`,{className:`lu-no`,children:`No. 001 · BASE`})]}),(0,V.jsx)(`span`,{className:`lu-rim lu-rim-front`}),(0,V.jsx)(`span`,{className:`lu-rim lu-rim-back`})]})})}function r$(){let e=K_(),t=e.ledger.mined/100,n=e.ledger.burned,r=t+1e-9>=2500&&n+1e-9>=25e4;return(0,V.jsxs)(`div`,{className:`flex flex-col gap-4`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`One handmade mark.`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`No tiers and no mint. Finish both goals and the wallet is written to the ledger. The NFT is made by hand and sent to that address. Mine `,c_(n_),` solutions and burn `,c_(r_),` LUCIFER.`]}),(0,V.jsx)(n$,{}),(0,V.jsx)(e$,{label:`Mine`,value:t,goal:n_,unit:`solutions`}),(0,V.jsx)(e$,{label:`Burn`,value:n,goal:r_,unit:`LUCIFER`}),(0,V.jsx)(`p`,{className:`text-sm ${r?`text-ps-gold`:`text-ps-fg/70`}`,children:r?`${e.ledger.qualified[0]?.address??`This wallet`} has the mark.`:`This wallet is still working toward the mark.`}),(0,V.jsxs)(`div`,{className:`border-ps-fg/20 flex flex-col gap-2 border-t pt-3`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:`Handmade ledger`}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Wallets that finished both goals. Copy an address and send the handmade NFT there.`}),e.ledger.qualified.length===0?(0,V.jsx)(`p`,{className:`text-sm`,children:`No wallet has reached the mark.`}):(0,V.jsx)(`ul`,{className:`flex flex-col gap-2`,children:e.ledger.qualified.map(e=>(0,V.jsxs)(`li`,{className:`flex items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright min-w-0 flex-1 truncate font-mono text-sm`,children:e.address}),(0,V.jsx)(t$,{address:e.address})]},e.address))})]})]})}function i$(){let e=K_(),t=Q_(),[n,r]=(0,B.useState)(null),i=Math.max(0,t.found-t.credited),a=Array.from({length:32},(e,n)=>(t.hashes+n)%7==0);return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Defragment the chain. Earn LUCIFER.`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`Era-0 reward is `,$_,` LUCIFER per solution, and it halves every `,c_(t_),` solutions. The series approaches `,c_($g),`. This host searches a benchmark target of `,ev,`, about `,$Q,` bits easier than genesis `,232,`. Mainnet still aims at one solve every 10 minutes.`]}),(0,V.jsx)(`div`,{className:`grid grid-cols-8 gap-1`,"aria-hidden":!0,children:a.map((e,n)=>(0,V.jsx)(`span`,{className:`flex h-5 items-center justify-center text-xs ${e&&t.running?`text-ps-gold`:`text-ps-fg/30`}`,children:e&&t.running?`█`:`░`},n))}),(0,V.jsx)($,{k:`Hashrate`,v:t.running?`${c_(t.hashrate)} H/s`:t.hashes>0?`stopped`:`idle`,tone:`info`}),(0,V.jsx)($,{k:`Hashes`,v:c_(t.hashes)}),(0,V.jsx)($,{k:`Solutions`,v:`${c_(t.found)} found · ${c_(i)} unsubmitted`,tone:`gold`}),(0,V.jsx)($,{k:`Submitted`,v:`${s_(e.ledger.mined/100,0)} / ${c_(n_)} toward the mark`,tone:`gold`}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[(0,V.jsx)(JQ,{onClick:()=>t.running?t.stop():t.start(),children:t.running?`Stop-LuciferMiner`:`Start-LuciferMiner`}),(0,V.jsx)(JQ,{disabled:i<=0,onClick:()=>{let n=i,a=e.creditMine(n);a.ok&&t.markCredited(t.credited+n),r(a)},children:i>0?`Submit-Solution (${i})`:`Submit-Solution`})]}),(0,V.jsx)(YQ,{result:n}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Typical browser rate is well under a miner. CPU-fair. One tab.`})]})}function a$(){let e=K_(),t=H_(),[n,r]=(0,B.useState)(``),[i,a]=(0,B.useState)(null),o=s_(e.ledger.balance,4);return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Connect a wallet. Withdraw LUCIFER.`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`Connect the wallet that should hold the mined balance. Withdraw assigns the spendable preview balance to that address. The token is not on Base yet, so this does not broadcast a transfer.`}),(0,V.jsx)($,{k:`Wallet`,v:t.address??`not connected`,tone:t.address?`gold`:`bright`}),(0,V.jsx)($,{k:`Network`,v:t.address?t.chain:`Base`,tone:`info`}),(0,V.jsx)($,{k:`Spendable`,v:`${o} LUCIFER`,tone:`gold`}),(0,V.jsx)($,{k:`Withdrawn`,v:`${s_(e.ledger.withdrawn,4)} LUCIFER`}),t.error?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:t.error}):null,(0,V.jsx)(U_,{}),(0,V.jsx)(qQ,{label:`Amount to withdraw`,value:n,onChange:r,suffix:`LUCIFER`}),(0,V.jsx)(JQ,{disabled:!t.address||e.ledger.balance<=0,onClick:()=>a(e.withdraw(XQ(n||String(e.ledger.balance)))),children:`Invoke-LuciferWithdraw`}),(0,V.jsx)(YQ,{result:i}),e.ledger.payouts.length>0?(0,V.jsx)(`ul`,{children:e.ledger.payouts.map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright tabular-nums`,children:[s_(e.amount,4),` LUCIFER`]}),(0,V.jsx)(`span`,{className:`text-ps-fg`,children:` → `}),(0,V.jsx)(`span`,{className:`text-ps-gold font-mono`,children:e.address})]},`${e.address}-${e.at}`))}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`No withdrawals yet. Mine, submit, then withdraw to the connected wallet.`})]})}function o$(){let e=K_(),[t,n]=(0,B.useState)(`100`),[r,i]=(0,B.useState)(``),[a,o]=(0,B.useState)(null),s=(0,B.useMemo)(()=>new TextEncoder().encode(r).length,[r]);return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`The pyre. Burn is the utility.`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`LuciferPyre.burn(amount, note) pulls an allowance, destroys the tokens, and writes a permanent receipt: burner, amount, timestamp, and a note of at most `,140,` bytes. No fee. The token tells LuciferMarks. The NFT is handmade, and only after both goals. A direct burn() counts too.`]}),(0,V.jsx)($,{k:`Preview balance`,v:`${s_(e.ledger.balance,4)} LUCIFER`}),(0,V.jsx)($,{k:`Burned in this preview`,v:`${s_(e.ledger.burned,4)} / ${c_(r_)} LUCIFER toward the mark`,tone:`bad`}),(0,V.jsx)($,{k:`Pyre receipts`,v:String(e.ledger.receipts.length)}),(0,V.jsx)(qQ,{label:`Amount to burn`,value:t,onChange:n,suffix:`LUCIFER`}),(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsxs)(`span`,{className:`text-ps-fg/80 mb-1 flex justify-between`,children:[(0,V.jsx)(`span`,{children:`Note`}),(0,V.jsxs)(`span`,{className:s>140?`text-ps-bad`:`text-ps-fg/60`,children:[s,`/`,140,` bytes`]})]}),(0,V.jsx)(`textarea`,{value:r,onChange:e=>i(e.target.value),rows:3,maxLength:280,placeholder:`for the skyline`,className:`w-full border border-ps-fg/25 bg-black/25 px-3 py-2 text-ps-bright outline-none placeholder:text-ps-fg/40`})]}),(0,V.jsx)(JQ,{tone:`bad`,onClick:()=>o(e.burn(XQ(t),r)),children:`Invoke-LuciferBurn`}),(0,V.jsx)(YQ,{result:a}),e.ledger.receipts.length>0?(0,V.jsx)(`ul`,{children:e.ledger.receipts.map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bad`,children:[`#`,e.id]}),` `,(0,V.jsxs)(`span`,{className:`text-ps-bright tabular-nums`,children:[s_(e.amount,4),` LUCIFER`]}),e.note?(0,V.jsxs)(`span`,{className:`text-ps-fg`,children:[` — `,e.note]}):null]},e.id))}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`No receipts yet.`})]})}// Fill these in after mainnet deploy; the tokenomics page then reads live supply, burns, vesting and the LP burn from Base.
-var DEPLOYED={token:``,mine:``,pyre:``,vesting:``,lpTokenId:``},LU_ABI=[{type:`function`,name:`totalMinted`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`totalSupply`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`totalBurned`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`receiptCount`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`balanceOf`,stateMutability:`view`,inputs:[{type:`address`}],outputs:[{type:`uint256`}]},{type:`function`,name:`ownerOf`,stateMutability:`view`,inputs:[{type:`uint256`}],outputs:[{type:`address`}]},{type:`function`,name:`releasable`,stateMutability:`view`,inputs:[{type:`address`}],outputs:[{type:`uint256`}]}];
-function LiveChain(){let[e,t]=(0,B.useState)(null),[n,r]=(0,B.useState)(``);return(0,B.useEffect)(()=>{if(!DEPLOYED.token)return;let e=!1;(async()=>{try{let n=async(e,t,n)=>{try{return await XZ.readContract({address:e,abi:LU_ABI,functionName:t,args:n||[]})}catch{return null}},[r,i,a,o,s,c]=await Promise.all([n(DEPLOYED.token,`totalMinted`),n(DEPLOYED.token,`totalSupply`),DEPLOYED.pyre?n(DEPLOYED.pyre,`totalBurned`):null,DEPLOYED.pyre?n(DEPLOYED.pyre,`receiptCount`):null,DEPLOYED.vesting?n(DEPLOYED.token,`balanceOf`,[DEPLOYED.vesting]):null,DEPLOYED.lpTokenId?n(`0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1`,`ownerOf`,[BigInt(DEPLOYED.lpTokenId)]):null]);e||t({minted:r,supply:i,burned:a,receipts:o,vesting:s,lpOwner:c})}catch(t){e||r(t instanceof Error?t.message:`Could not read the chain.`)}})();return()=>{e=!0}},[]),DEPLOYED.token?(0,V.jsxs)(`div`,{className:`border border-ps-gold/40 bg-black/20 p-3 flex flex-col gap-1`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:`Live from Base`}),n?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:n}):e?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)($,{k:`Minted so far`,v:e.minted===null?`—`:`${c_(Math.round(liveNum(e.minted,18)))} / ${c_(Qg)}`}),(0,V.jsx)($,{k:`Circulating`,v:e.supply===null?`—`:c_(Math.round(liveNum(e.supply,18)))}),(0,V.jsx)($,{k:`Burned in the pyre`,v:e.burned===null?`—`:`${c_(Math.round(liveNum(e.burned,18)))}${e.receipts!==null?` · ${c_(Number(e.receipts))} receipts`:``}`,tone:`bad`}),(0,V.jsx)($,{k:`Still vesting`,v:e.vesting===null?`—`:c_(Math.round(liveNum(e.vesting,18)))}),(0,V.jsx)($,{k:`LP position owner`,v:e.lpOwner===null?`—`:e.lpOwner.toLowerCase()===`0x000000000000000000000000000000000000dead`?`0x…dEaD (burned)`:e.lpOwner,tone:e.lpOwner&&e.lpOwner.toLowerCase()===`0x000000000000000000000000000000000000dead`?`ok`:`bright`})]}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Reading Base…`})]}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Live supply, burns, vesting balance and the LP-burn proof appear here, read straight from Base, the moment the contracts are deployed and their addresses are filled in.`})}
-function s$(){return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsxs)(`h2`,{className:`text-ps-bright text-xl font-bold text-balance`,children:[c_(Qg),` LUCIFER. Not one more.`]}),(0,V.jsx)(LiveChain,{}),(0,V.jsxs)(`div`,{className:`flex h-4 overflow-hidden`,role:`img`,"aria-label":`Mining 65%, team 35%`,children:[(0,V.jsx)(`span`,{className:`bg-ps-info`,style:{width:`65%`}}),(0,V.jsx)(`span`,{className:`bg-ps-ok`,style:{width:`35%`}})]}),(0,V.jsxs)(`ul`,{className:`grid gap-1 text-sm sm:grid-cols-2`,children:[(0,V.jsxs)(`li`,{children:[(0,V.jsx)(`span`,{className:`text-ps-info`,children:`█`}),` Mining `,65,`% · `,c_($g)]}),(0,V.jsxs)(`li`,{children:[(0,V.jsx)(`span`,{className:`text-ps-ok`,children:`█`}),` Team `,35,`% · `,c_(e_)]})]}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-2 font-bold`,children:`Mining`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`Reward starts at 100 LUCIFER and halves every `,c_(t_),` solutions. That series approaches 65,000,000. The token cap refuses anything past it.`]}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-2 font-bold`,children:`Team`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`35,000,000 LUCIFER is the treasury allocation, split in the deploy transaction: 3,500,000 goes liquid to the treasury and is the exact amount the liquidity script pairs with 0.25 ETH in the burned Uniswap pool, and 31,500,000 is minted into LuciferVesting, an OpenZeppelin vesting wallet with a 90-day cliff and an 18-month linear release to the treasury. Nobody, including the treasury, can pull vesting tokens early. Treasury and guardian are set to 0xC7877934601C38c1A95DF130dBCd7d9898c55e49. The other 65,000,000 stays unminted until LuciferMine accepts a solution. The guardian can only pause mining, never transfers or burns, and can renounce. The token supports EIP-2612 permit, so a pyre burn with a note is one transaction.`}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-2 font-bold`,children:`Burn utility`}),(0,V.jsx)($,{k:`Token burn()`,v:`Any holder, no note`}),(0,V.jsx)($,{k:`LuciferPyre`,v:`Any holder, with a 140-byte inscription`,tone:`bad`}),(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm leading-relaxed`,children:`Mining is hard-capped. Rounding dust is never minted. Burns do not free the cap.`})]})}function c$({initial:e}){let t=Nq.find(t=>t.name.toLowerCase()===(e??``).toLowerCase()),[n,r]=(0,B.useState)(t?.name??`Lucifer`),[i,a]=(0,B.useState)(!1),o=Nq.find(e=>e.name===n)??Nq[0];return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold`,children:`Five contracts, a deploy script and a liquidity script. No hidden mint.`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`ERC-20 with EIP-2612 permit, 18 decimals, Base mainnet. Solidity 0.8.26 on OpenZeppelin v5, built with Foundry, 51 tests passing including 5 on a fork of live Base. One transaction deploys Lucifer, which constructs LuciferMine, LuciferPyre, LuciferMarks and LuciferVesting (3,500,000 liquid to the treasury for the pool, 31,500,000 vesting with a 90-day cliff over 18 months). A second script seeds a Uniswap V3 LUCIFER/WETH pool with 3,500,000 LUCIFER and 0.25 ETH from the treasury and burns the LP position, so that liquidity can never be pulled. No proxy, no owner mint, no tax, no blacklist. Nothing in this system can raise the cap or mint the mining allocation without a valid solution. Nothing below is deployed yet.`}),(0,V.jsx)(`div`,{className:`flex flex-wrap gap-2`,children:Nq.map(e=>(0,V.jsx)(`button`,{type:`button`,onClick:()=>{r(e.name),a(!1)},className:`min-h-11 border px-3 py-2 text-sm ${e.name===o.name?`border-ps-gold text-ps-gold`:`border-ps-fg/25 text-ps-fg`}`,children:e.name},e.name))}),(0,V.jsx)(`p`,{className:`text-sm text-ps-info`,children:o.role}),(0,V.jsx)(`div`,{className:`flex flex-wrap gap-2`,children:(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>{navigator.clipboard.writeText(o.source).then(()=>{a(!0)})},children:i?`Copied`:`Copy source`})}),(0,V.jsx)(`pre`,{className:`max-h-96 overflow-auto border border-ps-fg/15 bg-black/30 p-3 text-xs leading-relaxed text-ps-bright`,children:o.source})]})}var l$=[{id:`abstract`,title:`Abstract`,paragraphs:[`Devil's Advocate ($LUCIFER) is a hard-capped ERC-20 on Base. Its economic life sits in the token, the mine, and the pyre. A wallet is listed for a handmade NFT only after it has mined 2,500 solutions and burned 250,000 LUCIFER. Supply enters through proof-of-work mining and a team allocation paid to the treasury at launch. Supply leaves through burn. Burns do not reopen the cap.`,`Nothing in this system is upgradeable. Only LuciferMine can mint, and only for a valid solution. No admin key can mint, freeze, tax, or blacklist. The guardian can pause mining and nothing else, and can renounce.`]},{id:`token`,title:`Token`,paragraphs:[`Name Devil's Advocate, symbol LUCIFER. ERC-20, 18 decimals, Base mainnet. Max supply 100,000,000 on cumulative minted supply. The constructor mints 35,000,000 to the treasury. LuciferMine may mint only the remaining 65,000,000, and only as mining rewards. Burns do not reopen mint room.`]},{id:`mine`,title:`Mining`,paragraphs:[`The miner submits a nonce when keccak(challenge, miner, nonce) is at or under the target. The first valid submission rotates the challenge.`,`Reward starts at 100 LUCIFER and halves every 325,000 solutions. That series approaches 65,000,000 and the mint refuses anything past it. Difficulty retargets every 256 solutions toward a 10-minute solve, clamped to a 4× move. Genesis target is 2^232.`]},{id:`burn`,title:`Pyre`,paragraphs:[`The pyre burns LUCIFER and stores a receipt: burner, amount, timestamp, and a note of at most 140 bytes. Receipts are public. There is no reward for burning. The utility is a smaller supply and a permanent line on the pyre.`,`A burn with no note is the same supply change. Both count toward the handmade mark.`]},{id:`team`,title:`Team`,paragraphs:[`script/Deploy.s.sol deploys the system in one transaction and mints 35,000,000 LUCIFER, 35% of supply, to TREASURY. GUARDIAN receives the mining pause key. Both default to 0xC7877934601C38c1A95DF130dBCd7d9898c55e49 and can be overridden with environment variables at deploy time. The treasury holds the full amount as soon as that transaction confirms. 3,500,000 of it plus 0.25 ETH seeds the Uniswap V3 pool on Base at the 1% tier, and that LP position is sent to the dead address: the launch liquidity is locked forever and its fees are unreachable by anyone, including the treasury.`]},{id:`marks`,title:`Marks`,paragraphs:[`LuciferMarks records accepted solutions and pyre burns. A wallet is marked only when both are done: 2,500 solutions and 250,000 LUCIFER burned. The Marked event fires once and the list is public. The NFT is made by hand and sent to that address. The contracts do not mint the NFT.`]},{id:`legal`,title:`Notice`,paragraphs:[`$LUCIFER is an experimental meme token. It can go to zero. Nothing here is investment, legal, or tax advice. Mining rewards may be regulated where you live. Read the contracts before you send value.`]}];function u$(){let[e,t]=(0,B.useState)(l$[0].id),n=l$.find(t=>t.id===e)??l$[0];return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Devil's Advocate ($LUCIFER) White Paper`}),(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm`,children:`November 2026 — Xebb n' Co.`}),(0,V.jsx)(`div`,{className:`flex flex-wrap gap-2`,children:l$.map(e=>(0,V.jsx)(`button`,{type:`button`,onClick:()=>t(e.id),className:`min-h-11 border px-3 py-2 text-sm ${e.id===n.id?`border-ps-gold text-ps-gold`:`border-ps-fg/25 text-ps-fg`}`,children:e.title},e.id))}),(0,V.jsxs)(`article`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h3`,{className:`text-ps-info font-bold`,children:n.title}),n.paragraphs.map(e=>(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:e},e.slice(0,24)))]})]})}function d$(){return(0,V.jsxs)(`div`,{className:`flex flex-col items-start gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold`,children:`Token cover and emblem`}),(0,V.jsx)(GQ,{className:`size-56 border border-ps-fg/30 sm:size-72`,alt:`Devil's Advocate emblem: a grinning blond kid with red horns and a pitchfork in a grey hoodie, ringed in green.`}),(0,V.jsx)(`p`,{className:`max-w-xl text-sm leading-relaxed text-pretty`,children:`The Devil's Advocate mascot is the mark for this host and for $LUCIFER. It sits on the token cover, the host icon, and the banner: the kid, the horns, the pitchfork, the green ring.`})]})}function f$(){let e=K_(),t=Q_(),n=H_();return(0,V.jsxs)(`div`,{children:[(0,V.jsx)(`h2`,{className:`text-ps-bright mb-2 font-bold`,children:`Session`}),(0,V.jsx)($,{k:`Network`,v:`Base · not deployed`}),(0,V.jsx)($,{k:`Wallet`,v:n.address??`not connected`,tone:`gold`}),(0,V.jsx)($,{k:`Contracts`,v:`ERC-20 · 18 decimals · 4 contracts`}),(0,V.jsx)($,{k:`Preview balance`,v:`${s_(e.ledger.balance,4)} LUCIFER`,tone:`gold`}),(0,V.jsx)($,{k:`Withdrawn`,v:`${s_(e.ledger.withdrawn,4)} LUCIFER`}),(0,V.jsx)($,{k:`Handmade mark`,v:e.ledger.mined/100+1e-9>=2500&&e.ledger.burned+1e-9>=25e4?`earned`:`working`,tone:`gold`}),(0,V.jsx)($,{k:`Ledger`,v:`${e.ledger.qualified.length} wallet${e.ledger.qualified.length===1?``:`s`}`}),(0,V.jsx)($,{k:`Mined in preview`,v:`${s_(e.ledger.mined,4)} LUCIFER`}),(0,V.jsx)($,{k:`Burned in preview`,v:`${s_(e.ledger.burned,4)} LUCIFER`,tone:`bad`}),(0,V.jsx)($,{k:`Miner`,v:t.running?`${c_(t.hashrate)} H/s`:`stopped`,tone:`info`})]})}function p$({points:e,pnl:t}){let n=e.length>0?e:[{t:Date.now()-6e4,pnl:0},{t:Date.now(),pnl:0}],r=t>=0;return(0,V.jsxs)(`div`,{className:`flex flex-col gap-2`,children:[(0,V.jsx)($,{k:`PNL`,v:`${r?`+`:`−`}$${s_(Math.abs(t),2)}`,tone:r?`ok`:`bad`}),(0,V.jsx)(`div`,{className:`border-ps-fg/20 h-44 w-full border`,children:(0,V.jsx)(sE,{width:`100%`,height:`100%`,children:(0,V.jsxs)(jq,{data:n,margin:{top:12,right:12,left:0,bottom:4},children:[(0,V.jsx)(GG,{dataKey:`t`,tickFormatter:e=>new Date(e).toLocaleTimeString([],{hour:`2-digit`,minute:`2-digit`}),stroke:`var(--color-ps-fg)`,tick:{fill:`var(--color-ps-fg)`,fontSize:11},minTickGap:28}),(0,V.jsx)(cK,{stroke:`var(--color-ps-fg)`,tick:{fill:`var(--color-ps-fg)`,fontSize:11},width:52,tickFormatter:e=>`$${Number(e).toFixed(0)}`}),(0,V.jsx)(MU,{y:0,stroke:`var(--color-ps-fg)`,strokeDasharray:`3 3`}),(0,V.jsx)(HT,{contentStyle:{background:`var(--color-ps-bg)`,border:`1px solid var(--color-ps-fg)`,fontSize:12},labelFormatter:e=>new Date(Number(e)).toLocaleTimeString(),formatter:e=>[`$${Number(e).toFixed(2)}`,`PNL`]}),(0,V.jsx)(OG,{type:`monotone`,dataKey:`pnl`,stroke:r?`var(--color-ps-gold)`:`var(--color-ps-bad)`,dot:!1,strokeWidth:2,isAnimationActive:!1})]})})})]})}function m$(){let e=(0,B.useSyncExternalStore)(nJ,rJ,rJ),t=(0,B.useSyncExternalStore)(SQ,CQ,CQ),[n,r]=(0,B.useState)(`0.01`),[i,a]=(0,B.useState)(``),[o,s]=(0,B.useState)(null),[c,l]=(0,B.useState)(!1),[ownerIn,setOwnerIn]=(0,B.useState)(``),[hist,setHist]=(0,B.useState)(null),[termsOpen,setTermsOpen]=(0,B.useState)(!1),[agree,setAgree]=(0,B.useState)(!1);(0,B.useEffect)(()=>{iJ(),TQ(),AQ();let e=__xebbLocal.getItem(`xebb-keel-wallet`);e&&a(e),__xebbLocal.getItem(CBW_KEY)===`1`&&void cbwConnect(!0)},[]);let u=t.address||wQ(),cb=t.cbw||{},wd=i.trim()||(cb.on?cb.main||``:``),d=E_(wd),f=eJ(e),p=f-e.startNav,m=Kq(e.book),h=tJ(e);async function g(){l(!0),s(`Approve the send in your wallet.`);try{let e=k_()[0]?.provider,t=``;if(e){let n=await e.request({method:`eth_requestAccounts`});t=Array.isArray(n)&&typeof n[0]==`string`?n[0]:``}else{let n=await C_();e=n.provider,t=n.address}if(!e||!E_(t))throw Error(`The wallet did not return an address.`);a(t),__xebbLocal.setItem(`xebb-keel-wallet`,t);let r=await jQ(e,t,n);s(`Sent ${n} ETH to the desk. ${r}`)}catch(e){s(`${L_(e)} You can also send ETH on Base to the desk address.`)}finally{l(!1)}}return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Invoke-AgenticTrading`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`Two ways to fund it. Connect Coinbase Wallet: the bot trades from an app sub account inside your Coinbase Wallet, pulling USDC (and gas) from your main balance through a spend permission you grant once, capped by the budget you set here; after that first approval every trade runs with no popups. Or Deposit: your wallet sends real ETH on Base to a desk key held in this browser, which turns it into USDC cash. Either way the desk runs the exact paper rules on real pools, one tick a minute, in whichever mode the paper book is set to. Flow (default): buy when buyers dominate the last 5 minutes and the hour with volume accelerating and price rising, 25% of equity each (max 4), 6% stop, 4% trail once up 6%, out when flow flips to selling. Classic: up 2.5% from the first-seen reference = buy, full cash split, unlimited positions, sell 2.5% under entry. 5/10: up 5% = buy, -10% stop, 5% trail once up 10%. Inferno (fast, high risk): a coin breaks out 3%+ over 30 minutes at a new high with two up ticks, no breadth gate, a third of equity per entry, at most 3 open, 4-10% volatility stop, a third off at +5% (stop to breakeven), another third at +12.5%, then a 5% trail, 60-tick time stop, 10-tick cooldown, 25% daily loss cap. Devil (patient): 5%+ over an hour, 40% of the book must be up, 3x fee floor, 8-20% stop, thirds off at +12% and +30%, 150-tick time stop, 20% daily cap. It watches Uniswap V2, V3 and V4 for brand-new pools, runs a contract check on each (GoPlus scan or on-chain owner check, tax, honeypot, blacklist, mint, holder concentration, aggregator round trip), and only buys a launch at 10% of equity (at most 2) after it is up 20% off its first print. Launch swaps route through the KyberSwap aggregator.`}),(0,V.jsx)(KQ,{children:`This spends real money on volatile memecoins and brand-new launches with no human in the loop. The contract check lowers the odds of a honeypot; it does not remove them, and most new tokens still go to zero. Expect losses. The desk key stays in this browser. Copy it before you clear site data. Closing the page stops new trades.`}),typeof window<`u`&&window.__xebbStorageVolatile?(0,V.jsx)(KQ,{children:`This preview blocks browser storage. The desk key below lives in memory only and is LOST on reload or tab close. Do NOT deposit here. Use the published site, or Reveal key and save it before sending anything.`}):null,(0,V.jsxs)(`div`,{className:`border border-ps-gold/40 bg-black/20 p-3 flex flex-col gap-2`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:`Coinbase Wallet`}),cb.on?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)($,{k:`Sub account`,v:cbwShort(cb.sub),tone:`gold`}),(0,V.jsx)($,{k:`Main wallet`,v:`${cbwShort(cb.main)} · $${s_(cb.mainUsdc||0,2)} USDC`}),(0,V.jsx)(qQ,{label:`Budget the bot may pull from the main wallet`,value:String(cb.budget??25),onChange:e=>cbwSetBudget(e),suffix:`USDC`}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Trades are sent from the sub account as one atomic batch (approve + swap). Coinbase fills any USDC or ETH shortfall from your main wallet through the spend permission. Keep a little ETH on Base in the main wallet for gas. Withdraw moves the sub account's coins and USDC to the main wallet unless you type another address below.`}),(0,V.jsxs)(`div`,{className:`border-t border-ps-fg/15 pt-2`,children:[(0,V.jsxs)(`div`,{className:`flex items-center justify-between gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright text-sm font-bold`,children:`Spend permissions`}),(0,V.jsx)(JQ,{tone:`plain`,disabled:cb.busy,onClick:()=>void cbwPerms(),children:`Refresh`})]}),(cb.perms||[]).length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:cb.permsAt?`None granted yet. The first trade asks for one.`:`Loading…`}):(0,V.jsx)(`ul`,{className:`flex flex-col gap-1`,children:cb.perms.map(e=>(0,V.jsxs)(`li`,{className:`flex flex-wrap items-center justify-between gap-2 border-b border-ps-fg/10 py-1 text-sm`,children:[(0,V.jsxs)(`span`,{className:e.live?`text-ps-gold`:`text-ps-fg/60`,children:[e.token,` · `,s_(e.allowance,e.token===`USDC`?2:5),` per `,e.periodDays>=1?`${s_(e.periodDays,0)} day${e.periodDays>=2?`s`:``}`:`${Math.round(e.periodDays*24)} h`,e.live?``:` · inactive`]}),(0,V.jsx)(JQ,{tone:`bad`,disabled:cb.busy||!!t.busy,onClick:()=>cbwRevoke(e.hash).then(()=>s(`Permission revoked.`)).catch(e=>s(L_(e))),children:`Revoke`})]},e.hash))}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Revoke is the kill switch: the sub account cancels its own permission on-chain, no popup, and the bot can no longer pull from your main wallet.`})]}),(0,V.jsxs)(`div`,{className:`border-t border-ps-fg/15 pt-2 flex flex-col gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright text-sm font-bold`,children:`24/7 worker`}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Keeps trading with these exact rules while this tab is closed. Four steps, all here: make the worker its own key, add that key as a second owner of the sub account (one Coinbase approval), copy the .env, run the worker on any always-on machine.`}),(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 text-sm`,children:`1.`}),cb.workerAddr?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)(`span`,{className:`text-ps-bright font-mono text-sm break-all`,children:cb.workerAddr}),(0,V.jsx)(t$,{address:cb.workerAddr}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>{workerKeyForget(),s(`Worker key removed from this browser.`)},children:`Forget key`})]}):(0,V.jsx)(JQ,{onClick:()=>{workerKeyGen(),s(`Worker key made. It lives in this browser until you click Forget key.`)},children:`Generate worker key`})]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 text-sm`,children:`2.`}),(0,V.jsx)(JQ,{disabled:cb.busy||!!t.busy||!cb.workerAddr,onClick:()=>cbwAddOwner(cb.workerAddr).then(()=>s(`Worker added as an owner of the sub account.`)).catch(e=>s(L_(e))),children:`Add worker as owner`}),(0,V.jsx)(`input`,{value:ownerIn,onChange:e=>setOwnerIn(e.target.value),spellCheck:!1,placeholder:`or paste another owner address`,className:`border-ps-fg/25 text-ps-bright min-h-11 min-w-0 flex-1 border bg-black/25 px-2 font-mono text-sm`}),(0,V.jsx)(JQ,{tone:`plain`,disabled:cb.busy||!!t.busy||!E_(ownerIn.trim()),onClick:()=>cbwAddOwner(ownerIn).then(()=>{s(`Owner added.`),setOwnerIn(``)}).catch(e=>s(L_(e))),children:`Add`})]}),cb.workerAddr?(0,V.jsxs)(`div`,{className:`flex flex-col gap-1`,children:[(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 text-sm`,children:`3. The worker's .env, filled from this desk (budget, risk, mode, paymaster, Telegram, cloud):`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>{navigator.clipboard.writeText(cb.workerEnv||``).then(()=>s(`.env copied. Paste it into the worker folder as .env.`))},children:`Copy .env`})]}),(0,V.jsx)(`pre`,{className:`border-ps-fg/20 text-ps-fg/85 max-h-48 overflow-auto border bg-black/40 p-2 font-mono text-xs leading-relaxed whitespace-pre`,children:(cb.workerEnv||``).replace(/(OWNER_PRIVATE_KEY=0x)[0-9a-fA-F]+/,`$1…hidden, included when you copy`)})]}):null,(0,V.jsxs)(`p`,{className:`text-ps-fg/70 text-sm`,children:[`4. `,(0,V.jsx)(`a`,{href:`./devils-advocate-worker.zip`,className:`text-ps-gold underline`,children:`Download the worker`}),` (Node 20). Unzip, drop the .env in, then `,(0,V.jsx)(`code`,{className:`text-ps-bright`,children:`npm install && npm run tick:dry`}),` to watch one dry tick, and `,(0,V.jsx)(`code`,{className:`text-ps-bright`,children:`DRY_RUN=0 npm start`}),` to go live. Dockerfile and hosting notes are in its README. Revoke above stops it at any time.`]}),(0,V.jsx)(KQ,{children:`The worker key is a hot key. It is generated and stored in this browser only, never sent anywhere, and it can spend the sub account once added as owner. Fund through the budget and spend permission, not by sending coins to the worker.`})]}),(0,V.jsx)(`div`,{children:(0,V.jsx)(JQ,{tone:`plain`,disabled:cb.busy||!!t.busy,onClick:()=>void cbwDisconnect(),children:`Disconnect Coinbase Wallet`})})]}):(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm`,children:`Connect and the bot trades from an app sub account inside your Coinbase Wallet, funded from your main balance through a spend permission. The first trade opens one approval in Coinbase Wallet; grant the ongoing permission there and every trade after runs with no popups. Budget caps how much it may pull.`}),cbwBlockedHost()?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)(`p`,{className:`text-ps-bad text-sm leading-relaxed`,children:`This host (pplx.app) sends a Cross-Origin-Opener-Policy header that cuts the Coinbase sign-in popup off from the page, so the connection can never finish here. The same app is mirrored on GitHub Pages without that header. Open it there to connect and trade; the paper book and everything else work on both.`}),(0,V.jsx)(`div`,{children:(0,V.jsx)(`a`,{href:CBW_MIRROR,className:`inline-block min-h-11 border border-ps-gold px-3 py-2 text-sm text-ps-gold hover:bg-ps-gold/10`,children:`Open the Coinbase-ready mirror →`})})]}):(0,V.jsx)(`div`,{children:(0,V.jsx)(JQ,{disabled:!!t.busy,onClick:()=>void cbwConnect(!1),children:cb.busy?(cb.status||`Connecting…`)+` (click to cancel)`:`Connect Coinbase Wallet`})})]}),(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 mb-1 block`,children:`Paymaster URL (optional, gasless trades)`}),(0,V.jsx)(`input`,{value:cb.pmDraft??cb.paymaster??``,onChange:e=>cbwSetPaymaster(e.target.value),spellCheck:!1,placeholder:`https://api.developer.coinbase.com/rpc/v1/base/…`,className:`border-ps-fg/25 text-ps-bright min-h-11 w-full border bg-black/25 px-2 font-mono text-sm`})]}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`A Coinbase Developer Platform paymaster sponsors gas so the sub account never needs ETH. Applies on the next connect.`}),cb.status&&!cb.busy?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:cb.status}):null]}),(0,V.jsxs)(`div`,{className:`border border-ps-fg/20 bg-black/20 p-3 flex gap-4`,children:[(0,V.jsxs)(`div`,{className:`flex flex-col items-center gap-1 shrink-0`,children:[(0,V.jsx)(`span`,{className:`text-ps-bad text-xs`,children:`HIGH`}),(0,V.jsx)(`input`,{type:`range`,min:0,max:100,step:1,value:t.risk??50,"aria-label":`Risk`,onChange:e=>setKeelRisk(e.target.value),style:{writingMode:`vertical-lr`,direction:`rtl`,height:`11rem`,width:`2rem`,accentColor:`var(--color-ps-gold)`}}),(0,V.jsx)(`span`,{className:`text-ps-ok text-xs`,children:`LOW`})]}),(0,V.jsxs)(`div`,{className:`flex flex-col gap-1 min-w-0`,children:[(0,V.jsxs)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:[`Risk `,t.risk??50,` · `,riskLabel(t.risk??50)]}),(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm leading-relaxed`,children:`Slide up for bigger positions, more of them, wider stops and looser entries; down for the opposite. 50 is the mode as designed. Paper and live share the dial and the mode, so what you see in paper is what live does.`}),(0,V.jsx)(`p`,{className:`text-ps-gold text-sm leading-relaxed`,children:riskSummary()})]})]}),(0,V.jsx)($,{k:cb.on?`Sub account`:`Desk`,v:u||`preparing`,tone:`gold`}),(0,V.jsx)($,{k:`On desk`,v:`${t.eth} ETH · $${s_(t.cash??0,2)} cash${t.tokens.map(e=>` · ${e.amount} ${e.symbol}`).join(``)}`}),(0,V.jsx)($,{k:`Live book`,v:`${(t.book??[]).length} open · $${s_(t.nav??0,2)}`}),(0,V.jsx)($,{k:`Next tick`,v:`${Math.max(0,Math.ceil(((t.nextAt||0)-(t.clock||0))/1e3))}s${t.busy?` · ${t.busy}`:``}${t.marketAt?` · prices ${Math.max(0,Math.round(((t.clock||0)-t.marketAt)/1e3))}s old · ETH $${s_(t.ethUsd||0,0)}`:``}`}),(0,V.jsx)($,{k:`Live`,v:t.busy||(t.armed?`Armed · Base`:`Stopped`),tone:t.armed?`gold`:`bright`}),(0,V.jsx)(p$,{points:t.points,pnl:t.pnl}),t.error?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:t.error}):null,(0,V.jsxs)(`div`,{className:`flex items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright min-w-0 flex-1 truncate font-mono text-sm`,children:u||`Desk address is preparing`}),u?(0,V.jsx)(t$,{address:u}):null]}),cb.on?null:(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Deposit asks your wallet to send. Or paste this address into any wallet and send ETH on Base yourself.`}),cb.on?null:(0,V.jsx)(qQ,{label:`Amount to deposit`,value:n,onChange:r,suffix:`ETH`}),(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 mb-1 block`,children:`Withdraw to this wallet`}),(0,V.jsx)(`input`,{value:i,onChange:e=>{a(e.target.value),__xebbLocal.setItem(`xebb-keel-wallet`,e.target.value.trim())},spellCheck:!1,autoCapitalize:`none`,placeholder:cb.on?cb.main||`0x… your main wallet`:`0x… filled in when you deposit`,className:`border-ps-fg/25 text-ps-bright min-h-11 w-full border bg-black/25 px-2 font-mono text-sm`})]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[cb.on?null:(0,V.jsx)(JQ,{disabled:c||!!t.busy,onClick:()=>void g(),children:`Deposit`}),(0,V.jsx)(JQ,{disabled:!!t.busy,onClick:()=>void VQ().then(e=>s(e[e.length-1]??`Look finished.`)).catch(e=>s(L_(e))),children:`LOOK`}),(0,V.jsx)(JQ,{disabled:!!t.busy,onClick:()=>{t.armed||t.terms?UQ(!t.armed):setTermsOpen(!0)},children:t.armed?`Stop live`:`Trade live`}),(0,V.jsx)(JQ,{tone:`bad`,disabled:!d||!!t.busy,onClick:()=>{WQ(wd).then(e=>s(e[e.length-1]??`Withdrawn.`)).catch(e=>s(L_(e)))},children:`Withdraw`}),cb.on?null:(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>t.revealed?DQ():EQ(),children:t.revealed?`Hide key`:`Reveal key`})]}),termsOpen&&!t.terms?(0,V.jsxs)(`div`,{className:`border border-ps-bad/60 bg-black/30 p-3 flex flex-col gap-2`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bad text-sm font-bold`,children:`Before you trade live`}),(0,V.jsx)(`ul`,{className:`text-ps-fg/85 list-disc pl-5 text-sm leading-relaxed`,children:[`This software is provided as is, with no warranty. It is not financial, investment, tax or legal advice.`,`It trades volatile memecoins and brand-new tokens automatically. You can lose everything you fund it with, including the full spend-permission allowance.`,`Xebb n' Co. never holds your keys or funds. The desk key stays in your browser; the Coinbase sub account is controlled by your Coinbase Wallet. Nobody can reverse a trade for you.`,`You are responsible for the laws, taxes and reporting that apply where you live, and for confirming this use is permitted there.`,`Market data comes from third parties (DexScreener, Uniswap, KyberSwap, Coinbase) and can be wrong, late or unavailable.`].map((e,t)=>(0,V.jsx)(`li`,{children:e},t))}),(0,V.jsxs)(`label`,{className:`flex items-center gap-2 text-sm`,children:[(0,V.jsx)(`input`,{type:`checkbox`,checked:agree,onChange:e=>setAgree(e.target.checked),className:`size-4 accent-[var(--color-ps-gold)]`}),(0,V.jsx)(`span`,{children:`I have read this and accept the risk.`})]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[(0,V.jsx)(JQ,{disabled:!agree,onClick:()=>{termsAccept(),setTermsOpen(!1),UQ(!0)},children:`Accept and trade live`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>setTermsOpen(!1),children:`Not now`})]})]}):null,(0,V.jsxs)(`div`,{className:`border border-ps-fg/20 bg-black/20 p-3 flex flex-col gap-2`,children:[(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center justify-between gap-2`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright text-sm font-bold`,children:[`Cloud history `,(0,V.jsx)(`span`,{className:`text-ps-fg/60 font-normal`,children:t.cloud?.on?`· on · ${t.cloud.saved} saved this session${t.cloud.err?` · ${t.cloud.err}`:``}`:`· off`})]}),(0,V.jsxs)(`div`,{className:`flex gap-2`,children:[(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>sbFills(cb.on?cb.sub:u,`live`).then(e=>setHist(e)).catch(e=>s(L_(e))),children:`Load history`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:sbToggle,children:t.cloud?.on?`Turn off`:`Turn on`})]})]}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Live fills, paper fills, PnL points and the per-minute order-flow tape are saved to a public Devil's Advocate ledger keyed by desk address, so history survives this browser and the Flow strategy can be backtested on real data. Turn it off if you do not want your fills public.`}),hist?hist.length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`No cloud fills for this desk yet.`}):(0,V.jsx)(`ul`,{children:hist.map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-1 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/60`,children:new Date(e.at).toLocaleString([],{month:`short`,day:`numeric`,hour:`2-digit`,minute:`2-digit`})+` `}),(0,V.jsx)(`span`,{className:e.side===`buy`?`text-ps-gold`:`text-ps-ok`,children:`${e.side} ${e.symbol} $${s_(+e.usd||0,2)}`}),(0,V.jsx)(`span`,{className:`text-ps-fg/80 block`,children:e.note})]},e.id))}):null]}),(0,V.jsxs)(`div`,{className:`border border-ps-fg/20 bg-black/20 p-3 flex flex-col gap-2`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright text-sm font-bold`,children:[`Telegram alerts `,(0,V.jsx)(`span`,{className:`text-ps-fg/60 font-normal`,children:t.tg?.token&&t.tg?.chat?`· on${t.tg.err?` · ${t.tg.err}`:``}`:`· off`})]}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Every live fill, stop, halt and arm/disarm is sent to you. Make a bot with @BotFather, paste its token, start a chat with it, and paste your chat id (from @userinfobot). Both stay in this browser.`}),(0,V.jsxs)(`div`,{className:`grid gap-2 sm:grid-cols-2`,children:[(0,V.jsx)(`input`,{value:t.tg?.token??``,onChange:e=>tgSet(e.target.value,void 0),spellCheck:!1,type:`password`,placeholder:`bot token 123456:ABC…`,className:`border-ps-fg/25 text-ps-bright min-h-11 min-w-0 border bg-black/25 px-2 font-mono text-sm`}),(0,V.jsx)(`input`,{value:t.tg?.chat??``,onChange:e=>tgSet(void 0,e.target.value),spellCheck:!1,placeholder:`chat id`,className:`border-ps-fg/25 text-ps-bright min-h-11 min-w-0 border bg-black/25 px-2 font-mono text-sm`})]}),(0,V.jsx)(`div`,{children:(0,V.jsx)(JQ,{tone:`plain`,disabled:!(t.tg?.token&&t.tg?.chat),onClick:()=>{tgSend(`Test from the desk. Alerts are working.`),s(`Test sent.`)},children:`Send test`})})]}),t.revealed&&!cb.on?(0,V.jsxs)(`p`,{className:`text-ps-bad break-all font-mono text-sm`,children:[`Desk key, not your wallet phrase: `,t.revealed]}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:cb.on?`Coinbase Wallet signs for the sub account. Withdraw moves its coins and USDC to the address above.`:`The key spends the desk. Withdraw sends the desk balance to the address above.`}),o?(0,V.jsx)(`p`,{className:`text-ps-fg text-sm`,children:o}):null,(0,V.jsx)(`h3`,{className:`text-ps-bright pt-1 text-sm font-bold`,children:`Live tape`}),(t.tape??[]).length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Live fills and decisions land here once the desk is armed.`}):(0,V.jsx)(`ul`,{children:t.tape.slice(0,10).map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/60`,children:new Date(e.at).toLocaleTimeString([],{hour:`2-digit`,minute:`2-digit`})+` `}),(0,V.jsx)(`span`,{className:e.tone===`ok`?`text-ps-ok`:e.tone===`bad`?`text-ps-bad`:e.tone===`gold`?`text-ps-gold`:`text-ps-fg`,children:e.text})]},`${e.at}-${e.text.slice(0,20)}`))}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-3 text-sm font-bold`,children:`Paper`}),(0,V.jsxs)(`p`,{className:`text-ps-fg/80 text-sm`,children:[`Play money, real prices. Starts at $`,150,`. The paper book holds the same coins as the live desk and prices them from the same Uniswap V3 and KyberSwap quotes on Base, once a minute, including vetted new launches. Fills are simulated at the quoted price with a modelled cost (pool fee plus 0.3% slippage; 3% on fresh launches) and the rules are identical to live. Five modes, switched with the button below and shared with the live desk. Flow (default): order flow. Every minute it reads the buy and sell counts and volume for every coin from DexScreener, and buys when at least 65% of the last 5 minutes' trades were buys (8+ trades), the hour is net buying, 5-minute volume is running 1.5x the hourly pace, price is up at least 0.5% in 5 minutes and up on the hour, with $100k+ liquidity and $20k+ hourly volume. 25% of equity per coin, max 4, 6% stop, 4% trail once up 6%, out when the flow flips to 65% sells, 45-tick time stop, 25% daily cap. Classic: the original 2.5 book, up 2.5% from where the coin was first seen = buy, full cash split across everything that qualifies, unlimited positions, sell 2.5% under entry. 5/10: up 5% = buy, -10% stop, 5% trail once up 10%. Inferno: fast and high risk, 30-minute breakouts, no breadth gate, a third of equity per position, quick exits. Devil: patient, one-hour breakouts, 40% breadth gate, bigger targets. Replayed over the last 27 hours of real Base prices: Inferno 41 trades, 51% wins, -5% (+3% in the first half, -25% in the falling second half); Devil 14 trades, 79% wins, +13.5%; the old rules -8.2%. Reset puts it back.`]}),(0,V.jsx)($,{k:`Paper`,v:e.armed?`Running`:`Stopped`,tone:e.armed?`gold`:`bright`}),(0,V.jsx)($,{k:`PNL`,v:`${p>=0?`+`:`−`}$${s_(Math.abs(p),2)}`,tone:p>=0?`ok`:`bad`}),(0,V.jsx)($,{k:`Cash book`,v:`${h.length} open · $${s_(f,2)}`}),(0,V.jsx)($,{k:`Next tick`,v:`${Math.max(0,Math.ceil(((e.nextAt||0)-(e.clock||0))/1e3))}s · tick ${e.tick||0}`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/70`,children:`In the book: `}),m.map(e=>(0,V.jsxs)(`span`,{className:h.includes(e)?`text-ps-gold`:`text-ps-fg/80`,children:[e,` `]},e))]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[(0,V.jsx)(JQ,{onClick:()=>lJ(!e.armed),children:e.armed?`Stop paper`:`Start paper`}),(0,V.jsx)(JQ,{disabled:f<=1,onClick:dJ,children:`LOOK`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>uJ(e.book===`10x`?`1x`:`10x`),children:e.book===`10x`?`Book 1x`:`Book 10x`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>setKeelMode(keelMode===`flow`?`classic`:keelMode===`classic`?`fiveten`:keelMode===`fiveten`?`inferno`:keelMode===`inferno`?`devil`:`flow`),children:keelMode===`flow`?`Mode: Flow (order flow)`:keelMode===`classic`?`Mode: Classic (2.5)`:keelMode===`fiveten`?`Mode: 5/10`:keelMode===`inferno`?`Mode: Inferno (fast)`:`Mode: Devil (patient)`}),(0,V.jsx)(JQ,{tone:`bad`,onClick:sJ,children:`Reset $150`})]}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-1 text-sm font-bold`,children:`Paper tape`}),e.fills.length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Paper fills land here while paper is running.`}):(0,V.jsx)(`ul`,{children:e.fills.slice(0,12).map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-gold`,children:e.from}),(0,V.jsx)(`span`,{className:`text-ps-fg`,children:` → `}),(0,V.jsx)(`span`,{className:`text-ps-bright`,children:e.to}),(0,V.jsxs)(`span`,{className:`text-ps-fg`,children:[` · $`,s_(e.nav,2)]}),e.fee>0?(0,V.jsxs)(`span`,{className:`text-ps-fg/70`,children:[` · fee $`,s_(e.fee,2)]}):null,(0,V.jsx)(`span`,{className:`text-ps-fg/80 block`,children:e.note})]},`${e.at}-${e.from}-${e.to}`))})]})}function h$({text:e}){return(0,V.jsx)(`pre`,{className:`text-ps-bad text-sm leading-relaxed whitespace-pre-wrap`,children:e})}var g$=[{name:`Get-Help`,kind:`help`,blurb:`Commands`},{name:`Start-Welcome`,kind:`welcome`,blurb:`Banner`},{name:`Invoke-LuciferMiner`,kind:`mine`,blurb:`Mine`},{name:`Invoke-LuciferBurn`,kind:`burn`,blurb:`Burn`},{name:`Get-Art`,kind:`marks`,blurb:`Art`},{name:`Get-Tokenomics`,kind:`tokenomics`,blurb:`Supply`},{name:`Get-Contract`,kind:`contracts`,blurb:`Source`},{name:`Get-WhitePaper`,kind:`paper`,blurb:`Paper`},{name:`Connect-Wallet`,kind:`wallet`,blurb:`Withdraw`},{name:`Invoke-AgenticTrading`,kind:`keel`,blurb:`Trade`},{name:`Get-Status`,kind:`status`,blurb:`Ledger`}],_$={help:`help`,"get-help":`help`,welcome:`welcome`,"get-welcome":`welcome`,"start-welcome":`welcome`,mine:`mine`,"start-luciferminer":`mine`,"start-xebbminer":`mine`,"invoke-luciferminer":`mine`,"invoke-xebbminer":`mine`,"start-miner":`mine`,burn:`burn`,"invoke-luciferburn":`burn`,"invoke-xebbburn":`burn`,"invoke-burn":`burn`,marks:`marks`,art:`marks`,"get-marks":`marks`,"get-art":`marks`,tokenomics:`tokenomics`,"get-tokenomics":`tokenomics`,contracts:`contracts`,contract:`contracts`,"get-contract":`contracts`,paper:`paper`,whitepaper:`paper`,"get-whitepaper":`paper`,wallet:`wallet`,connect:`wallet`,"connect-wallet":`wallet`,withdraw:`wallet`,"invoke-luciferwithdraw":`wallet`,"invoke-xebbwithdraw":`wallet`,keel:`keel`,"start-keel":`keel`,"invoke-keel":`keel`,"invoke-agentictrading":`keel`,status:`status`,"get-status":`status`};function v$(e){return`term : The term '${e}' is not recognized as the name of a cmdlet, function, script file, or operable program.
+function GQ({className:e,alt:t}){return(0,V.jsx)(`span`,{className:`inline-block overflow-hidden rounded-full bg-ps-chrome ${e??``}`,children:(0,V.jsx)(`img`,{src:Mq,alt:t,className:`size-full object-cover`})})}function KQ({children:e}){return(0,V.jsxs)(`p`,{className:`text-ps-gold text-sm leading-relaxed text-pretty`,children:[`WARNING: `,e]})}function $({k:e,v:t,tone:n=`bright`}){let r={bright:`text-ps-bright`,ok:`text-ps-ok`,bad:`text-ps-bad`,gold:`text-ps-gold`,info:`text-ps-info`}[n];return(0,V.jsxs)(`div`,{className:`flex flex-col gap-0.5 border-b border-ps-fg/10 py-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/75 text-sm`,children:e}),(0,V.jsx)(`span`,{className:`${r} text-sm tabular-nums sm:text-right`,children:t})]})}function qQ({label:e,value:t,onChange:n,suffix:r}){return(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 mb-1 block`,children:e}),(0,V.jsxs)(`span`,{className:`flex min-h-11 items-center border border-ps-fg/25 bg-black/25`,children:[(0,V.jsx)(`input`,{value:t,onChange:e=>n(e.target.value),inputMode:`decimal`,className:`min-w-0 flex-1 bg-transparent px-3 py-2 text-ps-bright outline-none placeholder:text-ps-fg/40`}),r?(0,V.jsx)(`span`,{className:`pr-3 text-ps-fg/60`,children:r}):null]})]})}function JQ({children:e,onClick:t,tone:n=`gold`,disabled:r}){let i={gold:`border-ps-gold text-ps-gold hover:bg-ps-gold/10`,bad:`border-ps-bad text-ps-bad hover:bg-ps-bad/10`,plain:`border-ps-fg/30 text-ps-fg hover:bg-ps-fg/10`}[n];return(0,V.jsx)(`button`,{type:`button`,disabled:r,onClick:t,className:`min-h-11 border px-3 py-2 text-left text-sm disabled:opacity-40 ${i}`,children:e})}function YQ({result:e}){return e?(0,V.jsx)(`p`,{className:`text-sm leading-relaxed ${e.ok?`text-ps-ok`:`text-ps-bad`}`,children:e.detail}):null}function XQ(e){return Number(e.trim())}var ZQ=[[`Start-Welcome`,`Banner and what this host is`],[`Connect-Wallet`,`Connect a wallet and withdraw LUCIFER`],[`Invoke-AgenticTrading`,`Wallet trading bot`],[`Invoke-LuciferMiner`,`Proof-of-work benchmark`],[`Invoke-LuciferBurn`,`Pyre — burn LUCIFER and keep a note`],[`Get-Art`,`One handmade NFT after the mine and burn goals`],[`Get-Tokenomics`,`Allocations`],[`Get-Contract`,`Source. Optional name, e.g. Get-Contract LuciferPyre`],[`Get-WhitePaper`,`White paper`]];function QQ({onRun:e}){let luList=useLuHelpList();return(0,V.jsxs)(`div`,{className:`flex flex-col gap-4`,children:[(0,V.jsxs)(`div`,{className:`flex flex-col gap-4 sm:flex-row sm:items-center`,children:[(0,V.jsx)(GQ,{className:`size-28 shrink-0 border border-ps-fg/30`,alt:`Devil's Advocate emblem: a grinning blond kid with red horns and a pitchfork in a grey hoodie, ringed in green.`}),(0,V.jsxs)(`div`,{children:[(0,V.jsx)(`p`,{className:`text-ps-info text-sm`,children:`Devil's Advocate · $LUCIFER token cover`}),(0,V.jsx)(`h1`,{className:`text-ps-bright text-2xl font-bold text-balance`,children:`Devil's Advocate`}),(0,V.jsx)(`p`,{className:`text-ps-gold`,children:`$LUCIFER — Mine. Burn. Trade.`})]})]}),(0,V.jsxs)(`p`,{className:`max-w-3xl text-sm leading-relaxed text-pretty`,children:[`$LUCIFER is a hard-capped ERC-20 on Base. `,c_(Qg),` total, `,18,` decimals. `,c_($g),` is mined, `,65,` percent, at `,100,` LUCIFER a solution. `,c_(e_),` is minted to the treasury at launch. Supply leaves through burn and the pyre. A wallet that mines `,c_(n_),` solutions and burns `,c_(r_),` `,`LUCIFER is written to the handmade ledger. The NFT is made by hand and sent to that address.`]}),(0,V.jsx)(LuLaunchNotice,{}),(0,V.jsx)(`ul`,{className:`flex flex-col gap-1`,children:luList.map(([t,n])=>(0,V.jsx)(`li`,{children:(0,V.jsxs)(`button`,{type:`button`,onClick:()=>e(t),className:`min-h-11 w-full text-left text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-gold`,children:t}),(0,V.jsxs)(`span`,{className:`text-ps-fg/80`,children:[` — `,n]})]})},t))})]})}var $Q=8;function e$({label:e,value:t,goal:n,unit:r}){let i=o_(t,n),a=Math.min(t,n);return(0,V.jsxs)(`div`,{children:[(0,V.jsxs)(`div`,{className:`mb-1 flex items-baseline justify-between gap-3 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright`,children:e}),(0,V.jsxs)(`span`,{className:`text-ps-fg/80 tabular-nums`,children:[s_(a,a>=100?0:2),` / `,c_(n),` `,r]})]}),(0,V.jsx)(`div`,{className:`border-ps-fg/30 h-4 border bg-black`,role:`progressbar`,"aria-valuemin":0,"aria-valuemax":100,"aria-valuenow":Math.round(i*100),"aria-label":e,children:(0,V.jsx)(`div`,{className:`bg-ps-gold h-full`,style:{width:`${i*100}%`}})})]})}function t$({address:e}){let[t,n]=(0,B.useState)(!1);return(0,V.jsx)(`button`,{type:`button`,className:`border-ps-fg/30 text-ps-gold hover:border-ps-gold min-h-11 shrink-0 border px-3 text-sm`,onClick:()=>{navigator.clipboard.writeText(e).then(()=>{n(!0),window.setTimeout(()=>n(!1),1200)})},children:t?`Copied`:`Copy`})}function n$(){return(0,V.jsx)(`div`,{className:`lu-stage flex w-full justify-center py-2`,children:(0,V.jsxs)(`div`,{className:`lu-coin relative size-56`,children:[Array.from({length:72},(e,t)=>(0,V.jsx)(`span`,{className:t%2==0?`lu-ridge`:`lu-ridge is-groove`,style:{transform:`rotateZ(${t*5}deg) translateY(-7rem) rotateX(90deg)`}},t)),(0,V.jsx)(GQ,{className:`lu-face lu-obverse size-full`,alt:`Concept NFT, obverse: the Devil's Advocate mascot, a grinning blond kid with red horns and a pitchfork, ringed in green.`}),(0,V.jsxs)(`div`,{className:`lu-face lu-reverse`,children:[(0,V.jsxs)(`svg`,{viewBox:`0 0 100 100`,className:`lu-fork`,"aria-hidden":!0,children:[(0,V.jsx)(`path`,{d:`M50 92V38`}),(0,V.jsx)(`path`,{d:`M30 14v18q0 10 10 10h20q10 0 10-10V14`}),(0,V.jsx)(`path`,{d:`M50 10v32`}),(0,V.jsx)(`path`,{d:`M26 20l4-8 4 8M46 16l4-8 4 8M66 20l4-8 4 8`})]}),(0,V.jsx)(`p`,{className:`lu-ticker`,children:`$LUCIFER`}),(0,V.jsx)(`p`,{className:`lu-sub`,children:`MINE · BURN · TRADE`}),(0,V.jsx)(`p`,{className:`lu-no`,children:`No. 001 · BASE`})]}),(0,V.jsx)(`span`,{className:`lu-rim lu-rim-front`}),(0,V.jsx)(`span`,{className:`lu-rim lu-rim-back`})]})})}function r$Preview(){let e=K_(),t=e.ledger.mined/100,n=e.ledger.burned,r=t+1e-9>=2500&&n+1e-9>=25e4;return(0,V.jsxs)(`div`,{className:`flex flex-col gap-4`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`One handmade mark.`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`No tiers and no mint. Finish both goals and the wallet is written to the ledger. The NFT is made by hand and sent to that address. Mine `,c_(n_),` solutions and burn `,c_(r_),` LUCIFER.`]}),(0,V.jsx)(n$,{}),(0,V.jsx)(e$,{label:`Mine`,value:t,goal:n_,unit:`solutions`}),(0,V.jsx)(e$,{label:`Burn`,value:n,goal:r_,unit:`LUCIFER`}),(0,V.jsx)(`p`,{className:`text-sm ${r?`text-ps-gold`:`text-ps-fg/70`}`,children:r?`${e.ledger.qualified[0]?.address??`This wallet`} has the mark.`:`This wallet is still working toward the mark.`}),(0,V.jsxs)(`div`,{className:`border-ps-fg/20 flex flex-col gap-2 border-t pt-3`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:`Handmade ledger`}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Wallets that finished both goals. Copy an address and send the handmade NFT there.`}),e.ledger.qualified.length===0?(0,V.jsx)(`p`,{className:`text-sm`,children:`No wallet has reached the mark.`}):(0,V.jsx)(`ul`,{className:`flex flex-col gap-2`,children:e.ledger.qualified.map(e=>(0,V.jsxs)(`li`,{className:`flex items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright min-w-0 flex-1 truncate font-mono text-sm`,children:e.address}),(0,V.jsx)(t$,{address:e.address})]},e.address))})]})]})}function i$Preview(){let e=K_(),t=Q_(),[n,r]=(0,B.useState)(null),i=Math.max(0,t.found-t.credited),a=Array.from({length:32},(e,n)=>(t.hashes+n)%7==0);return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Defragment the chain. Earn LUCIFER.`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`Era-0 reward is `,$_,` LUCIFER per solution, and it halves every `,c_(t_),` solutions. The series approaches `,c_($g),`. This host searches a benchmark target of `,ev,`, about `,$Q,` bits easier than genesis `,232,`. Mainnet still aims at one solve every 10 minutes.`]}),(0,V.jsx)(`div`,{className:`grid grid-cols-8 gap-1`,"aria-hidden":!0,children:a.map((e,n)=>(0,V.jsx)(`span`,{className:`flex h-5 items-center justify-center text-xs ${e&&t.running?`text-ps-gold`:`text-ps-fg/30`}`,children:e&&t.running?`█`:`░`},n))}),(0,V.jsx)($,{k:`Hashrate`,v:t.running?`${c_(t.hashrate)} H/s`:t.hashes>0?`stopped`:`idle`,tone:`info`}),(0,V.jsx)($,{k:`Hashes`,v:c_(t.hashes)}),(0,V.jsx)($,{k:`Solutions`,v:`${c_(t.found)} found · ${c_(i)} unsubmitted`,tone:`gold`}),(0,V.jsx)($,{k:`Submitted`,v:`${s_(e.ledger.mined/100,0)} / ${c_(n_)} toward the mark`,tone:`gold`}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[(0,V.jsx)(JQ,{onClick:()=>t.running?t.stop():t.start(),children:t.running?`Stop-LuciferMiner`:`Start-LuciferMiner`}),(0,V.jsx)(JQ,{disabled:i<=0,onClick:()=>{let n=i,a=e.creditMine(n);a.ok&&t.markCredited(t.credited+n),r(a)},children:i>0?`Submit-Solution (${i})`:`Submit-Solution`})]}),(0,V.jsx)(YQ,{result:n}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Typical browser rate is well under a miner. CPU-fair. One tab.`})]})}function a$Preview(){let e=K_(),t=H_(),[n,r]=(0,B.useState)(``),[i,a]=(0,B.useState)(null),o=s_(e.ledger.balance,4);return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Connect a wallet. Withdraw LUCIFER.`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`Connect the wallet that should hold the mined balance. Withdraw assigns the spendable preview balance to that address. The token is not on Base yet, so this does not broadcast a transfer.`}),(0,V.jsx)($,{k:`Wallet`,v:t.address??`not connected`,tone:t.address?`gold`:`bright`}),(0,V.jsx)($,{k:`Network`,v:t.address?t.chain:`Base`,tone:`info`}),(0,V.jsx)($,{k:`Spendable`,v:`${o} LUCIFER`,tone:`gold`}),(0,V.jsx)($,{k:`Withdrawn`,v:`${s_(e.ledger.withdrawn,4)} LUCIFER`}),t.error?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:t.error}):null,(0,V.jsx)(U_,{}),(0,V.jsx)(qQ,{label:`Amount to withdraw`,value:n,onChange:r,suffix:`LUCIFER`}),(0,V.jsx)(JQ,{disabled:!t.address||e.ledger.balance<=0,onClick:()=>a(e.withdraw(XQ(n||String(e.ledger.balance)))),children:`Invoke-LuciferWithdraw`}),(0,V.jsx)(YQ,{result:i}),e.ledger.payouts.length>0?(0,V.jsx)(`ul`,{children:e.ledger.payouts.map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright tabular-nums`,children:[s_(e.amount,4),` LUCIFER`]}),(0,V.jsx)(`span`,{className:`text-ps-fg`,children:` → `}),(0,V.jsx)(`span`,{className:`text-ps-gold font-mono`,children:e.address})]},`${e.address}-${e.at}`))}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`No withdrawals yet. Mine, submit, then withdraw to the connected wallet.`})]})}function o$Preview(){let e=K_(),[t,n]=(0,B.useState)(`100`),[r,i]=(0,B.useState)(``),[a,o]=(0,B.useState)(null),s=(0,B.useMemo)(()=>new TextEncoder().encode(r).length,[r]);return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`The pyre. Burn is the utility.`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`LuciferPyre.burn(amount, note) pulls an allowance, destroys the tokens, and writes a permanent receipt: burner, amount, timestamp, and a note of at most `,140,` bytes. No fee. The token tells LuciferMarks. The NFT is handmade, and only after both goals. A direct burn() counts too.`]}),(0,V.jsx)($,{k:`Preview balance`,v:`${s_(e.ledger.balance,4)} LUCIFER`}),(0,V.jsx)($,{k:`Burned in this preview`,v:`${s_(e.ledger.burned,4)} / ${c_(r_)} LUCIFER toward the mark`,tone:`bad`}),(0,V.jsx)($,{k:`Pyre receipts`,v:String(e.ledger.receipts.length)}),(0,V.jsx)(qQ,{label:`Amount to burn`,value:t,onChange:n,suffix:`LUCIFER`}),(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsxs)(`span`,{className:`text-ps-fg/80 mb-1 flex justify-between`,children:[(0,V.jsx)(`span`,{children:`Note`}),(0,V.jsxs)(`span`,{className:s>140?`text-ps-bad`:`text-ps-fg/60`,children:[s,`/`,140,` bytes`]})]}),(0,V.jsx)(`textarea`,{value:r,onChange:e=>i(e.target.value),rows:3,maxLength:280,placeholder:`for the skyline`,className:`w-full border border-ps-fg/25 bg-black/25 px-3 py-2 text-ps-bright outline-none placeholder:text-ps-fg/40`})]}),(0,V.jsx)(JQ,{tone:`bad`,onClick:()=>o(e.burn(XQ(t),r)),children:`Invoke-LuciferBurn`}),(0,V.jsx)(YQ,{result:a}),e.ledger.receipts.length>0?(0,V.jsx)(`ul`,{children:e.ledger.receipts.map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bad`,children:[`#`,e.id]}),` `,(0,V.jsxs)(`span`,{className:`text-ps-bright tabular-nums`,children:[s_(e.amount,4),` LUCIFER`]}),e.note?(0,V.jsxs)(`span`,{className:`text-ps-fg`,children:[` — `,e.note]}):null]},e.id))}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`No receipts yet.`})]})}
+/* ==== LUCIFER CHAIN MODE (begin) ====
+ * Readable source for everything that talks to the real contracts on Base.
+ * Empty deployed.json  -> every page keeps the preview behaviour.
+ * deployed.json with a token address -> pages switch to chain mode.
+ */
+var LU_TREASURY = "0xC7877934601C38c1A95DF130dBCd7d9898c55e49",
+  LU_WETH = "0x4200000000000000000000000000000000000006",
+  LU_NPM = "0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1",
+  LU_V3_FACTORY = "0x33128a8fC17869897dcE68Ed026d694621f6FDfD",
+  LU_DEAD = "0x000000000000000000000000000000000000dEaD",
+  LU_CREATE2_FACTORY = "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+  // Arachnid's deterministic deployment proxy; this is the keccak of its runtime code
+  LU_CREATE2_FACTORY_CODEHASH =
+    "0x2fa86add0aed31f33a762c9d88e807c475bd51d0f52bd0955754b2608f7e4989",
+  LU_SCAN = "https://basescan.org",
+  LU_ZERO = "0x0000000000000000000000000000000000000000",
+  LU_TOPIC_TRANSFER =
+    "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+  LU_TOPIC_SOLVED =
+    "0x8c08aa4e9759017b8b967a5627f12fdac7249960c8e314762ed6fee4f0537f1f",
+  LU_TOPIC_BURNED =
+    "0x672089f82e974a2ddedc73b7aa6612ae0d137122f027ac799de4fde206965795",
+  LU_EMPTY = Object.freeze({
+    token: "",
+    mine: "",
+    pyre: "",
+    marks: "",
+    vesting: "",
+    lpTokenId: "",
+    lpBurnTx: "",
+    deployTx: "",
+    deployedAt: "",
+  });
+
+/* ---- deployed.json config -------------------------------------------- */
+var DEPLOYED = LU_EMPTY,
+  luCfgSubs = new Set(),
+  luCfgStarted = !1;
+function chainMode() {
+  return !!DEPLOYED.token;
+}
+function luSetDeployed(next) {
+  DEPLOYED = Object.freeze({ ...LU_EMPTY, ...next });
+  luCfgSubs.forEach((f) => f());
+}
+function luCleanConfig(raw) {
+  let out = { ...LU_EMPTY };
+  if (!raw || typeof raw != "object") return out;
+  for (let k of ["token", "mine", "pyre", "marks", "vesting"])
+    E_(raw[k]) && (out[k] = Wo(raw[k]));
+  for (let k of ["lpTokenId", "lpBurnTx", "deployTx", "deployedAt"])
+    (typeof raw[k] == "string" || typeof raw[k] == "number") &&
+      (out[k] = String(raw[k]).trim());
+  /^\d+$/.test(out.lpTokenId) || (out.lpTokenId = "");
+  return out;
+}
+async function luLoadDeployed() {
+  if (luCfgStarted || typeof window > "u") return;
+  luCfgStarted = !0;
+  try {
+    let res = await fetch(new URL("../deployed.json", import.meta.url), {
+      cache: "no-store",
+    });
+    if (!res.ok) return;
+    let cfg = luCleanConfig(await res.json());
+    if (!cfg.token) return;
+    // The token knows its four companions; fill any that were left blank.
+    for (let k of ["mine", "pyre", "marks", "vesting"])
+      if (!cfg[k])
+        try {
+          cfg[k] = Wo(
+            await XZ.readContract({
+              address: cfg.token,
+              abi: LU_TOKEN_ABI,
+              functionName: k,
+            }),
+          );
+        } catch {}
+    luSetDeployed(cfg);
+  } catch {}
+}
+function useDeployed() {
+  return B.useSyncExternalStore(
+    (f) => (luCfgSubs.add(f), () => luCfgSubs.delete(f)),
+    () => DEPLOYED,
+    () => LU_EMPTY,
+  );
+}
+function useChainMode() {
+  return !!useDeployed().token;
+}
+
+/* ---- tiny element helper (keeps this block readable) ----------------- */
+function luH(type, props, ...kids) {
+  let p = props ? { ...props } : {},
+    key = p.key;
+  delete p.key;
+  kids.length === 1
+    ? (p.children = kids[0])
+    : kids.length > 1 && (p.children = kids);
+  return kids.length > 1 ? V.jsxs(type, p, key) : V.jsx(type, p, key);
+}
+
+/* ---- ABIs (only what the pages call) ---------------------------------- */
+function luFn(name, inputs, outputs, mut) {
+  let io = (l) =>
+    (l || []).map((t) => (typeof t == "string" ? { type: t, name: "" } : t));
+  return {
+    type: "function",
+    name,
+    stateMutability: mut || "view",
+    inputs: io(inputs),
+    outputs: io(outputs),
+  };
+}
+function luEr(name, inputs) {
+  return {
+    type: "error",
+    name,
+    inputs: (inputs || []).map((t) => ({ type: t, name: "" })),
+  };
+}
+var LU_ERRORS = [
+    luEr("InvalidSolution"),
+    luEr("MiningPaused"),
+    luEr("MiningComplete"),
+    luEr("ZeroAmount"),
+    luEr("NoteTooLong"),
+    luEr("ERC20InsufficientBalance", ["address", "uint256", "uint256"]),
+    luEr("ERC20InsufficientAllowance", ["address", "uint256", "uint256"]),
+    luEr("ERC2612ExpiredSignature", ["uint256"]),
+    luEr("ERC2612InvalidSigner", ["address", "address"]),
+    luEr("ERC20InvalidReceiver", ["address"]),
+  ],
+  LU_SELECTORS = {
+    "0xd9c1988f": "InvalidSolution",
+    "0xfe8e2643": "MiningPaused",
+    "0xc2cf00fc": "MiningComplete",
+    "0x1f2a2005": "ZeroAmount",
+    "0x155be563": "NoteTooLong",
+    "0xe450d38c": "ERC20InsufficientBalance",
+    "0xfb8f41b2": "ERC20InsufficientAllowance",
+    "0x62791302": "ERC2612ExpiredSignature",
+    "0x4b800e46": "ERC2612InvalidSigner",
+    "0xec442f05": "ERC20InvalidReceiver",
+  },
+  LU_ERR_COPY = {
+    InvalidSolution:
+      "InvalidSolution: that nonce does not solve the current challenge.",
+    MiningPaused: "MiningPaused: the guardian has paused the mine.",
+    MiningComplete: "MiningComplete: the mining allocation is fully mined.",
+    ZeroAmount: "ZeroAmount: enter an amount above zero.",
+    NoteTooLong: "NoteTooLong: the note is over 140 bytes.",
+    ERC20InsufficientBalance:
+      "ERC20InsufficientBalance: the wallet does not hold that much LUCIFER.",
+    ERC20InsufficientAllowance:
+      "ERC20InsufficientAllowance: the pyre is not approved for that amount.",
+    ERC2612ExpiredSignature: "ERC2612ExpiredSignature: the permit expired.",
+    ERC2612InvalidSigner:
+      "ERC2612InvalidSigner: the permit signature did not match the wallet.",
+    ERC20InvalidReceiver: "ERC20InvalidReceiver: that recipient is not valid.",
+  },
+  LU_TOKEN_ABI = [
+    luFn("mine", [], ["address"]),
+    luFn("pyre", [], ["address"]),
+    luFn("marks", [], ["address"]),
+    luFn("vesting", [], ["address"]),
+    luFn("treasury", [], ["address"]),
+    luFn("totalMinted", [], ["uint256"]),
+    luFn("totalSupply", [], ["uint256"]),
+    luFn("balanceOf", ["address"], ["uint256"]),
+    luFn("allowance", ["address", "address"], ["uint256"]),
+    luFn("nonces", ["address"], ["uint256"]),
+    luFn("approve", ["address", "uint256"], ["bool"], "nonpayable"),
+    luFn("transfer", ["address", "uint256"], ["bool"], "nonpayable"),
+    ...LU_ERRORS,
+  ],
+  LU_MINE_ABI = [
+    luFn("challenge", [], ["bytes32"]),
+    luFn("target", [], ["uint256"]),
+    luFn("solutions", [], ["uint256"]),
+    luFn("totalMined", [], ["uint256"]),
+    luFn("currentReward", [], ["uint256"]),
+    luFn("paused", [], ["bool"]),
+    luFn("solutionsOf", ["address"], ["uint256"]),
+    luFn("submit", ["uint256"], [], "nonpayable"),
+    ...LU_ERRORS,
+  ],
+  LU_PYRE_ABI = [
+    luFn("totalBurned", [], ["uint256"]),
+    luFn("burnedOf", ["address"], ["uint256"]),
+    luFn("receiptCount", [], ["uint256"]),
+    luFn(
+      "getReceipt",
+      ["uint256"],
+      [
+        {
+          type: "tuple",
+          name: "",
+          components: [
+            { name: "burner", type: "address" },
+            { name: "amount", type: "uint256" },
+            { name: "timestamp", type: "uint64" },
+            { name: "note", type: "bytes" },
+          ],
+        },
+      ],
+    ),
+    luFn("burn", ["uint256", "bytes"], ["uint256"], "nonpayable"),
+    luFn(
+      "burnWithPermit",
+      ["uint256", "string", "uint256", "uint8", "bytes32", "bytes32"],
+      ["uint256"],
+      "nonpayable",
+    ),
+    ...LU_ERRORS,
+  ],
+  LU_MARKS_ABI = [
+    luFn("qualifies", ["address"], ["bool"]),
+    luFn("isMarked", ["address"], ["bool"]),
+    luFn("markedCount", [], ["uint256"]),
+    luFn("allMarked", [], ["address[]"]),
+    luFn("check", ["address"], ["bool"], "nonpayable"),
+  ],
+  LU_UNI_ABI = [
+    luFn("getPool", ["address", "address", "uint24"], ["address"]),
+    luFn(
+      "slot0",
+      [],
+      ["uint160", "int24", "uint16", "uint16", "uint16", "uint8", "bool"],
+    ),
+    luFn("liquidity", [], ["uint128"]),
+    luFn("ownerOf", ["uint256"], ["address"]),
+    luFn("balanceOf", ["address"], ["uint256"]),
+    luFn("tokenOfOwnerByIndex", ["address", "uint256"], ["uint256"]),
+    luFn(
+      "positions",
+      ["uint256"],
+      [
+        "uint96",
+        "address",
+        "address",
+        "address",
+        "uint24",
+        "int24",
+        "int24",
+        "uint128",
+        "uint256",
+        "uint256",
+        "uint128",
+        "uint128",
+      ],
+    ),
+  ];
+
+/* ---- small pure helpers ---------------------------------------------- */
+function luSame(a, b) {
+  return (
+    typeof a == "string" &&
+    typeof b == "string" &&
+    a.toLowerCase() === b.toLowerCase()
+  );
+}
+function luNum(wei, dp = 4) {
+  return wei == null ? "—" : s_(Number(dh(wei, 18)), dp);
+}
+function luHex(n) {
+  return "0x" + BigInt(n).toString(16);
+}
+function luWord(v) {
+  return typeof v == "string" && v.startsWith("0x")
+    ? v.slice(2).toLowerCase().padStart(64, "0")
+    : BigInt(v).toString(16).padStart(64, "0");
+}
+function luParseAmount(text) {
+  let t = String(text ?? "")
+    .trim()
+    .replace(/,/g, "");
+  if (!/^\d+(\.\d{1,18})?$/.test(t)) return null;
+  try {
+    return Kh(t, 18);
+  } catch {
+    return null;
+  }
+}
+function luSleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+async function luRetry(fn, tries = 4, gap = 1500) {
+  let last;
+  for (let i = 0; i < tries; i++)
+    try {
+      return await fn();
+    } catch (e) {
+      ((last = e), i < tries - 1 && (await luSleep(gap)));
+    }
+  throw last;
+}
+function luBytesToHex(b) {
+  let s = "0x";
+  for (let i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, "0");
+  return s;
+}
+function luHexToText(hex) {
+  try {
+    return new TextDecoder().decode(J_(hex));
+  } catch {
+    return hex;
+  }
+}
+function luIsqrt(n) {
+  if (n < 2n) return n;
+  let x = n,
+    y = (x + 1n) >> 1n;
+  for (; y < x; ) ((x = y), (y = (x + n / x) >> 1n));
+  return x;
+}
+/* keccak256(rlp([sender, nonce]))[12:] — the address a plain deployment gets. */
+function luCreateAddress(sender, nonce) {
+  let n = BigInt(nonce),
+    nb = [];
+  for (; n > 0n; n >>= 8n) nb.unshift(Number(n & 255n));
+  let enc = nb.length === 0 ? [128] : nb.length === 1 && nb[0] < 128 ? nb : [128 + nb.length, ...nb],
+    body = [148, ...J_(sender), ...enc],
+    h = Zg(new Uint8Array([192 + body.length, ...body]));
+  return Wo(luBytesToHex(h.slice(12)));
+}
+/* keccak256(0xff ++ factory ++ salt ++ keccak256(initcode))[12:] */
+function luCreate2Address(factory, saltHex, initcodeHex) {
+  let buf = new Uint8Array(85);
+  buf[0] = 255;
+  buf.set(J_(factory), 1);
+  buf.set(J_(saltHex), 21);
+  buf.set(Zg(J_(initcodeHex)), 53);
+  return Wo(luBytesToHex(Zg(buf).slice(12)));
+}
+
+/* ---- the proof-of-work rule ------------------------------------------- *
+ * LuciferMine.submit(nonce) accepts when
+ *   uint256(keccak256(abi.encodePacked(challenge, msg.sender, nonce))) <= target
+ * i.e. an 84-byte preimage: challenge (32) | miner (20) | nonce (32, big-endian).
+ */
+function luPowBuffer(challengeHex, minerHex, nonce) {
+  let buf = new Uint8Array(84);
+  buf.set(J_(challengeHex), 0);
+  buf.set(J_(minerHex), 32);
+  nonce != null && Y_(buf, 52, BigInt(nonce));
+  return buf;
+}
+function luTargetBytes(target) {
+  let b = new Uint8Array(32);
+  Y_(b, 0, BigInt(target));
+  return b;
+}
+/* big-endian compare: hash <= target */
+function luLte(hash, target) {
+  for (let i = 0; i < 32; i++) {
+    if (hash[i] < target[i]) return !0;
+    if (hash[i] > target[i]) return !1;
+  }
+  return !0;
+}
+function luPowCheck(challengeHex, minerHex, nonce, target) {
+  let hash = Zg(luPowBuffer(challengeHex, minerHex, nonce));
+  return { hash: luBytesToHex(hash), ok: luLte(hash, luTargetBytes(target)) };
+}
+
+/* ---- errors ------------------------------------------------------------ */
+function luErrName(e) {
+  let data = "";
+  for (let c = e, i = 0; c && typeof c == "object" && i < 10; c = c.cause, i++) {
+    if (c.data && typeof c.data == "object" && c.data.errorName)
+      return c.data.errorName;
+    let d =
+      typeof c.data == "string"
+        ? c.data
+        : c.data && typeof c.data.data == "string"
+          ? c.data.data
+          : typeof c.raw == "string"
+            ? c.raw
+            : "";
+    !data && /^0x[0-9a-fA-F]{8}/.test(d) && (data = d);
+  }
+  return data ? LU_SELECTORS[data.slice(0, 10).toLowerCase()] || "" : "";
+}
+function luRejected(e) {
+  for (let c = e, i = 0; c && typeof c == "object" && i < 10; c = c.cause, i++)
+    if ("code" in c && Number(c.code) === 4001) return !0;
+  return !1;
+}
+function luErrText(e) {
+  if (luRejected(e)) return "The wallet rejected the request.";
+  let name = luErrName(e);
+  if (name) return LU_ERR_COPY[name] || name;
+  if (e && typeof e == "object") {
+    if (typeof e.shortMessage == "string" && e.shortMessage)
+      return e.shortMessage;
+    if (typeof e.message == "string" && e.message)
+      return e.message.split("\n")[0].slice(0, 300);
+  }
+  return "The request failed.";
+}
+
+/* ---- sending from the connected wallet -------------------------------- */
+async function luEnsureBase(provider) {
+  let id = "";
+  try {
+    id = String(await provider.request({ method: "eth_chainId" }));
+  } catch {}
+  Number.parseInt(id, 16) !== 8453 && (await kQ(provider));
+}
+/* Wait until our RPC has seen the block a receipt came from, so the next
+ * read or gas estimate is not answered by a node that is one block behind. */
+async function luCatchUp(blockNumber) {
+  for (let i = 0; i < 12; i++) {
+    try {
+      if ((await XZ.getBlockNumber({ cacheTime: 0 })) >= blockNumber) return;
+    } catch {}
+    await luSleep(700);
+  }
+}
+/* tx = { to?, data, value? }.  Estimates first (so a revert is reported
+ * before the wallet opens), sends with eth_sendTransaction, reports the
+ * hash through onHash the moment the wallet returns it, waits for the receipt. */
+async function luSend(wallet, tx, opts = {}) {
+  let provider = wallet.provider,
+    from = wallet.address;
+  if (!provider || !from) throw Error("Connect a wallet first.");
+  await luEnsureBase(provider);
+  let value = tx.value ? BigInt(tx.value) : 0n,
+    call = { account: from, data: tx.data, value };
+  tx.to && (call.to = tx.to);
+  let gas =
+    opts.gas ??
+    (await luRetry(() => XZ.estimateGas(call), opts.estimateTries ?? 1, 2e3));
+  opts.onStage?.("wallet");
+  let params = { from, data: tx.data, value: luHex(value) };
+  tx.to && (params.to = tx.to);
+  gas && (params.gas = luHex((BigInt(gas) * 13n) / 10n));
+  let hash = await provider.request({
+    method: "eth_sendTransaction",
+    params: [params],
+  });
+  if (typeof hash != "string" || !/^0x[0-9a-fA-F]{64}$/.test(hash))
+    throw Error("The wallet did not return a transaction hash.");
+  opts.onHash?.(hash);
+  opts.onStage?.("mining");
+  return luReceipt(hash);
+}
+async function luReceipt(hash, timeout = 24e4) {
+  let receipt = await XZ.waitForTransactionReceipt({
+    hash,
+    timeout,
+    pollingInterval: 2e3,
+  });
+  await luCatchUp(receipt.blockNumber);
+  if (receipt.status !== "success") {
+    let err = Error("The transaction was mined but reverted. Gas was spent.");
+    err.luReverted = !0;
+    err.luReceipt = receipt;
+    throw err;
+  }
+  return receipt;
+}
+/* Contract call: estimate with the ABI so custom errors come back by name. */
+async function luCall(wallet, req, opts = {}) {
+  if (!wallet.provider || !wallet.address)
+    throw Error("Connect a wallet first.");
+  let gas = await XZ.estimateContractGas({
+    account: wallet.address,
+    address: req.address,
+    abi: req.abi,
+    functionName: req.functionName,
+    args: req.args || [],
+    value: req.value,
+  });
+  return luSend(
+    wallet,
+    {
+      to: req.address,
+      data: Ec({
+        abi: req.abi,
+        functionName: req.functionName,
+        args: req.args || [],
+      }),
+      value: req.value,
+    },
+    { ...opts, gas },
+  );
+}
+function luRead(address, abi, functionName, args) {
+  return XZ.readContract({ address, abi, functionName, args: args || [] });
+}
+
+/* ---- polling hook ------------------------------------------------------ */
+function useLuPoll(fn, deps, ms) {
+  let key = deps.map(String).join("|"),
+    [state, set] = B.useState({ key: "", data: null, error: "" }),
+    [tick, setTick] = B.useState(0),
+    ref = B.useRef(fn);
+  ref.current = fn;
+  B.useEffect(() => {
+    let dead = !1,
+      first = !0,
+      run = async () => {
+        if (!first && typeof document < "u" && document.hidden) return;
+        first = !1;
+        try {
+          let data = await ref.current();
+          dead || set({ key, data, error: "" });
+        } catch (e) {
+          dead ||
+            set((p) => ({
+              key,
+              data: p.key === key ? p.data : null,
+              error: luErrText(e),
+            }));
+        }
+      };
+    run();
+    let id = ms ? window.setInterval(run, ms) : 0;
+    return () => {
+      dead = !0;
+      id && window.clearInterval(id);
+    };
+  }, [key, tick]);
+  return {
+    data: state.key === key ? state.data : null,
+    error: state.key === key ? state.error : "",
+    refresh: B.useCallback(() => setTick((t) => t + 1), []),
+  };
+}
+
+/* ---- shared UI bits ---------------------------------------------------- */
+function LuLink({ href, children }) {
+  return luH(
+    "a",
+    {
+      href,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "text-ps-gold hover:underline",
+    },
+    children,
+  );
+}
+function LuTx({ hash, label }) {
+  return hash
+    ? luH(LuLink, { href: `${LU_SCAN}/tx/${hash}` }, label || D_(hash))
+    : null;
+}
+function LuAddr({ address, kind }) {
+  return address
+    ? luH(
+        LuLink,
+        { href: `${LU_SCAN}/${kind || "address"}/${address}` },
+        address,
+      )
+    : "—";
+}
+function LuText({ label, value, onChange, placeholder, mono }) {
+  return luH(
+    "label",
+    { className: "block text-sm" },
+    luH("span", { className: "text-ps-fg/80 mb-1 block" }, label),
+    luH(
+      "span",
+      {
+        className:
+          "flex min-h-11 items-center border border-ps-fg/25 bg-black/25",
+      },
+      luH("input", {
+        value,
+        onChange: (e) => onChange(e.target.value),
+        placeholder,
+        spellCheck: !1,
+        autoComplete: "off",
+        autoCapitalize: "off",
+        className: `min-w-0 flex-1 bg-transparent px-3 py-2 text-ps-bright outline-none placeholder:text-ps-fg/40${mono ? " font-mono" : ""}`,
+      }),
+    ),
+  );
+}
+/* Connected to the wrong network: one button that asks the wallet to switch. */
+function LuNeedBase({ wallet }) {
+  let [err, setErr] = B.useState("");
+  return wallet.address && wallet.provider && wallet.chainId !== 8453
+    ? luH(
+        "div",
+        { className: "flex flex-col gap-2" },
+        luH(
+          "p",
+          { className: "text-ps-bad text-sm" },
+          `The wallet is on ${wallet.chain}. $LUCIFER lives on Base.`,
+        ),
+        luH(
+          JQ,
+          {
+            tone: "plain",
+            onClick: () => {
+              setErr("");
+              kQ(wallet.provider).catch((e) => setErr(luErrText(e)));
+            },
+          },
+          "Switch-Network Base",
+        ),
+        err ? luH("p", { className: "text-ps-bad text-sm" }, err) : null,
+      )
+    : null;
+}
+/* ---- the real miner ---------------------------------------------------- *
+ * One search loop for the whole tab, shared by every miner block on screen.
+ * It hashes in 20 ms slices on the main thread, like the preview benchmark,
+ * but against the live challenge and target, with the connected wallet as the
+ * miner. It stops on the first valid nonce and holds it until it is submitted
+ * or the challenge moves on.
+ */
+var luMiner = (() => {
+  let state = {
+      running: !1,
+      hashrate: 0,
+      hashes: 0,
+      found: null,
+      stale: !1,
+      ready: !1,
+    },
+    subs = new Set(),
+    job = null,
+    looping = !1,
+    total = 0,
+    markAt = 0,
+    markHashes = 0;
+  function emit(patch) {
+    state = { ...state, ...patch };
+    subs.forEach((f) => f());
+  }
+  function slice() {
+    if (!state.running || !job || state.found) {
+      looping = !1;
+      state.hashrate !== 0 && emit({ hashrate: 0 });
+      return;
+    }
+    let buf = job.buf,
+      tgt = job.tgt,
+      t0 = performance.now(),
+      hit = !1;
+    search: for (;;) {
+      for (let k = 0; k < 256; k++) {
+        // next nonce: big-endian increment of the last 32 bytes
+        for (let i = 83; i >= 52; i--) {
+          buf[i] = (buf[i] + 1) & 255;
+          if (buf[i] !== 0) break;
+        }
+        total += 1;
+        if (luLte(Zg(buf), tgt)) {
+          hit = !0;
+          break search;
+        }
+      }
+      if (performance.now() - t0 >= 20) break;
+    }
+    let now = performance.now();
+    if (hit) {
+      let nonce = BigInt(luBytesToHex(buf.slice(52, 84)));
+      emit({
+        hashes: total,
+        hashrate: 0,
+        stale: !1,
+        found: {
+          challenge: job.challenge,
+          miner: job.miner,
+          nonce,
+          hash: luBytesToHex(Zg(buf)),
+        },
+      });
+      looping = !1;
+      return;
+    }
+    if (now - markAt >= 250) {
+      let secs = (now - markAt) / 1e3;
+      emit({
+        hashes: total,
+        hashrate: secs > 0 ? Math.round((total - markHashes) / secs) : 0,
+      });
+      markAt = now;
+      markHashes = total;
+    }
+    window.setTimeout(slice, 0);
+  }
+  function kick() {
+    if (looping || !state.running || !job || state.found) return;
+    looping = !0;
+    markAt = performance.now();
+    markHashes = total;
+    window.setTimeout(slice, 0);
+  }
+  return {
+    subscribe: (f) => (subs.add(f), () => subs.delete(f)),
+    get: () => state,
+    /* Point the miner at the live challenge. Safe to call on every poll. */
+    setJob(challenge, miner, target) {
+      let m = miner.toLowerCase(),
+        t = BigInt(target);
+      if (job && job.challenge === challenge && job.miner === m && job.target === t)
+        return;
+      let buf = luPowBuffer(challenge, m, null);
+      // random 96-bit starting nonce, so two tabs or two wallets never overlap
+      crypto.getRandomValues(buf.subarray(72, 84));
+      job = { challenge, miner: m, target: t, buf, tgt: luTargetBytes(t) };
+      let f = state.found,
+        stale = !!f && (f.challenge !== challenge || f.miner !== m);
+      emit({ ready: !0, found: stale ? null : f, stale: stale || state.stale });
+      kick();
+    },
+    clearJob() {
+      job = null;
+      emit({ ready: !1, found: null });
+    },
+    start() {
+      emit({ running: !0, stale: !1 });
+      kick();
+    },
+    stop() {
+      emit({ running: !1, hashrate: 0 });
+    },
+    /* Drop the held solution (it was submitted, or it went stale). */
+    clearFound(stale) {
+      emit({ found: null, stale: !!stale });
+      kick();
+    },
+  };
+})();
+function useLuMiner() {
+  return B.useSyncExternalStore(luMiner.subscribe, luMiner.get, luMiner.get);
+}
+
+/* ---- reads shared by several pages ------------------------------------ */
+async function luReadWallet(cfg, address) {
+  let [balance, solutions, burned, marked, qualifies] = await Promise.all([
+    luRead(cfg.token, LU_TOKEN_ABI, "balanceOf", [address]),
+    luRead(cfg.mine, LU_MINE_ABI, "solutionsOf", [address]),
+    luRead(cfg.pyre, LU_PYRE_ABI, "burnedOf", [address]),
+    luRead(cfg.marks, LU_MARKS_ABI, "isMarked", [address]),
+    luRead(cfg.marks, LU_MARKS_ABI, "qualifies", [address]),
+  ]);
+  return { balance, solutions, burned, marked, qualifies };
+}
+function useLuWallet(cfg, address) {
+  return useLuPoll(
+    () => (address && cfg.token ? luReadWallet(cfg, address) : null),
+    [cfg.token, address ?? ""],
+    15e3,
+  );
+}
+function LuReadError({ error }) {
+  return error
+    ? luH("p", { className: "text-ps-bad text-sm" }, `Base RPC: ${error}`)
+    : null;
+}
+
+/* ---- welcome banner ---------------------------------------------------- */
+var LU_PRELAUNCH =
+  "Pre-launch. The Base contracts, deploy script and liquidity script are written, tested, and shown here. Nothing is deployed yet. Wallet actions are a local preview ledger.";
+function LuLaunchNotice() {
+  let cfg = useDeployed();
+  return cfg.token
+    ? luH(
+        "p",
+        { className: "text-ps-ok text-sm leading-relaxed text-pretty" },
+        "LIVE: $LUCIFER is deployed on Base. Token ",
+        luH(
+          "span",
+          { className: "text-ps-bright font-mono break-all" },
+          cfg.token,
+        ),
+        " · ",
+        luH(LuLink, { href: `${LU_SCAN}/token/${cfg.token}` }, "Basescan"),
+      )
+    : V.jsx(KQ, { children: LU_PRELAUNCH });
+}
+/* The help list under the banner. Server-rendered text stays as is; the
+ * chain-mode wording and the treasury-only entry appear after mount. */
+function useLuHelpList() {
+  let chain = useChainMode(),
+    wallet = H_(),
+    list = chain
+      ? ZQ.map(([name, blurb]) =>
+          name === "Connect-Wallet"
+            ? [name, "Connect a wallet, see your balance and send LUCIFER"]
+            : name === "Invoke-LuciferMiner"
+              ? [name, "Proof-of-work miner — live on Base"]
+              : [name, blurb],
+        )
+      : ZQ;
+  return luSame(wallet.address, LU_TREASURY)
+    ? [...list, ["Invoke-Deploy", "Launch wizard — treasury wallet only"]]
+    : list;
+}
+
+/* ---- Invoke-LuciferMiner (chain) -------------------------------------- */
+function LuChainMiner() {
+  let cfg = useDeployed(),
+    wallet = H_(),
+    miner = useLuMiner(),
+    [result, setResult] = B.useState(null),
+    [busy, setBusy] = B.useState(""),
+    info = useLuPoll(
+      async () => {
+        let [challenge, target, reward, solutions, totalMined, paused, mine] =
+          await Promise.all([
+            luRead(cfg.mine, LU_MINE_ABI, "challenge"),
+            luRead(cfg.mine, LU_MINE_ABI, "target"),
+            luRead(cfg.mine, LU_MINE_ABI, "currentReward"),
+            luRead(cfg.mine, LU_MINE_ABI, "solutions"),
+            luRead(cfg.mine, LU_MINE_ABI, "totalMined"),
+            luRead(cfg.mine, LU_MINE_ABI, "paused"),
+            wallet.address
+              ? luRead(cfg.mine, LU_MINE_ABI, "solutionsOf", [wallet.address])
+              : null,
+          ]);
+        return { challenge, target, reward, solutions, totalMined, paused, mine };
+      },
+      [cfg.mine, wallet.address ?? ""],
+      15e3,
+    ),
+    live = info.data;
+  B.useEffect(() => {
+    live && wallet.address
+      ? luMiner.setJob(live.challenge, wallet.address, live.target)
+      : wallet.address || luMiner.clearJob();
+  }, [live?.challenge, live?.target, wallet.address]);
+  let bits = live ? live.target.toString(2).length - 1 : 0,
+    expected = live && live.target > 0n ? Number((1n << 256n) / live.target) : 0,
+    eta =
+      miner.hashrate > 0 && expected > 0
+        ? Math.round(expected / miner.hashrate)
+        : 0,
+    found =
+      miner.found && live && miner.found.challenge === live.challenge
+        ? miner.found
+        : null,
+    cells = Array.from({ length: 32 }, (e, n) => (miner.hashes + n) % 7 == 0),
+    searching = miner.running && !found && !!wallet.address && !!live;
+  async function submit() {
+    let f = found;
+    if (!f) return;
+    setBusy("Confirm submit(nonce) in your wallet…");
+    setResult(null);
+    try {
+      let receipt = await luCall(
+          wallet,
+          {
+            address: cfg.mine,
+            abi: LU_MINE_ABI,
+            functionName: "submit",
+            args: [f.nonce],
+          },
+          {
+            onStage: (s) =>
+              s === "mining" && setBusy("Sent. Waiting for Base to include it…"),
+          },
+        ),
+        log = receipt.logs.find(
+          (l) => luSame(l.address, cfg.mine) && l.topics[0] === LU_TOPIC_SOLVED,
+        ),
+        index = log ? BigInt(log.topics[2]) : null,
+        reward = log ? BigInt("0x" + log.data.slice(66, 130)) : null,
+        next = log ? "0x" + log.data.slice(130, 194) : null;
+      next && live && luMiner.setJob(next, wallet.address, live.target);
+      luMiner.clearFound(!1);
+      setResult({
+        ok: !0,
+        detail: luH(
+          V.Fragment,
+          null,
+          `Solved. Solution #${index == null ? "?" : c_(Number(index) + 1)} paid ${luNum(reward)} LUCIFER to ${D_(wallet.address)}. Gas used ${c_(Number(receipt.gasUsed))}. `,
+          luH(LuTx, { hash: receipt.transactionHash, label: "View on Basescan" }),
+        ),
+      });
+    } catch (e) {
+      let name = luErrName(e);
+      name === "InvalidSolution" || e?.luReverted
+        ? (luMiner.clearFound(!0),
+          setResult({
+            ok: !1,
+            detail: e?.luReverted
+              ? "Lost the race: another miner's solution landed first and this transaction reverted. Its gas is spent. The challenge was re-read and the search goes on."
+              : "Stale challenge: another miner solved it first, so nothing was sent. The challenge was re-read and the search goes on.",
+          }))
+        : setResult({ ok: !1, detail: luErrText(e) });
+    } finally {
+      setBusy("");
+      info.refresh();
+    }
+  }
+  return luH(
+    "div",
+    { className: "flex flex-col gap-3" },
+    luH(
+      "h2",
+      { className: "text-ps-bright font-bold text-balance" },
+      "Defragment the chain. Earn LUCIFER.",
+    ),
+    luH(
+      "p",
+      { className: "text-sm leading-relaxed text-pretty" },
+      "Era-0 reward is ",
+      $_,
+      " LUCIFER per solution, and it halves every ",
+      c_(t_),
+      " solutions. The series approaches ",
+      c_($g),
+      ". This host searches the live LuciferMine target on Base with your wallet as the miner: keccak256(challenge, wallet, nonce) must be at or under the target. A valid nonce only pays the wallet that found it.",
+    ),
+    V.jsx(KQ, {
+      children:
+        "The first solve at genesis is a race. One submit wins each challenge; a transaction that lands second reverts and its gas is lost. Browser hashing is slow next to a native miner.",
+    }),
+    luH(
+      "div",
+      { className: "grid grid-cols-8 gap-1", "aria-hidden": !0 },
+      cells.map((on, n) =>
+        luH(
+          "span",
+          {
+            key: n,
+            className: `flex h-5 items-center justify-center text-xs ${on && searching ? "text-ps-gold" : "text-ps-fg/30"}`,
+          },
+          on && searching ? "█" : "░",
+        ),
+      ),
+    ),
+    luH(LuReadError, { error: info.error }),
+    luH($, {
+      k: "Challenge",
+      v: live ? D_(live.challenge) : "reading Base…",
+      tone: "info",
+    }),
+    luH($, {
+      k: "Target",
+      v: live
+        ? `≈ 2^${bits} · about ${c_(expected)} hashes per solution`
+        : "—",
+    }),
+    luH($, {
+      k: "Reward now",
+      v: live ? `${luNum(live.reward)} LUCIFER` : "—",
+      tone: "gold",
+    }),
+    luH($, {
+      k: "Network",
+      v: live
+        ? `${c_(Number(live.solutions))} solutions · ${luNum(live.totalMined, 0)} LUCIFER mined${live.paused ? " · PAUSED" : ""}`
+        : "—",
+      tone: live?.paused ? "bad" : "bright",
+    }),
+    luH($, {
+      k: "Hashrate",
+      v: searching && !miner.hashrate
+        ? "starting…"
+        : searching
+        ? `${c_(miner.hashrate)} H/s${eta ? ` · ~${eta < 120 ? `${eta} s` : `${c_(eta / 60)} min`} per solution` : ""}`
+        : found
+          ? "paused — solution ready"
+          : miner.hashes > 0
+            ? "stopped"
+            : "idle",
+      tone: "info",
+    }),
+    luH($, { k: "Hashes", v: c_(miner.hashes) }),
+    luH($, {
+      k: "Your solutions",
+      v:
+        live && live.mine != null
+          ? `${c_(Number(live.mine))} / ${c_(n_)} toward the mark`
+          : wallet.address
+            ? "—"
+            : "connect a wallet",
+      tone: "gold",
+    }),
+    found
+      ? luH(
+          "p",
+          { className: "text-ps-gold text-sm break-all" },
+          `Solution found. Nonce ${found.nonce.toString()} · hash ${found.hash}. Submit it before someone else does.`,
+        )
+      : miner.stale
+        ? luH(
+            "p",
+            { className: "text-ps-fg/70 text-sm" },
+            "The challenge moved on (someone else solved it). Searching the new one.",
+          )
+        : null,
+    wallet.address
+      ? null
+      : luH(
+          "p",
+          { className: "text-ps-fg/70 text-sm" },
+          "Connect the wallet that should be paid. The solution is bound to that address.",
+        ),
+    wallet.error
+      ? luH("p", { className: "text-ps-bad text-sm" }, wallet.error)
+      : null,
+    wallet.address ? null : luH(U_, {}),
+    luH(LuNeedBase, { wallet }),
+    luH(
+      "div",
+      { className: "flex flex-wrap gap-2" },
+      luH(
+        JQ,
+        {
+          disabled: !wallet.address || !live || live.paused,
+          onClick: () => (miner.running ? luMiner.stop() : luMiner.start()),
+        },
+        miner.running ? "Stop-LuciferMiner" : "Start-LuciferMiner",
+      ),
+      luH(
+        JQ,
+        { disabled: !found || !!busy, onClick: () => void submit() },
+        found ? "Submit-Solution (1)" : "Submit-Solution",
+      ),
+    ),
+    busy ? luH("p", { className: "text-ps-info text-sm" }, busy) : null,
+    luH(YQ, { result }),
+    luH(
+      "p",
+      { className: "text-ps-fg/70 text-sm" },
+      "Typical browser rate is well under a miner. CPU-fair. One tab. Keep the tab in front; background tabs are throttled.",
+    ),
+  );
+}
+
+/* ---- Invoke-LuciferBurn (chain) --------------------------------------- */
+var LU_RECEIPT_SCAN = 300;
+async function luReadReceipts(cfg, address) {
+  let count = Number(await luRead(cfg.pyre, LU_PYRE_ABI, "receiptCount"));
+  if (!address || count === 0) return { count, mine: [], scanned: 0 };
+  let from = Math.max(0, count - LU_RECEIPT_SCAN),
+    ids = Array.from({ length: count - from }, (e, i) => from + i),
+    rows = await Promise.all(
+      ids.map((id) =>
+        luRead(cfg.pyre, LU_PYRE_ABI, "getReceipt", [BigInt(id)]).catch(
+          () => null,
+        ),
+      ),
+    ),
+    mine = [];
+  rows.forEach((r, i) => {
+    r &&
+      luSame(r.burner, address) &&
+      mine.push({
+        id: ids[i],
+        amount: r.amount,
+        at: Number(r.timestamp),
+        note: luHexToText(r.note),
+      });
+  });
+  return { count, mine: mine.reverse(), scanned: ids.length };
+}
+/* Burn through the pyre. Path 1: EIP-2612 permit + burnWithPermit in one
+ * transaction. Path 2 (wallet cannot sign typed data, or the signature is
+ * not a plain ECDSA one): approve, then burn. */
+async function luBurn(wallet, cfg, amount, note, say) {
+  let owner = wallet.address,
+    provider = wallet.provider;
+  if (!owner || !provider) throw Error("Connect a wallet first.");
+  await luEnsureBase(provider);
+  let balance = await luRead(cfg.token, LU_TOKEN_ABI, "balanceOf", [owner]);
+  if (balance < amount)
+    throw Error(
+      `The wallet holds ${luNum(balance)} LUCIFER. That is less than the burn.`,
+    );
+  let allowance = await luRead(cfg.token, LU_TOKEN_ABI, "allowance", [
+      owner,
+      cfg.pyre,
+    ]),
+    noteHex = luBytesToHex(new TextEncoder().encode(note)),
+    burnPlain = () => (
+      say("Confirm the burn in your wallet…"),
+      luCall(
+        wallet,
+        {
+          address: cfg.pyre,
+          abi: LU_PYRE_ABI,
+          functionName: "burn",
+          args: [amount, noteHex],
+        },
+        { onStage: (s) => s === "mining" && say("Burning. Waiting for Base…") },
+      )
+    );
+  if (allowance >= amount) return { receipt: await burnPlain(), path: "burn" };
+  // ---- permit path
+  let sig = null;
+  try {
+    let [nonce, block] = await Promise.all([
+        luRead(cfg.token, LU_TOKEN_ABI, "nonces", [owner]),
+        XZ.getBlock(),
+      ]),
+      now = Math.max(Math.floor(Date.now() / 1e3), Number(block.timestamp)),
+      deadline = BigInt(now + 1200),
+      typed = {
+        types: {
+          EIP712Domain: [
+            { name: "name", type: "string" },
+            { name: "version", type: "string" },
+            { name: "chainId", type: "uint256" },
+            { name: "verifyingContract", type: "address" },
+          ],
+          Permit: [
+            { name: "owner", type: "address" },
+            { name: "spender", type: "address" },
+            { name: "value", type: "uint256" },
+            { name: "nonce", type: "uint256" },
+            { name: "deadline", type: "uint256" },
+          ],
+        },
+        primaryType: "Permit",
+        domain: {
+          name: "Devil's Advocate",
+          version: "1",
+          chainId: 8453,
+          verifyingContract: cfg.token,
+        },
+        message: {
+          owner,
+          spender: cfg.pyre,
+          value: amount.toString(),
+          nonce: nonce.toString(),
+          deadline: deadline.toString(),
+        },
+      };
+    say("Sign the permit in your wallet (no gas)…");
+    let raw = await provider.request({
+      method: "eth_signTypedData_v4",
+      params: [owner, JSON.stringify(typed)],
+    });
+    if (typeof raw == "string" && /^0x[0-9a-fA-F]{130}$/.test(raw)) {
+      let v = Number.parseInt(raw.slice(130, 132), 16);
+      v < 27 && (v += 27);
+      sig = {
+        r: "0x" + raw.slice(2, 66),
+        s: "0x" + raw.slice(66, 130),
+        v,
+        deadline,
+      };
+    }
+  } catch (e) {
+    if (luRejected(e)) throw e;
+    sig = null;
+  }
+  if (sig)
+    try {
+      say("Confirm the burn in your wallet…");
+      let receipt = await luCall(
+        wallet,
+        {
+          address: cfg.pyre,
+          abi: LU_PYRE_ABI,
+          functionName: "burnWithPermit",
+          args: [amount, note, sig.deadline, sig.v, sig.r, sig.s],
+        },
+        { onStage: (s) => s === "mining" && say("Burning. Waiting for Base…") },
+      );
+      return { receipt, path: "permit" };
+    } catch (e) {
+      // A permit the token does not accept shows up as a missing allowance.
+      if (luRejected(e) || e?.luReverted) throw e;
+      if (luErrName(e) !== "ERC20InsufficientAllowance") throw e;
+    }
+  // ---- approve + burn path
+  say("This wallet cannot use a permit. Confirm the approval (1 of 2)…");
+  await luCall(
+    wallet,
+    {
+      address: cfg.token,
+      abi: LU_TOKEN_ABI,
+      functionName: "approve",
+      args: [cfg.pyre, amount],
+    },
+    { onStage: (s) => s === "mining" && say("Approving. Waiting for Base…") },
+  );
+  return { receipt: await burnPlain(), path: "approve" };
+}
+function LuChainBurn() {
+  let cfg = useDeployed(),
+    wallet = H_(),
+    [amountText, setAmountText] = B.useState("100"),
+    [note, setNote] = B.useState(""),
+    [result, setResult] = B.useState(null),
+    [busy, setBusy] = B.useState(""),
+    [confirming, setConfirming] = B.useState(!1),
+    noteBytes = B.useMemo(() => new TextEncoder().encode(note).length, [note]),
+    mine = useLuWallet(cfg, wallet.address),
+    receipts = useLuPoll(
+      () => luReadReceipts(cfg, wallet.address),
+      [cfg.pyre, wallet.address ?? ""],
+      3e4,
+    ),
+    amount = luParseAmount(amountText),
+    problem = !wallet.address
+      ? "Connect a wallet to burn."
+      : amount == null || amount <= 0n
+        ? "Enter an amount above zero (up to 18 decimals)."
+        : noteBytes > 140
+          ? "The note is over 140 bytes."
+          : mine.data && mine.data.balance < amount
+            ? "The wallet does not hold that much LUCIFER."
+            : "";
+  async function burn() {
+    setConfirming(!1);
+    setResult(null);
+    setBusy("Preparing…");
+    try {
+      let { receipt, path } = await luBurn(wallet, cfg, amount, note, setBusy),
+        log = receipt.logs.find(
+          (l) => luSame(l.address, cfg.pyre) && l.topics[0] === LU_TOPIC_BURNED,
+        ),
+        id = log ? Number(BigInt(log.topics[1])) : null;
+      setResult({
+        ok: !0,
+        detail: luH(
+          V.Fragment,
+          null,
+          `Burned ${luNum(amount)} LUCIFER${id == null ? "" : ` · receipt #${id}`} · ${path === "permit" ? "permit + burn in one transaction" : path === "approve" ? "approve + burn" : "burn"} · gas used ${c_(Number(receipt.gasUsed))}. `,
+          luH(LuTx, { hash: receipt.transactionHash, label: "View on Basescan" }),
+        ),
+      });
+    } catch (e) {
+      setResult({ ok: !1, detail: luErrText(e) });
+    } finally {
+      setBusy("");
+      mine.refresh();
+      receipts.refresh();
+    }
+  }
+  let list = receipts.data?.mine ?? [];
+  return luH(
+    "div",
+    { className: "flex flex-col gap-3" },
+    luH(
+      "h2",
+      { className: "text-ps-bright font-bold text-balance" },
+      "The pyre. Burn is the utility.",
+    ),
+    luH(
+      "p",
+      { className: "text-sm leading-relaxed text-pretty" },
+      "LuciferPyre destroys the tokens and writes a permanent receipt: burner, amount, timestamp, and a note of at most ",
+      140,
+      " bytes. No fee. This host signs an EIP-2612 permit and calls burnWithPermit, so approval and burn are one transaction; if the wallet cannot sign a permit it falls back to approve, then burn. Burns through the pyre count toward the mark. A burn cannot be undone.",
+    ),
+    luH(LuReadError, { error: mine.error || receipts.error }),
+    luH($, {
+      k: "Balance",
+      v: wallet.address
+        ? mine.data
+          ? `${luNum(mine.data.balance)} LUCIFER`
+          : "reading Base…"
+        : "connect a wallet",
+      tone: "gold",
+    }),
+    luH($, {
+      k: "Burned by this wallet",
+      v: mine.data
+        ? `${luNum(mine.data.burned)} / ${c_(r_)} LUCIFER toward the mark`
+        : "—",
+      tone: "bad",
+    }),
+    luH($, {
+      k: "Pyre receipts",
+      v: receipts.data
+        ? `${c_(receipts.data.count)} total${wallet.address ? ` · ${c_(list.length)} from this wallet` : ""}`
+        : "—",
+    }),
+    wallet.error
+      ? luH("p", { className: "text-ps-bad text-sm" }, wallet.error)
+      : null,
+    wallet.address ? null : luH(U_, {}),
+    luH(LuNeedBase, { wallet }),
+    luH(qQ, {
+      label: "Amount to burn",
+      value: amountText,
+      onChange: (v) => (setAmountText(v), setConfirming(!1)),
+      suffix: "LUCIFER",
+    }),
+    luH(
+      "label",
+      { className: "block text-sm" },
+      luH(
+        "span",
+        { className: "text-ps-fg/80 mb-1 flex justify-between" },
+        luH("span", null, "Note"),
+        luH(
+          "span",
+          { className: noteBytes > 140 ? "text-ps-bad" : "text-ps-fg/60" },
+          noteBytes,
+          "/",
+          140,
+          " bytes",
+        ),
+      ),
+      luH("textarea", {
+        value: note,
+        onChange: (e) => setNote(e.target.value),
+        rows: 3,
+        maxLength: 280,
+        placeholder: "for the skyline",
+        className:
+          "w-full border border-ps-fg/25 bg-black/25 px-3 py-2 text-ps-bright outline-none placeholder:text-ps-fg/40",
+      }),
+    ),
+    confirming
+      ? luH(
+          "div",
+          { className: "flex flex-wrap gap-2" },
+          luH(
+            JQ,
+            { tone: "bad", disabled: !!busy, onClick: () => void burn() },
+            `Confirm: burn ${luNum(amount)} LUCIFER forever`,
+          ),
+          luH(
+            JQ,
+            { tone: "plain", onClick: () => setConfirming(!1) },
+            "Cancel",
+          ),
+        )
+      : luH(
+          JQ,
+          {
+            tone: "bad",
+            disabled: !!busy || !!problem,
+            onClick: () => (setResult(null), setConfirming(!0)),
+          },
+          "Invoke-LuciferBurn",
+        ),
+    problem && wallet.address
+      ? luH("p", { className: "text-ps-fg/70 text-sm" }, problem)
+      : null,
+    busy ? luH("p", { className: "text-ps-info text-sm" }, busy) : null,
+    luH(YQ, { result }),
+    list.length > 0
+      ? luH(
+          "ul",
+          null,
+          list.map((r) =>
+            luH(
+              "li",
+              { key: r.id, className: "border-b border-ps-fg/10 py-2 text-sm" },
+              luH("span", { className: "text-ps-bad" }, "#", r.id),
+              " ",
+              luH(
+                "span",
+                { className: "text-ps-bright tabular-nums" },
+                luNum(r.amount),
+                " LUCIFER",
+              ),
+              r.note
+                ? luH("span", { className: "text-ps-fg" }, " — ", r.note)
+                : null,
+              luH(
+                "span",
+                { className: "text-ps-fg/60" },
+                " · ",
+                new Date(r.at * 1e3).toISOString().slice(0, 16).replace("T", " "),
+                " UTC",
+              ),
+            ),
+          ),
+        )
+      : luH(
+          "p",
+          { className: "text-ps-fg/70 text-sm" },
+          wallet.address
+            ? receipts.data
+              ? "No receipts from this wallet yet."
+              : "Reading receipts…"
+            : "Connect a wallet to see its receipts.",
+        ),
+    receipts.data && receipts.data.count > LU_RECEIPT_SCAN
+      ? luH(
+          "p",
+          { className: "text-ps-fg/70 text-sm" },
+          `Showing this wallet's receipts among the latest ${LU_RECEIPT_SCAN}.`,
+        )
+      : null,
+  );
+}
+
+/* ---- Get-Art / marks (chain) ------------------------------------------ */
+function LuChainMarks() {
+  let cfg = useDeployed(),
+    wallet = H_(),
+    mine = useLuWallet(cfg, wallet.address),
+    ledger = useLuPoll(
+      () => luRead(cfg.marks, LU_MARKS_ABI, "allMarked"),
+      [cfg.marks],
+      3e4,
+    ),
+    [result, setResult] = B.useState(null),
+    [busy, setBusy] = B.useState(!1),
+    d = mine.data,
+    solutions = d ? Number(d.solutions) : 0,
+    burned = d ? Number(dh(d.burned, 18)) : 0,
+    marked = ledger.data ?? [];
+  async function record() {
+    setBusy(!0);
+    setResult(null);
+    try {
+      let receipt = await luCall(wallet, {
+        address: cfg.marks,
+        abi: LU_MARKS_ABI,
+        functionName: "check",
+        args: [wallet.address],
+      });
+      setResult({
+        ok: !0,
+        detail: luH(
+          V.Fragment,
+          null,
+          "Written to the handmade ledger. ",
+          luH(LuTx, { hash: receipt.transactionHash, label: "View on Basescan" }),
+        ),
+      });
+    } catch (e) {
+      setResult({ ok: !1, detail: luErrText(e) });
+    } finally {
+      setBusy(!1);
+      mine.refresh();
+      ledger.refresh();
+    }
+  }
+  return luH(
+    "div",
+    { className: "flex flex-col gap-4" },
+    luH(
+      "h2",
+      { className: "text-ps-bright font-bold text-balance" },
+      "One handmade mark.",
+    ),
+    luH(
+      "p",
+      { className: "text-sm leading-relaxed text-pretty" },
+      "No tiers and no mint. Finish both goals and the wallet is written to the ledger. The NFT is made by hand and sent to that address. Mine ",
+      c_(n_),
+      " solutions and burn ",
+      c_(r_),
+      " LUCIFER. Progress below is read from LuciferMine and LuciferPyre on Base.",
+    ),
+    luH(n$, {}),
+    luH(e$, { label: "Mine", value: solutions, goal: n_, unit: "solutions" }),
+    luH(e$, { label: "Burn", value: burned, goal: r_, unit: "LUCIFER" }),
+    luH(LuReadError, { error: mine.error || ledger.error }),
+    luH(
+      "p",
+      {
+        className: `text-sm ${d?.marked || d?.qualifies ? "text-ps-gold" : "text-ps-fg/70"}`,
+      },
+      !wallet.address
+        ? "Connect a wallet to see its progress."
+        : !d
+          ? "Reading Base…"
+          : d.marked
+            ? `${wallet.address} has the mark.`
+            : d.qualifies
+              ? `${wallet.address} has finished both goals. Record it on the ledger below.`
+              : "This wallet is still working toward the mark.",
+    ),
+    wallet.address ? null : luH(U_, {}),
+    d && d.qualifies && !d.marked
+      ? luH(
+          JQ,
+          { disabled: busy, onClick: () => void record() },
+          busy ? "Recording…" : "Set-LuciferMark",
+        )
+      : null,
+    luH(YQ, { result }),
+    luH(
+      "div",
+      { className: "border-ps-fg/20 flex flex-col gap-2 border-t pt-3" },
+      luH(
+        "h3",
+        { className: "text-ps-bright text-sm font-bold" },
+        "Handmade ledger",
+      ),
+      luH(
+        "p",
+        { className: "text-ps-fg/70 text-sm" },
+        "Wallets that finished both goals, read from LuciferMarks.allMarked(). Copy an address and send the handmade NFT there.",
+      ),
+      !ledger.data
+        ? luH("p", { className: "text-sm" }, "Reading Base…")
+        : marked.length === 0
+          ? luH("p", { className: "text-sm" }, "No wallet has reached the mark.")
+          : luH(
+              "ul",
+              { className: "flex flex-col gap-2" },
+              marked.map((a) =>
+                luH(
+                  "li",
+                  { key: a, className: "flex items-center gap-2" },
+                  luH(
+                    "span",
+                    {
+                      className:
+                        "text-ps-bright min-w-0 flex-1 truncate font-mono text-sm",
+                    },
+                    a,
+                  ),
+                  luH(t$, { address: a }),
+                ),
+              ),
+            ),
+    ),
+  );
+}
+
+/* ---- Connect-Wallet (chain) ------------------------------------------- */
+function LuChainWallet() {
+  let cfg = useDeployed(),
+    wallet = H_(),
+    mine = useLuWallet(cfg, wallet.address),
+    supply = useLuPoll(
+      () => luRead(cfg.token, LU_TOKEN_ABI, "totalSupply"),
+      [cfg.token],
+      3e4,
+    ),
+    [amountText, setAmountText] = B.useState(""),
+    [to, setTo] = B.useState(""),
+    [confirming, setConfirming] = B.useState(!1),
+    [busy, setBusy] = B.useState(""),
+    [result, setResult] = B.useState(null),
+    amount = luParseAmount(amountText),
+    recipient = to.trim(),
+    problem = !wallet.address
+      ? "Connect a wallet to send."
+      : amount == null || amount <= 0n
+        ? "Enter an amount above zero (up to 18 decimals)."
+        : !E_(recipient)
+          ? "Enter a recipient address (0x followed by 40 hex characters)."
+          : luSame(recipient, cfg.token) || luSame(recipient, LU_ZERO)
+            ? "That recipient would lose the tokens. Pick a wallet address."
+            : mine.data && mine.data.balance < amount
+              ? "The wallet does not hold that much LUCIFER."
+              : "";
+  async function send() {
+    setConfirming(!1);
+    setResult(null);
+    setBusy("Confirm the transfer in your wallet…");
+    try {
+      let receipt = await luCall(
+        wallet,
+        {
+          address: cfg.token,
+          abi: LU_TOKEN_ABI,
+          functionName: "transfer",
+          args: [Wo(recipient), amount],
+        },
+        { onStage: (s) => s === "mining" && setBusy("Sent. Waiting for Base…") },
+      );
+      setResult({
+        ok: !0,
+        detail: luH(
+          V.Fragment,
+          null,
+          `Sent ${luNum(amount)} LUCIFER to ${recipient}. Gas used ${c_(Number(receipt.gasUsed))}. `,
+          luH(LuTx, { hash: receipt.transactionHash, label: "View on Basescan" }),
+        ),
+      });
+      setAmountText("");
+    } catch (e) {
+      setResult({ ok: !1, detail: luErrText(e) });
+    } finally {
+      setBusy("");
+      mine.refresh();
+    }
+  }
+  return luH(
+    "div",
+    { className: "flex flex-col gap-3" },
+    luH(
+      "h2",
+      { className: "text-ps-bright font-bold text-balance" },
+      "Connect a wallet. Hold and send LUCIFER.",
+    ),
+    luH(
+      "p",
+      { className: "text-sm leading-relaxed text-pretty" },
+      "$LUCIFER is a plain ERC-20 on Base. Mining rewards and purchases land directly in the wallet that earned them; nothing is held by this host. The form below sends a normal token transfer from the connected wallet.",
+    ),
+    luH($, {
+      k: "Wallet",
+      v: wallet.address ?? "not connected",
+      tone: wallet.address ? "gold" : "bright",
+    }),
+    luH($, {
+      k: "Network",
+      v: wallet.address ? wallet.chain : "Base",
+      tone: "info",
+    }),
+    luH($, {
+      k: "Balance",
+      v: wallet.address
+        ? mine.data
+          ? `${luNum(mine.data.balance)} LUCIFER`
+          : "reading Base…"
+        : "—",
+      tone: "gold",
+    }),
+    luH($, {
+      k: "Total supply",
+      v: supply.data == null ? "—" : `${luNum(supply.data)} LUCIFER`,
+    }),
+    luH($, {
+      k: "Token",
+      v: luH(LuAddr, { address: cfg.token, kind: "token" }),
+    }),
+    luH(LuReadError, { error: mine.error || supply.error }),
+    wallet.error
+      ? luH("p", { className: "text-ps-bad text-sm" }, wallet.error)
+      : null,
+    luH(U_, {}),
+    luH(LuNeedBase, { wallet }),
+    luH(qQ, {
+      label: "Amount to send",
+      value: amountText,
+      onChange: (v) => (setAmountText(v), setConfirming(!1)),
+      suffix: "LUCIFER",
+    }),
+    luH(LuText, {
+      label: "Recipient address",
+      value: to,
+      onChange: (v) => (setTo(v), setConfirming(!1)),
+      placeholder: "0x…",
+      mono: !0,
+    }),
+    confirming
+      ? luH(
+          "div",
+          { className: "flex flex-col gap-2" },
+          luH(
+            "p",
+            { className: "text-ps-gold text-sm break-all" },
+            `Send ${luNum(amount)} LUCIFER to ${recipient}? A transfer cannot be reversed.`,
+          ),
+          luH(
+            "div",
+            { className: "flex flex-wrap gap-2" },
+            luH(
+              JQ,
+              { disabled: !!busy, onClick: () => void send() },
+              "Confirm-Transfer",
+            ),
+            luH(
+              JQ,
+              { tone: "plain", onClick: () => setConfirming(!1) },
+              "Cancel",
+            ),
+          ),
+        )
+      : luH(
+          JQ,
+          {
+            disabled: !!busy || !!problem,
+            onClick: () => (setResult(null), setConfirming(!0)),
+          },
+          "Send-Lucifer",
+        ),
+    problem && wallet.address && (amountText || to)
+      ? luH("p", { className: "text-ps-fg/70 text-sm" }, problem)
+      : null,
+    busy ? luH("p", { className: "text-ps-info text-sm" }, busy) : null,
+    luH(YQ, { result }),
+  );
+}
+
+/* ---- Get-Status (chain) ------------------------------------------------ */
+function LuChainStatus() {
+  let cfg = useDeployed(),
+    wallet = H_(),
+    miner = useLuMiner(),
+    mine = useLuWallet(cfg, wallet.address),
+    net = useLuPoll(
+      async () => {
+        let [solutions, burned, marked] = await Promise.all([
+          luRead(cfg.mine, LU_MINE_ABI, "solutions"),
+          luRead(cfg.pyre, LU_PYRE_ABI, "totalBurned"),
+          luRead(cfg.marks, LU_MARKS_ABI, "markedCount"),
+        ]);
+        return { solutions, burned, marked };
+      },
+      [cfg.token],
+      3e4,
+    ),
+    d = mine.data,
+    n = net.data;
+  return luH(
+    "div",
+    null,
+    luH("h2", { className: "text-ps-bright mb-2 font-bold" }, "Session"),
+    luH($, { k: "Network", v: "Base · live", tone: "ok" }),
+    luH($, {
+      k: "Token",
+      v: luH(LuAddr, { address: cfg.token, kind: "token" }),
+    }),
+    luH($, {
+      k: "Wallet",
+      v: wallet.address ?? "not connected",
+      tone: "gold",
+    }),
+    luH($, { k: "Contracts", v: "ERC-20 · 18 decimals · 5 contracts" }),
+    luH($, {
+      k: "Balance",
+      v: d ? `${luNum(d.balance)} LUCIFER` : wallet.address ? "reading Base…" : "—",
+      tone: "gold",
+    }),
+    luH($, {
+      k: "Solutions",
+      v: `${d ? c_(Number(d.solutions)) : "—"} yours · ${n ? c_(Number(n.solutions)) : "—"} network`,
+    }),
+    luH($, {
+      k: "Burned",
+      v: `${d ? luNum(d.burned) : "—"} yours · ${n ? luNum(n.burned) : "—"} total LUCIFER`,
+      tone: "bad",
+    }),
+    luH($, {
+      k: "Handmade mark",
+      v: d ? (d.marked ? "earned" : d.qualifies ? "ready to record" : "working") : "—",
+      tone: "gold",
+    }),
+    luH($, {
+      k: "Marked",
+      v: n ? `${c_(Number(n.marked))} wallet${Number(n.marked) === 1 ? "" : "s"}` : "—",
+    }),
+    luH($, {
+      k: "Miner",
+      v: miner.running && miner.hashrate ? `${c_(miner.hashrate)} H/s` : "stopped",
+      tone: "info",
+    }),
+    luH(LuReadError, { error: mine.error || net.error }),
+  );
+}
+
+/* ---- Get-Contract: deployed addresses --------------------------------- */
+function LuContractAddresses() {
+  let cfg = useDeployed();
+  if (!cfg.token) return null;
+  let rows = [
+    ["Lucifer (token)", cfg.token, "token"],
+    ["LuciferMine", cfg.mine],
+    ["LuciferPyre", cfg.pyre],
+    ["LuciferMarks", cfg.marks],
+    ["LuciferVesting", cfg.vesting],
+  ];
+  return luH(
+    "div",
+    { className: "flex flex-col" },
+    luH(
+      "h3",
+      { className: "text-ps-bright text-sm font-bold" },
+      "Deployed on Base",
+    ),
+    rows.map(([k, a, kind]) =>
+      luH($, {
+        key: k,
+        k,
+        v: luH(
+          "span",
+          { className: "font-mono break-all" },
+          luH(LuAddr, { address: a, kind }),
+        ),
+      }),
+    ),
+    cfg.lpTokenId
+      ? luH($, {
+          k: "Liquidity",
+          v: luH(
+            V.Fragment,
+            null,
+            `Uniswap V3 position #${cfg.lpTokenId}, burned to 0x…dEaD `,
+            cfg.lpBurnTx ? luH(LuTx, { hash: cfg.lpBurnTx, label: "(proof)" }) : null,
+          ),
+          tone: "ok",
+        })
+      : null,
+    cfg.deployTx
+      ? luH($, {
+          k: "Deploy transaction",
+          v: luH(LuTx, { hash: cfg.deployTx }),
+        })
+      : null,
+  );
+}
+/* ---- Invoke-Deploy: the launch wizard ---------------------------------- *
+ * Treasury wallet only. Seven transactions, in order, each sent through the
+ * connected wallet and confirmed before the next one is built:
+ *   deploy Lucifer -> wrap ETH -> approve LUCIFER -> approve WETH ->
+ *   create + initialize the pool -> mint the full-range position -> burn the LP.
+ * Progress is saved after every state change, and every step first asks Base
+ * whether its effect already exists, so a refresh or a second click can never
+ * send a finished step twice.
+ */
+var LU_WIZ_KEY = "xebb-launch-wizard-v1",
+  LU_CONFIRM_PHRASE = "BURN THE LP",
+  LU_WIZ_STEPS = [
+    { id: "deploy", label: "Deploy Lucifer (one transaction, five contracts)" },
+    { id: "wrap", label: "Wrap 0.25 ETH into WETH", recipe: 0 },
+    {
+      id: "approveToken",
+      label: "Approve LUCIFER to the position manager",
+      recipe: 1,
+    },
+    {
+      id: "approveWeth",
+      label: "Approve WETH to the position manager",
+      recipe: 2,
+    },
+    {
+      id: "createPool",
+      label: "Create + initialize the 1% LUCIFER/WETH pool",
+      recipe: 3,
+    },
+    { id: "mint", label: "Mint the full-range position", recipe: 4 },
+    { id: "burnLp", label: "Burn the LP NFT (send it to 0x…dEaD)", recipe: 5 },
+  ],
+  luKitPromise = null;
+function luWizLoad() {
+  try {
+    let s = JSON.parse(__xebbLocal.getItem(LU_WIZ_KEY) || "null");
+    if (s && s.v === 1 && s.steps && typeof s.steps == "object") return s;
+  } catch {}
+  return { v: 1, ack: !1, steps: {}, addr: {} };
+}
+/* One copy of the wizard's progress for the whole tab, however many
+ * Invoke-Deploy blocks are on screen. */
+var luWiz = (() => {
+  let state = null,
+    ui = { running: !1, stageId: "", stageText: "" },
+    snap = null,
+    subs = new Set(),
+    emit = () => {
+      snap = { state, ...ui };
+      subs.forEach((f) => f());
+    };
+  return {
+    subscribe: (f) => (subs.add(f), () => subs.delete(f)),
+    snapshot: () => snap,
+    load() {
+      state || ((state = luWizLoad()), emit());
+    },
+    get: () => state,
+    commit(fn) {
+      let next = JSON.parse(JSON.stringify(state));
+      next.addr ||= {};
+      fn(next);
+      state = next;
+      luWizSave(next);
+      emit();
+    },
+    ui: () => ui,
+    setUi(patch) {
+      ui = { ...ui, ...patch };
+      emit();
+    },
+  };
+})();
+function luWizSave(s) {
+  try {
+    __xebbLocal.setItem(LU_WIZ_KEY, JSON.stringify(s));
+  } catch {}
+}
+/* The contracts engineer's two files, shipped next to the site. */
+function luLoadKit() {
+  return (luKitPromise ||= (async () => {
+    let get = async (name) => {
+        let res = await fetch(new URL(`../launch/${name}`, import.meta.url), {
+          cache: "no-store",
+        });
+        if (!res.ok) throw Error(`Could not load launch/${name} (${res.status}).`);
+        return res.json();
+      },
+      [artifact, recipe] = await Promise.all([
+        get("deploy-artifact.json"),
+        get("liquidity-recipe.json"),
+      ]),
+      lu = artifact.lucifer,
+      initcode = lu.deployTxData || lu.creationBytecode + lu.encodedDefaultArgs.slice(2);
+    if (artifact.chainId !== 8453 || recipe.chainId !== 8453)
+      throw Error("The launch kit is not for Base (chain 8453).");
+    if (!luSame(recipe.sender, LU_TREASURY) || recipe.steps?.length !== 6)
+      throw Error("The liquidity recipe does not match this wizard.");
+    if (!luSame(lu.constructorArgs.defaults[0], LU_TREASURY))
+      throw Error("The deploy artifact's treasury is not the treasury wallet.");
+    if (!/^0x[0-9a-f]+$/i.test(initcode) || !initcode.endsWith(lu.encodedDefaultArgs.slice(2)))
+      throw Error("The deploy artifact's transaction data is malformed.");
+    let p = recipe.parameters;
+    return {
+      artifact,
+      recipe,
+      initcode,
+      args: lu.constructorArgs.defaults,
+      lpTokens: BigInt(p.LP_TOKENS),
+      lpEth: BigInt(p.LP_ETH),
+      fee: Number(p.FEE),
+      slippageBps: BigInt(p.SLIPPAGE_BPS),
+      deadlineSeconds: Number(p.DEADLINE_SECONDS),
+      deployGasLimit: artifact.estimatedGas?.recommendedGasLimitForDeploy,
+      ethRecommended:
+        recipe.forkReplay?.ethNeeded?.recommendedWalletBalanceEth || "0.30",
+      ethExact: recipe.forkReplay?.ethNeeded?.totalEth || "",
+      forkGas: artifact.estimatedGas?.perStep || {},
+    };
+  })().catch((e) => {
+    luKitPromise = null;
+    throw e;
+  }));
+}
+/* token0/token1 ordering, amounts, 1% minimums and the starting price. */
+function luPoolMath(kit, token) {
+  let tokenIs1 = BigInt(token) > BigInt(LU_WETH),
+    [token0, token1, amount0, amount1] = tokenIs1
+      ? [LU_WETH, token, kit.lpEth, kit.lpTokens]
+      : [token, LU_WETH, kit.lpTokens, kit.lpEth],
+    keep = 10000n - kit.slippageBps;
+  return {
+    token0,
+    token1,
+    amount0,
+    amount1,
+    amount0Min: (amount0 * keep) / 10000n,
+    amount1Min: (amount1 * keep) / 10000n,
+    sqrtPriceX96: luIsqrt((amount1 << 192n) / amount0),
+  };
+}
+function luFillTemplate(template, words) {
+  let out = template.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => {
+    if (!(k in words)) throw Error(`The recipe needs ${k}, which is not known yet.`);
+    return luWord(words[k]);
+  });
+  if (!/^0x([0-9a-f]{2})*$/i.test(out))
+    throw Error("The recipe produced malformed transaction data.");
+  return out;
+}
+/* Recipe step -> { to, data, value } with every placeholder filled. */
+function luRecipeTx(kit, index, token, extra) {
+  let step = kit.recipe.steps[index],
+    m = luPoolMath(kit, token),
+    words = {
+      TOKEN: token,
+      TOKEN0: m.token0,
+      TOKEN1: m.token1,
+      AMOUNT0: m.amount0,
+      AMOUNT1: m.amount1,
+      AMOUNT0_MIN: m.amount0Min,
+      AMOUNT1_MIN: m.amount1Min,
+      SQRT_PRICE_X96: m.sqrtPriceX96,
+      ...extra,
+    };
+  return {
+    to: step.to === "{{TOKEN}}" ? token : Wo(step.to),
+    data: luFillTemplate(step.dataTemplate, words),
+    value: BigInt(step.value || "0"),
+  };
+}
+/* eth_getCode with the 14 immutable words zeroed, hashed, compared. */
+async function luCheckCode(kit, token) {
+  let d = kit.artifact.lucifer.deployedBytecode;
+  if (!d?.keccak256) return "not checked (the artifact has no hash)";
+  let code = await XZ.getCode({ address: token });
+  if (!code || code === "0x") throw Error("No contract code at the token address.");
+  let bytes = J_(code),
+    starts = d.immutableStarts || (d.immutableReferences || []).map((r) => r.start);
+  if (d.deployedBytecodeLength && bytes.length !== d.deployedBytecodeLength)
+    throw Error(
+      `Deployed code is ${bytes.length} bytes; the artifact expects ${d.deployedBytecodeLength}. Stop: this is not the audited build.`,
+    );
+  for (let s of starts) bytes.fill(0, s, s + 32);
+  if (luBytesToHex(Zg(bytes)) !== d.keccak256.toLowerCase())
+    throw Error(
+      "Deployed code does not hash to the artifact's value. Stop: this is not the audited build.",
+    );
+  return "matches the audited build";
+}
+async function luHasCode(address) {
+  let code = await XZ.getCode({ address });
+  return !!code && code !== "0x";
+}
+async function luIsOurToken(kit, address) {
+  if (!(await luHasCode(address))) return !1;
+  try {
+    return (
+      luSame(await luRead(address, LU_TOKEN_ABI, "treasury"), LU_TREASURY) &&
+      (await luCheckCode(kit, address), !0)
+    );
+  } catch {
+    return !1;
+  }
+}
+/* Find our position NFT among an owner's most recent ones. */
+async function luFindPosition(owner, m, fee) {
+  let n = Number(await luRead(LU_NPM, LU_UNI_ABI, "balanceOf", [owner]));
+  for (let i = n - 1; i >= Math.max(0, n - 40); i--) {
+    let id = await luRead(LU_NPM, LU_UNI_ABI, "tokenOfOwnerByIndex", [
+        owner,
+        BigInt(i),
+      ]),
+      pos = await luRead(LU_NPM, LU_UNI_ABI, "positions", [id]);
+    if (luSame(pos[2], m.token0) && luSame(pos[3], m.token1) && Number(pos[4]) === fee)
+      return id;
+  }
+  return null;
+}
+
+/* One run of the wizard. ctx = { wallet, kit, get(), commit(fn), stage(id, text) } */
+function luWizMark(ctx, id, patch) {
+  ctx.commit((s) => {
+    s.steps[id] = { ...(s.steps[id] || {}), ...patch };
+  });
+}
+/* Ask Base what already exists and mark those steps done. Reads only. */
+async function luWizReconcile(ctx) {
+  let { kit } = ctx,
+    s = ctx.get(),
+    done = (id, note) =>
+      ctx.get().steps[id]?.status === "done" ||
+      luWizMark(ctx, id, { status: "done", note, error: "", hash: "" });
+  // -- the token
+  if (s.steps.deploy?.status !== "done") {
+    let found = "",
+      candidates = [];
+    s.addr?.token && candidates.push(s.addr.token);
+    s.predicted && candidates.push(s.predicted);
+    candidates.push(luCreate2Address(LU_CREATE2_FACTORY, "0x" + "00".repeat(32), kit.initcode));
+    let nonce = await XZ.getTransactionCount({ address: LU_TREASURY });
+    for (let n = nonce - 1; n >= Math.max(0, nonce - 16); n--)
+      candidates.push(luCreateAddress(LU_TREASURY, n));
+    for (let a of candidates)
+      if (await luIsOurToken(kit, a)) {
+        found = a;
+        break;
+      }
+    found && (await luWizAdoptToken(ctx, found, null, "found on Base"));
+  }
+  s = ctx.get();
+  let token = s.addr?.token;
+  if (!token || s.steps.deploy?.status !== "done") return;
+  // -- the pool and the position
+  let m = luPoolMath(kit, token),
+    pool = await luRead(LU_V3_FACTORY, LU_UNI_ABI, "getPool", [
+      m.token0,
+      m.token1,
+      kit.fee,
+    ]);
+  if (luSame(pool, LU_ZERO)) return;
+  ctx.commit((st) => {
+    st.addr.pool = Wo(pool);
+  });
+  let [slot0, liquidity, treasuryTokens] = await Promise.all([
+    luRead(pool, LU_UNI_ABI, "slot0"),
+    luRead(pool, LU_UNI_ABI, "liquidity"),
+    luRead(token, LU_TOKEN_ABI, "balanceOf", [LU_TREASURY]),
+  ]);
+  if (slot0[0] === m.sqrtPriceX96 && s.steps.createPool?.status !== "done")
+    done("createPool", "found on Base");
+  if (liquidity > 0n && treasuryTokens < kit.lpTokens) {
+    // the 3.5M already left the treasury: the position exists
+    for (let id of ["wrap", "approveToken", "approveWeth", "createPool"])
+      done(id, "confirmed on Base");
+    let tokenId = s.lpTokenId ? BigInt(s.lpTokenId) : null,
+      burned = !1;
+    if (tokenId == null) {
+      tokenId = await luFindPosition(LU_TREASURY, m, kit.fee);
+      tokenId == null &&
+        ((tokenId = await luFindPosition(LU_DEAD, m, kit.fee)), (burned = tokenId != null));
+    }
+    if (tokenId != null) {
+      ctx.commit((st) => {
+        st.lpTokenId = tokenId.toString();
+      });
+      done("mint", "confirmed on Base");
+      (burned ||
+        luSame(await luRead(LU_NPM, LU_UNI_ABI, "ownerOf", [tokenId]), LU_DEAD)) &&
+        done("burnLp", "confirmed on Base");
+    }
+  }
+}
+async function luWizAdoptToken(ctx, token, receipt, note) {
+  let { kit } = ctx,
+    addr = await luRetry(async () => {
+      let [mine, pyre, marks, vesting, treasury] = await Promise.all(
+        ["mine", "pyre", "marks", "vesting", "treasury"].map((f) =>
+          luRead(token, LU_TOKEN_ABI, f),
+        ),
+      );
+      if (!luSame(treasury, LU_TREASURY))
+        throw Error("The deployed token names a different treasury. Stop.");
+      return {
+        token: Wo(token),
+        mine: Wo(mine),
+        pyre: Wo(pyre),
+        marks: Wo(marks),
+        vesting: Wo(vesting),
+      };
+    }),
+    codeCheck = await luRetry(() => luCheckCode(kit, token), 3),
+    deployedAt = "";
+  try {
+    let block = receipt
+      ? await XZ.getBlock({ blockNumber: receipt.blockNumber })
+      : null;
+    block && (deployedAt = new Date(Number(block.timestamp) * 1e3).toISOString());
+  } catch {}
+  ctx.commit((s) => {
+    s.addr = { ...(s.addr || {}), ...addr };
+    deployedAt && (s.deployedAt = deployedAt);
+    s.steps.deploy = {
+      ...(s.steps.deploy || {}),
+      status: "done",
+      error: "",
+      codeCheck,
+      ...(note ? { note } : {}),
+      ...(receipt
+        ? { hash: receipt.transactionHash, gasUsed: receipt.gasUsed.toString() }
+        : { hash: "" }),
+    };
+  });
+}
+/* Has a recorded transaction landed? Returns the receipt, "pending", or
+ * "missing" when Base has never heard of the hash. */
+async function luWizCheckHash(hash) {
+  try {
+    return await XZ.getTransactionReceipt({ hash });
+  } catch {}
+  try {
+    if (await XZ.getTransaction({ hash })) return "pending";
+  } catch {}
+  return "missing";
+}
+async function luWizStep(ctx, id, opts = {}) {
+  let { kit, wallet } = ctx,
+    rec = ctx.get().steps[id] || {},
+    say = (t) => ctx.stage(id, t),
+    token = ctx.get().addr?.token,
+    math = token ? luPoolMath(kit, token) : null,
+    receipt = null;
+  if (rec.status === "done") return;
+  try {
+    // 1. A transaction was already sent for this step: settle it, never resend blind.
+    if (rec.hash) {
+      say("Checking the transaction already sent…");
+      let seen = await luWizCheckHash(rec.hash);
+      if (seen === "pending" || (seen === "missing" && !opts.retry)) {
+        say("Waiting for Base to include it…");
+        receipt = await luReceipt(rec.hash, seen === "pending" ? 24e4 : 6e4);
+      } else if (seen !== "missing") {
+        if (seen.status !== "success") {
+          let err = Error("The transaction was mined but reverted. Gas was spent.");
+          err.luReverted = !0;
+          throw err;
+        }
+        receipt = seen;
+      }
+    }
+    // 2. Nothing in flight: does the effect already exist on Base?
+    if (!receipt) {
+      say("Reading Base…");
+      await luWizReconcile(ctx);
+      if (ctx.get().steps[id]?.status === "done") return;
+      token = ctx.get().addr?.token;
+      math = token ? luPoolMath(kit, token) : null;
+      if (id !== "deploy" && !token)
+        throw Error("The token is not deployed yet.");
+      if (id === "wrap") {
+        let weth = await luRead(LU_WETH, LU_TOKEN_ABI, "balanceOf", [LU_TREASURY]);
+        if (weth >= kit.lpEth) {
+          luWizMark(ctx, id, { status: "done", note: "treasury already holds the WETH", error: "", hash: "" });
+          return;
+        }
+      }
+      if (id === "approveToken" || id === "approveWeth") {
+        let erc20 = id === "approveToken" ? token : LU_WETH,
+          need = id === "approveToken" ? kit.lpTokens : kit.lpEth,
+          have = await luRead(erc20, LU_TOKEN_ABI, "allowance", [LU_TREASURY, LU_NPM]);
+        if (have >= need) {
+          luWizMark(ctx, id, { status: "done", note: "allowance already set", error: "", hash: "" });
+          return;
+        }
+      }
+      if (id === "createPool") {
+        let pool = await luRead(LU_V3_FACTORY, LU_UNI_ABI, "getPool", [
+          math.token0,
+          math.token1,
+          kit.fee,
+        ]);
+        if (!luSame(pool, LU_ZERO)) {
+          let price = (await luRead(pool, LU_UNI_ABI, "slot0"))[0];
+          if (price !== 0n && price !== math.sqrtPriceX96)
+            throw Error(
+              `The pool ${pool} already exists at a different price (sqrtPriceX96 ${price}, expected ${math.sqrtPriceX96}). Someone initialized it first. Stop here: do not mint until the price is corrected.`,
+            );
+        }
+      }
+      if (id === "mint") {
+        let [lu, weth] = await Promise.all([
+          luRead(token, LU_TOKEN_ABI, "balanceOf", [LU_TREASURY]),
+          luRead(LU_WETH, LU_TOKEN_ABI, "balanceOf", [LU_TREASURY]),
+        ]);
+        if (lu < kit.lpTokens || weth < kit.lpEth)
+          throw Error(
+            `The treasury holds ${luNum(lu)} LUCIFER and ${luNum(weth, 6)} WETH; the position needs ${luNum(kit.lpTokens)} and ${luNum(kit.lpEth, 6)}.`,
+          );
+      }
+      if (id === "burnLp") {
+        let tokenId = ctx.get().lpTokenId;
+        if (!tokenId) throw Error("The LP token id is not known yet.");
+        if (luSame(await luRead(LU_NPM, LU_UNI_ABI, "ownerOf", [BigInt(tokenId)]), LU_DEAD)) {
+          luWizMark(ctx, id, { status: "done", note: "already burned", error: "", hash: "" });
+          return;
+        }
+      }
+      // 3. Build and send.
+      let tx,
+        sendOpts = { estimateTries: 3 };
+      if (id === "deploy") {
+        if (opts.create2) {
+          let salt = "0x" + "00".repeat(32),
+            predicted = luCreate2Address(LU_CREATE2_FACTORY, salt, kit.initcode),
+            factoryCode = await XZ.getCode({ address: LU_CREATE2_FACTORY });
+          // a call to an address without this code would succeed and deploy nothing
+          if (
+            !factoryCode ||
+            luBytesToHex(Zg(J_(factoryCode))) !== LU_CREATE2_FACTORY_CODEHASH
+          )
+            throw Error(
+              "The CREATE2 factory is not at its usual address on this network. Nothing was sent.",
+            );
+          ctx.commit((s) => {
+            s.predicted = predicted;
+            s.deployVia = "create2";
+          });
+          tx = { to: LU_CREATE2_FACTORY, data: salt + kit.initcode.slice(2) };
+        } else {
+          let nonce = await XZ.getTransactionCount({ address: LU_TREASURY }),
+            predicted = luCreateAddress(LU_TREASURY, nonce);
+          ctx.commit((s) => {
+            s.predicted = predicted;
+            s.deployVia = "create";
+          });
+          tx = { data: kit.initcode };
+        }
+      } else if (id === "mint") {
+        let block = await XZ.getBlock();
+        tx = luRecipeTx(kit, 4, token, {
+          DEADLINE: BigInt(
+            Math.max(Number(block.timestamp), Math.floor(Date.now() / 1e3)) +
+              kit.deadlineSeconds,
+          ),
+        });
+      } else if (id === "burnLp")
+        tx = luRecipeTx(kit, 5, token, { TOKEN_ID: BigInt(ctx.get().lpTokenId) });
+      else
+        tx = luRecipeTx(
+          kit,
+          LU_WIZ_STEPS.find((s) => s.id === id).recipe,
+          token,
+          {},
+        );
+      say("Estimating gas…");
+      receipt = await luSend(wallet, tx, {
+        ...sendOpts,
+        onStage: (st) =>
+          say(
+            st === "wallet"
+              ? "Confirm the transaction in your wallet…"
+              : "Sent. Waiting for Base to include it…",
+          ),
+        onHash: (hash) =>
+          luWizMark(ctx, id, { status: "sent", hash, error: "", note: "" }),
+      });
+    }
+    // 4. Read the result of the confirmed transaction.
+    say("Confirmed. Reading the result…");
+    if (id === "deploy") {
+      let s = ctx.get(),
+        address = receipt.contractAddress || s.predicted;
+      if (!address || !(await luRetry(async () => {
+        if (!(await luHasCode(address))) throw Error("no code yet");
+        return !0;
+      }).catch(() => !1)))
+        throw Error("The deploy transaction confirmed but no contract was found at the expected address.");
+      await luWizAdoptToken(ctx, address, receipt, "");
+      return;
+    }
+    let extra = {};
+    if (id === "createPool") {
+      let pool = await luRetry(async () => {
+          let p = await luRead(LU_V3_FACTORY, LU_UNI_ABI, "getPool", [
+            math.token0,
+            math.token1,
+            kit.fee,
+          ]);
+          if (luSame(p, LU_ZERO)) throw Error("The pool was not created.");
+          return p;
+        }),
+        price = (await luRead(pool, LU_UNI_ABI, "slot0"))[0];
+      if (price !== math.sqrtPriceX96)
+        throw Error(
+          `The pool's price (sqrtPriceX96 ${price}) is not the expected ${math.sqrtPriceX96}. Stop here: do not mint.`,
+        );
+      ctx.commit((s) => {
+        s.addr.pool = Wo(pool);
+      });
+    }
+    if (id === "mint") {
+      let log = receipt.logs.find(
+        (l) =>
+          luSame(l.address, LU_NPM) &&
+          l.topics.length === 4 &&
+          l.topics[0] === LU_TOPIC_TRANSFER &&
+          BigInt(l.topics[1]) === 0n,
+      );
+      if (!log) throw Error("The mint confirmed but no LP token id was found in its logs.");
+      let tokenId = BigInt(log.topics[3]).toString();
+      ctx.commit((s) => {
+        s.lpTokenId = tokenId;
+      });
+    }
+    if (id === "burnLp") {
+      let owner = await luRetry(async () => {
+        let o = await luRead(LU_NPM, LU_UNI_ABI, "ownerOf", [BigInt(ctx.get().lpTokenId)]);
+        if (!luSame(o, LU_DEAD)) throw Error("The LP NFT is not at 0x…dEaD yet.");
+        return o;
+      });
+      extra.note = `owner is now ${D_(owner)}`;
+    }
+    luWizMark(ctx, id, {
+      status: "done",
+      error: "",
+      hash: receipt.transactionHash,
+      gasUsed: receipt.gasUsed.toString(),
+      ...extra,
+    });
+  } catch (e) {
+    let cur = ctx.get().steps[id] || {};
+    cur.status === "done" ||
+      luWizMark(ctx, id, {
+        status: "failed",
+        error: luErrText(e),
+        // a reverted hash is finished business; an unconfirmed one must be re-checked first
+        ...(e?.luReverted && cur.hash ? { revertedHash: cur.hash, hash: "" } : {}),
+      });
+    throw e;
+  } finally {
+    ctx.stage(id, "");
+  }
+}
+
+function luDeployedJson(s) {
+  let a = s.addr || {};
+  return JSON.stringify(
+    {
+      token: a.token || "",
+      mine: a.mine || "",
+      pyre: a.pyre || "",
+      marks: a.marks || "",
+      vesting: a.vesting || "",
+      lpTokenId: s.lpTokenId || "",
+      lpBurnTx: s.steps.burnLp?.hash || "",
+      deployTx: s.steps.deploy?.hash || "",
+      deployedAt: s.deployedAt || "",
+    },
+    null,
+    2,
+  );
+}
+function luVerifyCommands(s) {
+  let a = s.addr || {};
+  return `# Basescan verification (run in the lucifer-eth repo; see launch/verify.md)
+export PATH="$PATH:$HOME/.foundry/bin"
+export RPC_URL=https://mainnet.base.org
+export ETHERSCAN_API_KEY=...   # one Etherscan v2 key works for Base
+export LUCIFER=${a.token}
+export TREASURY=${LU_TREASURY}
+export GUARDIAN=${LU_TREASURY}
+export MINE=${a.mine}
+export PYRE=${a.pyre}
+export MARKS=${a.marks}
+export VESTING=${a.vesting}
+export VEST_START=$(cast call $VESTING "start()(uint256)" --rpc-url $RPC_URL | awk '{print $1}')
+export VEST_DURATION=$(cast call $VESTING "duration()(uint256)" --rpc-url $RPC_URL | awk '{print $1}')
+export VEST_CLIFF=$(( $(cast call $VESTING "cliff()(uint256)" --rpc-url $RPC_URL | awk '{print $1}') - VEST_START ))
+COMMON="--chain 8453 --watch --compiler-version 0.8.26 --num-of-optimizations 200 --evm-version cancun"
+
+forge verify-contract $COMMON $LUCIFER src/Lucifer.sol:Lucifer \\
+  --constructor-args $(cast abi-encode "constructor(address,address,uint256,uint64,uint64,uint64)" \\
+      $TREASURY $GUARDIAN 3500000000000000000000000 0 7776000 46656000)
+forge verify-contract $COMMON $MINE src/LuciferMine.sol:LuciferMine \\
+  --constructor-args $(cast abi-encode "constructor(address,uint256,address)" $LUCIFER 65000000000000000000000000 $GUARDIAN)
+forge verify-contract $COMMON $PYRE src/LuciferPyre.sol:LuciferPyre \\
+  --constructor-args $(cast abi-encode "constructor(address)" $LUCIFER)
+forge verify-contract $COMMON $MARKS src/LuciferMarks.sol:LuciferMarks \\
+  --constructor-args $(cast abi-encode "constructor(address)" $LUCIFER)
+forge verify-contract $COMMON $VESTING src/LuciferVesting.sol:LuciferVesting \\
+  --constructor-args $(cast abi-encode "constructor(address,uint64,uint64,uint64)" $TREASURY $VEST_START $VEST_CLIFF $VEST_DURATION)`;
+}
+function LuPre({ text }) {
+  return luH(
+    "pre",
+    {
+      className:
+        "max-h-96 overflow-auto border border-ps-fg/15 bg-black/30 p-3 text-xs leading-relaxed text-ps-bright",
+    },
+    text,
+  );
+}
+function LuWizResult({ state }) {
+  let a = state.addr || {},
+    json = luDeployedJson(state),
+    verify = luVerifyCommands(state),
+    gas = LU_WIZ_STEPS.reduce(
+      (n, st) => n + Number(state.steps[st.id]?.gasUsed || 0),
+      0,
+    );
+  return luH(
+    "div",
+    { className: "border-ps-fg/20 flex flex-col gap-2 border-t pt-3" },
+    luH(
+      "h3",
+      { className: "text-ps-ok text-sm font-bold" },
+      "Launched. $LUCIFER is live on Base and the liquidity is locked forever.",
+    ),
+    [
+      ["Lucifer (token)", a.token, "token"],
+      ["LuciferMine", a.mine],
+      ["LuciferPyre", a.pyre],
+      ["LuciferMarks", a.marks],
+      ["LuciferVesting", a.vesting],
+      ["Uniswap V3 pool (1%)", a.pool],
+    ].map(([k, addr, kind]) =>
+      luH($, {
+        key: k,
+        k,
+        v: luH(
+          "span",
+          { className: "font-mono break-all" },
+          luH(LuAddr, { address: addr, kind }),
+        ),
+      }),
+    ),
+    luH($, {
+      k: "LP position",
+      v: `#${state.lpTokenId} · owner 0x…dEaD (burned)`,
+      tone: "ok",
+    }),
+    luH($, {
+      k: "Deploy transaction",
+      v: state.steps.deploy?.hash
+        ? luH(LuTx, { hash: state.steps.deploy.hash })
+        : "found on Base",
+    }),
+    luH($, {
+      k: "LP burn transaction",
+      v: state.steps.burnLp?.hash
+        ? luH(LuTx, { hash: state.steps.burnLp.hash })
+        : "confirmed on Base",
+    }),
+    luH($, { k: "Bytecode check", v: state.steps.deploy?.codeCheck || "—", tone: "ok" }),
+    luH($, { k: "Total gas used", v: gas ? c_(gas) : "—" }),
+    luH(
+      "p",
+      { className: "text-sm leading-relaxed text-pretty" },
+      "Next: paste this block into deployed.json at the root of the site and publish. Every page switches from the preview ledger to the live contracts.",
+    ),
+    luH(LuPre, { text: json }),
+    luH(
+      "div",
+      { className: "flex flex-wrap items-center gap-2" },
+      luH(t$, { address: json }),
+      luH("span", { className: "text-ps-fg/70 text-sm" }, "deployed.json"),
+    ),
+    luH(
+      "p",
+      { className: "text-sm leading-relaxed text-pretty" },
+      "Then verify the five contracts on Basescan. Verification only reads the chain; no key is involved.",
+    ),
+    luH(LuPre, { text: verify }),
+    luH(
+      "div",
+      { className: "flex flex-wrap items-center gap-2" },
+      luH(t$, { address: verify }),
+      luH("span", { className: "text-ps-fg/70 text-sm" }, "verify commands"),
+    ),
+  );
+}
+function LuDeployWizard() {
+  let wallet = H_(),
+    cfg = useDeployed(),
+    snap = B.useSyncExternalStore(luWiz.subscribe, luWiz.snapshot, () => null),
+    state = snap?.state ?? null,
+    running = !!snap?.running,
+    stage = { id: snap?.stageId ?? "", text: snap?.stageText ?? "" },
+    [kit, setKit] = B.useState(null),
+    [kitError, setKitError] = B.useState(""),
+    [phrase, setPhrase] = B.useState(""),
+    walletRef = B.useRef(wallet);
+  walletRef.current = wallet;
+  B.useEffect(() => {
+    luWiz.load();
+    luLoadKit().then(setKit, (e) => setKitError(luErrText(e)));
+  }, []);
+  let isTreasury = luSame(wallet.address, LU_TREASURY),
+    onBase = wallet.chainId === 8453,
+    pre = useLuPoll(
+      async () => {
+        let [balance, block, nonce, code, weth] = await Promise.all([
+          XZ.getBalance({ address: LU_TREASURY }),
+          XZ.getBlock(),
+          XZ.getTransactionCount({ address: LU_TREASURY }),
+          XZ.getCode({ address: LU_TREASURY }),
+          luRead(LU_WETH, LU_TOKEN_ABI, "balanceOf", [LU_TREASURY]),
+        ]);
+        return {
+          balance,
+          weth,
+          baseFee: block.baseFeePerGas ?? 0n,
+          nonce,
+          delegated: !!code && code.toLowerCase().startsWith("0xef0100"),
+        };
+      },
+      [running ? "run" : "idle"],
+      15e3,
+    );
+  // A browser with no saved progress (or stale progress) asks Base what already
+  // exists as soon as the treasury connects. Reads only; nothing is sent.
+  B.useEffect(() => {
+    if (!kit || !state || !isTreasury || cfg.token) return;
+    let ui = luWiz.ui();
+    if (ui.running || ui.synced) return;
+    luWiz.setUi({ synced: !0, running: !0, syncing: !0 });
+    luWizReconcile({
+      kit,
+      get: luWiz.get,
+      commit: luWiz.commit,
+      stage() {},
+      get wallet() {
+        return walletRef.current;
+      },
+    })
+      .catch(() => {})
+      .finally(() => luWiz.setUi({ running: !1, syncing: !1 }));
+  }, [!!kit, !!state, isTreasury, cfg.token]);
+  if (!state)
+    return luH("p", { className: "text-ps-fg/70 text-sm" }, "Loading…");
+  let steps = state.steps,
+    doneCount = LU_WIZ_STEPS.filter((s) => steps[s.id]?.status === "done").length,
+    allDone = doneCount === LU_WIZ_STEPS.length,
+    started = doneCount > 0 || LU_WIZ_STEPS.some((s) => steps[s.id]?.hash),
+    failed = LU_WIZ_STEPS.find((s) => steps[s.id]?.status === "failed"),
+    acked = state.ack || phrase.trim() === LU_CONFIRM_PHRASE,
+    wrapDone = steps.wrap?.status === "done",
+    // ETH still to be wrapped (WETH the treasury already holds counts) + gas headroom
+    wethHeld = pre.data?.weth ?? 0n,
+    minWei = kit
+      ? (wrapDone || wethHeld >= kit.lpEth ? 0n : kit.lpEth - wethHeld) + Gh("0.0005")
+      : 0n,
+    enough = !!pre.data && pre.data.balance >= minWei,
+    recommended = kit ? Gh(kit.ethRecommended) : 0n,
+    ctx = {
+      get wallet() {
+        return walletRef.current;
+      },
+      kit,
+      get: luWiz.get,
+      commit: luWiz.commit,
+      stage: (id, text) =>
+        luWiz.setUi({ stageId: text ? id : "", stageText: text }),
+    };
+  async function run(retryId, opts) {
+    if (luWiz.ui().running || !kit) return;
+    luWiz.setUi({ running: !0 });
+    state.ack || ctx.commit((s) => {
+      s.ack = !0;
+    });
+    try {
+      for (let step of LU_WIZ_STEPS) {
+        let rec = luWiz.get().steps[step.id];
+        if (rec?.status === "done") continue;
+        if (!luSame(walletRef.current.address, LU_TREASURY))
+          throw Error("The treasury wallet was disconnected.");
+        await luWizStep(
+          ctx,
+          step.id,
+          step.id === retryId ? { retry: !0, ...opts } : {},
+        );
+      }
+    } catch {
+      /* the failing step carries its own error */
+    } finally {
+      luWiz.setUi({ running: !1 });
+      pre.refresh();
+    }
+  }
+  let args = kit?.args,
+    canRun =
+      isTreasury && onBase && !!kit && !running && acked && enough && !cfg.token;
+  if (cfg.token)
+    return luH(
+      "div",
+      { className: "flex flex-col gap-3" },
+      luH(
+        "h2",
+        { className: "text-ps-bright font-bold text-balance" },
+        "Invoke-Deploy. Put $LUCIFER on Base.",
+      ),
+      luH(
+        "p",
+        { className: "text-ps-ok text-sm leading-relaxed" },
+        "This host is already in chain mode: deployed.json names the token ",
+        luH(LuAddr, { address: cfg.token, kind: "token" }),
+        ". There is nothing left to launch.",
+      ),
+      allDone ? luH(LuWizResult, { state }) : null,
+    );
+  return luH(
+    "div",
+    { className: "flex flex-col gap-3" },
+    luH(
+      "h2",
+      { className: "text-ps-bright font-bold text-balance" },
+      "Invoke-Deploy. Put $LUCIFER on Base.",
+    ),
+    luH(
+      "p",
+      { className: "text-sm leading-relaxed text-pretty" },
+      "Treasury wallet only. Seven transactions from the connected wallet: one deploys Lucifer and its four contracts, six seed the Uniswap V3 pool and burn the LP position. Each is confirmed on Base before the next is built. Progress is saved in this browser; a refresh resumes where it stopped and never sends a finished step again.",
+    ),
+    kitError ? luH("p", { className: "text-ps-bad text-sm" }, kitError) : null,
+    // ---- who is connected
+    luH($, {
+      k: "Treasury",
+      v: luH("span", { className: "font-mono break-all" }, LU_TREASURY),
+    }),
+    luH($, {
+      k: "Connected wallet",
+      v: wallet.address
+        ? `${wallet.address}${isTreasury ? " · treasury" : " · not the treasury"}`
+        : "not connected",
+      tone: isTreasury ? "ok" : wallet.address ? "bad" : "bright",
+    }),
+    luH($, {
+      k: "Network",
+      v: wallet.address ? wallet.chain : "Base",
+      tone: wallet.address && !onBase ? "bad" : "info",
+    }),
+    wallet.error ? luH("p", { className: "text-ps-bad text-sm" }, wallet.error) : null,
+    !wallet.address
+      ? luH(
+          "p",
+          { className: "text-ps-gold text-sm" },
+          "Connect the treasury wallet to continue. No other wallet can run the launch.",
+        )
+      : !isTreasury
+        ? luH(
+            "p",
+            { className: "text-ps-bad text-sm" },
+            "This wallet is not the treasury. Disconnect, switch the wallet to the treasury account, and connect again. Nothing can be sent from here.",
+          )
+        : null,
+    isTreasury ? null : luH(U_, {}),
+    luH(LuNeedBase, { wallet }),
+    // ---- pre-flight
+    luH(
+      "div",
+      { className: "border-ps-fg/20 flex flex-col border-t pt-3" },
+      luH("h3", { className: "text-ps-bright text-sm font-bold" }, "1 · Pre-flight"),
+      luH($, {
+        k: "Treasury ETH on Base",
+        v: pre.data ? `${luNum(pre.data.balance, 6)} ETH` : "reading Base…",
+        tone: pre.data ? (enough ? (pre.data.balance >= recommended || wrapDone ? "ok" : "gold") : "bad") : "bright",
+      }),
+      luH($, {
+        k: "ETH required",
+        v: kit
+          ? `hold ≥ ${kit.ethRecommended} ETH · 0.25 goes into the pool, gas for all seven was ≈ ${kit.ethExact ? s_(Number(kit.ethExact) - 0.25, 6) : "0.0001"} ETH on the fork`
+          : "hold ≥ 0.30 ETH",
+      }),
+      luH($, {
+        k: "Base fee now",
+        v: pre.data ? `${s_(Number(pre.data.baseFee) / 1e9, 5)} gwei` : "—",
+      }),
+      luH($, {
+        k: "Treasury nonce",
+        v: pre.data
+          ? `${pre.data.nonce}${pre.data.delegated ? " · EIP-7702 smart-account delegation is set" : ""}`
+          : "—",
+      }),
+      luH($, { k: "Constructor · treasury", v: args ? D_(args[0]) : "—" }),
+      luH($, { k: "Constructor · guardian", v: args ? D_(args[1]) : "—" }),
+      luH($, {
+        k: "Constructor · liquid to treasury",
+        v: args ? `${luNum(BigInt(args[2]), 0)} LUCIFER` : "—",
+      }),
+      luH($, {
+        k: "Constructor · vesting",
+        v: args
+          ? `31,500,000 LUCIFER · ${c_(Number(args[4]) / 86400)}-day cliff · ${c_(Number(args[5]) / 86400)}-day vest · starts at the deploy block`
+          : "—",
+      }),
+      luH($, {
+        k: "Liquidity",
+        v: kit
+          ? `${luNum(kit.lpTokens, 0)} LUCIFER + ${luNum(kit.lpEth, 4)} ETH · Uniswap V3 · ${kit.fee / 1e4}% tier · full range`
+          : "—",
+        tone: "gold",
+      }),
+      luH($, {
+        k: "LP position",
+        v: "sent to 0x…dEaD · irreversible · nobody can ever pull the liquidity",
+        tone: "bad",
+      }),
+      luH(LuReadError, { error: pre.error }),
+      pre.data && !enough && !allDone
+        ? luH(
+            "p",
+            { className: "text-ps-bad text-sm" },
+            `The treasury needs at least ${luNum(minWei, 4)} ETH on Base to continue. Send ETH to the treasury address, then come back.`,
+          )
+        : null,
+      pre.data?.delegated
+        ? luH(
+            "p",
+            { className: "text-ps-fg/70 text-sm leading-relaxed" },
+            "The treasury address carries an EIP-7702 delegation to a smart-account implementation. If the wallet cannot send a contract creation, the deploy step offers the same deployment through the CREATE2 factory.",
+          )
+        : null,
+    ),
+    // ---- the typed confirmation
+    state.ack
+      ? null
+      : luH(
+          "div",
+          { className: "flex flex-col gap-2" },
+          V.jsx(KQ, {
+            children:
+              "This spends real ETH and cannot be undone. The LP position is burned at the end. Type the phrase to arm the launch.",
+          }),
+          luH(LuText, {
+            label: `Type ${LU_CONFIRM_PHRASE} to confirm`,
+            value: phrase,
+            onChange: setPhrase,
+            placeholder: LU_CONFIRM_PHRASE,
+          }),
+        ),
+    // ---- checklist
+    luH(
+      "div",
+      { className: "border-ps-fg/20 flex flex-col border-t pt-3" },
+      luH(
+        "h3",
+        { className: "text-ps-bright text-sm font-bold" },
+        "2 · Deploy  ·  3 · Liquidity",
+      ),
+      luH(
+        "ul",
+        null,
+        LU_WIZ_STEPS.map((st, i) => {
+          let rec = steps[st.id] || {},
+            active = stage.id === st.id,
+            mark =
+              rec.status === "done"
+                ? "[x]"
+                : rec.status === "failed"
+                  ? "[!]"
+                  : active || rec.status === "sent"
+                    ? "[~]"
+                    : "[ ]",
+            tone =
+              rec.status === "done"
+                ? "text-ps-ok"
+                : rec.status === "failed"
+                  ? "text-ps-bad"
+                  : active
+                    ? "text-ps-gold"
+                    : "text-ps-fg/70";
+          return luH(
+            "li",
+            { key: st.id, className: "border-b border-ps-fg/10 py-2 text-sm" },
+            luH(
+              "div",
+              { className: "flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4" },
+              luH(
+                "span",
+                { className: tone },
+                luH("span", { className: "font-mono" }, mark),
+                ` ${i + 1}/7 ${st.label}`,
+              ),
+              luH(
+                "span",
+                { className: "text-ps-fg/70 tabular-nums sm:text-right" },
+                rec.status === "done"
+                  ? rec.gasUsed
+                    ? `gas ${c_(Number(rec.gasUsed))} `
+                    : `${rec.note || "done"} `
+                  : rec.status === "sent" && !active
+                    ? "sent, not yet confirmed "
+                    : "",
+                rec.hash ? luH(LuTx, { hash: rec.hash }) : null,
+              ),
+            ),
+            active && stage.text
+              ? luH("p", { className: "text-ps-info text-sm" }, stage.text)
+              : null,
+            rec.status === "done" && rec.gasUsed && rec.note
+              ? luH("p", { className: "text-ps-fg/70 text-sm" }, rec.note)
+              : null,
+            st.id === "deploy" && rec.status === "done" && state.addr?.token
+              ? luH(
+                  "p",
+                  { className: "text-ps-fg/70 text-sm break-all" },
+                  `Lucifer ${state.addr.token} · bytecode ${rec.codeCheck || "not checked"}`,
+                )
+              : null,
+            st.id === "mint" && rec.status === "done" && state.lpTokenId
+              ? luH(
+                  "p",
+                  { className: "text-ps-fg/70 text-sm" },
+                  `LP token id ${state.lpTokenId}`,
+                )
+              : null,
+            rec.status === "failed"
+              ? luH(
+                  "div",
+                  { className: "flex flex-col gap-2" },
+                  luH(
+                    "p",
+                    { className: "text-ps-bad text-sm break-words" },
+                    rec.error,
+                    rec.revertedHash
+                      ? luH(V.Fragment, null, " ", luH(LuTx, { hash: rec.revertedHash, label: "(reverted tx)" }))
+                      : null,
+                  ),
+                  luH(
+                    "div",
+                    { className: "flex flex-wrap gap-2" },
+                    luH(
+                      JQ,
+                      { disabled: !canRun, onClick: () => void run(st.id) },
+                      `Retry step ${i + 1}`,
+                    ),
+                    st.id === "deploy"
+                      ? luH(
+                          JQ,
+                          {
+                            tone: "plain",
+                            disabled: !canRun,
+                            onClick: () => void run(st.id, { create2: !0 }),
+                          },
+                          "Retry through the CREATE2 factory",
+                        )
+                      : null,
+                  ),
+                )
+              : null,
+          );
+        }),
+      ),
+    ),
+    allDone || failed
+      ? null
+      : luH(
+          "div",
+          { className: "flex flex-col gap-2" },
+          luH(
+            JQ,
+            { disabled: !canRun, onClick: () => void run() },
+            running
+              ? snap?.syncing
+                ? "Reading Base…"
+                : "Launching…"
+              : started
+                ? `Resume-Launch (${doneCount}/7 done)`
+                : "Invoke-Launch",
+          ),
+          !running && !canRun
+            ? luH(
+                "p",
+                { className: "text-ps-fg/70 text-sm" },
+                !wallet.address
+                  ? "Waiting for the treasury wallet."
+                  : !isTreasury
+                    ? "Waiting for the treasury wallet (a different wallet is connected)."
+                    : !onBase
+                      ? "Switch the wallet to Base."
+                      : !kit
+                        ? "Loading the launch kit…"
+                        : !acked
+                          ? `Type ${LU_CONFIRM_PHRASE} above to arm the launch.`
+                          : "The treasury needs more ETH.",
+              )
+            : null,
+        ),
+    // ---- result
+    allDone ? luH("h3", { className: "text-ps-bright text-sm font-bold" }, "4 · Result") : null,
+    allDone ? luH(LuWizResult, { state }) : null,
+  );
+}
+/* ---- preview or chain: one switch per page ----------------------------- */
+function r$() {
+  return useChainMode() ? V.jsx(LuChainMarks, {}) : V.jsx(r$Preview, {});
+}
+function i$() {
+  return useChainMode() ? V.jsx(LuChainMiner, {}) : V.jsx(i$Preview, {});
+}
+function a$() {
+  return useChainMode() ? V.jsx(LuChainWallet, {}) : V.jsx(a$Preview, {});
+}
+function o$() {
+  return useChainMode() ? V.jsx(LuChainBurn, {}) : V.jsx(o$Preview, {});
+}
+function f$() {
+  return useChainMode() ? V.jsx(LuChainStatus, {}) : V.jsx(f$Preview, {});
+}
+typeof window < "u" && luLoadDeployed();
+/* ==== LUCIFER CHAIN MODE (end) ==== */
+var LU_ABI=[{type:`function`,name:`totalMinted`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`totalSupply`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`totalBurned`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`receiptCount`,stateMutability:`view`,inputs:[],outputs:[{type:`uint256`}]},{type:`function`,name:`balanceOf`,stateMutability:`view`,inputs:[{type:`address`}],outputs:[{type:`uint256`}]},{type:`function`,name:`ownerOf`,stateMutability:`view`,inputs:[{type:`uint256`}],outputs:[{type:`address`}]},{type:`function`,name:`releasable`,stateMutability:`view`,inputs:[{type:`address`}],outputs:[{type:`uint256`}]}];
+function LiveChain(){let DEPLOYED=useDeployed(),[e,t]=(0,B.useState)(null),[n,r]=(0,B.useState)(``);return(0,B.useEffect)(()=>{if(!DEPLOYED.token)return;let e=!1;(async()=>{try{let n=async(e,t,n)=>{try{return await XZ.readContract({address:e,abi:LU_ABI,functionName:t,args:n||[]})}catch{return null}},[r,i,a,o,s,c]=await Promise.all([n(DEPLOYED.token,`totalMinted`),n(DEPLOYED.token,`totalSupply`),DEPLOYED.pyre?n(DEPLOYED.pyre,`totalBurned`):null,DEPLOYED.pyre?n(DEPLOYED.pyre,`receiptCount`):null,DEPLOYED.vesting?n(DEPLOYED.token,`balanceOf`,[DEPLOYED.vesting]):null,DEPLOYED.lpTokenId?n(`0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1`,`ownerOf`,[BigInt(DEPLOYED.lpTokenId)]):null]);e||t({minted:r,supply:i,burned:a,receipts:o,vesting:s,lpOwner:c})}catch(t){e||r(t instanceof Error?t.message:`Could not read the chain.`)}})();return()=>{e=!0}},[DEPLOYED]),DEPLOYED.token?(0,V.jsxs)(`div`,{className:`border border-ps-gold/40 bg-black/20 p-3 flex flex-col gap-1`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:`Live from Base`}),n?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:n}):e?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)($,{k:`Minted so far`,v:e.minted===null?`—`:`${c_(Math.round(liveNum(e.minted,18)))} / ${c_(Qg)}`}),(0,V.jsx)($,{k:`Circulating`,v:e.supply===null?`—`:c_(Math.round(liveNum(e.supply,18)))}),(0,V.jsx)($,{k:`Burned in the pyre`,v:e.burned===null?`—`:`${c_(Math.round(liveNum(e.burned,18)))}${e.receipts!==null?` · ${c_(Number(e.receipts))} receipts`:``}`,tone:`bad`}),(0,V.jsx)($,{k:`Still vesting`,v:e.vesting===null?`—`:c_(Math.round(liveNum(e.vesting,18)))}),(0,V.jsx)($,{k:`LP position owner`,v:e.lpOwner===null?`—`:e.lpOwner.toLowerCase()===`0x000000000000000000000000000000000000dead`?`0x…dEaD (burned)`:e.lpOwner,tone:e.lpOwner&&e.lpOwner.toLowerCase()===`0x000000000000000000000000000000000000dead`?`ok`:`bright`})]}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Reading Base…`})]}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Live supply, burns, vesting balance and the LP-burn proof appear here, read straight from Base, the moment the contracts are deployed and their addresses are filled in.`})}
+function s$(){return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsxs)(`h2`,{className:`text-ps-bright text-xl font-bold text-balance`,children:[c_(Qg),` LUCIFER. Not one more.`]}),(0,V.jsx)(LiveChain,{}),(0,V.jsxs)(`div`,{className:`flex h-4 overflow-hidden`,role:`img`,"aria-label":`Mining 65%, team 35%`,children:[(0,V.jsx)(`span`,{className:`bg-ps-info`,style:{width:`65%`}}),(0,V.jsx)(`span`,{className:`bg-ps-ok`,style:{width:`35%`}})]}),(0,V.jsxs)(`ul`,{className:`grid gap-1 text-sm sm:grid-cols-2`,children:[(0,V.jsxs)(`li`,{children:[(0,V.jsx)(`span`,{className:`text-ps-info`,children:`█`}),` Mining `,65,`% · `,c_($g)]}),(0,V.jsxs)(`li`,{children:[(0,V.jsx)(`span`,{className:`text-ps-ok`,children:`█`}),` Team `,35,`% · `,c_(e_)]})]}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-2 font-bold`,children:`Mining`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:[`Reward starts at 100 LUCIFER and halves every `,c_(t_),` solutions. That series approaches 65,000,000. The token cap refuses anything past it.`]}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-2 font-bold`,children:`Team`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`35,000,000 LUCIFER is the treasury allocation, split in the deploy transaction: 3,500,000 goes liquid to the treasury and is the exact amount the liquidity script pairs with 0.25 ETH in the burned Uniswap pool, and 31,500,000 is minted into LuciferVesting, an OpenZeppelin vesting wallet with a 90-day cliff and an 18-month linear release to the treasury. Nobody, including the treasury, can pull vesting tokens early. Treasury and guardian are set to 0xC7877934601C38c1A95DF130dBCd7d9898c55e49. The other 65,000,000 stays unminted until LuciferMine accepts a solution. The guardian can only pause mining, never transfers or burns, and can renounce. The token supports EIP-2612 permit, so a pyre burn with a note is one transaction.`}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-2 font-bold`,children:`Burn utility`}),(0,V.jsx)($,{k:`Token burn()`,v:`Any holder, no note`}),(0,V.jsx)($,{k:`LuciferPyre`,v:`Any holder, with a 140-byte inscription`,tone:`bad`}),(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm leading-relaxed`,children:`Mining is hard-capped. Rounding dust is never minted. Burns do not free the cap.`})]})}function c$({initial:e}){let t=Nq.find(t=>t.name.toLowerCase()===(e??``).toLowerCase()),[n,r]=(0,B.useState)(t?.name??`Lucifer`),[i,a]=(0,B.useState)(!1),o=Nq.find(e=>e.name===n)??Nq[0];return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold`,children:`Five contracts, a deploy script and a liquidity script. No hidden mint.`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`ERC-20 with EIP-2612 permit, 18 decimals, Base mainnet. Solidity 0.8.26 on OpenZeppelin v5, built with Foundry, 51 tests passing including 5 on a fork of live Base. One transaction deploys Lucifer, which constructs LuciferMine, LuciferPyre, LuciferMarks and LuciferVesting (3,500,000 liquid to the treasury for the pool, 31,500,000 vesting with a 90-day cliff over 18 months). A second script seeds a Uniswap V3 LUCIFER/WETH pool with 3,500,000 LUCIFER and 0.25 ETH from the treasury and burns the LP position, so that liquidity can never be pulled. No proxy, no owner mint, no tax, no blacklist. Nothing in this system can raise the cap or mint the mining allocation without a valid solution. ${useChainMode()?`Live on Base; the deployed addresses are listed below.`:`Nothing below is deployed yet.`}`}),(0,V.jsx)(LuContractAddresses,{}),(0,V.jsx)(`div`,{className:`flex flex-wrap gap-2`,children:Nq.map(e=>(0,V.jsx)(`button`,{type:`button`,onClick:()=>{r(e.name),a(!1)},className:`min-h-11 border px-3 py-2 text-sm ${e.name===o.name?`border-ps-gold text-ps-gold`:`border-ps-fg/25 text-ps-fg`}`,children:e.name},e.name))}),(0,V.jsx)(`p`,{className:`text-sm text-ps-info`,children:o.role}),(0,V.jsx)(`div`,{className:`flex flex-wrap gap-2`,children:(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>{navigator.clipboard.writeText(o.source).then(()=>{a(!0)})},children:i?`Copied`:`Copy source`})}),(0,V.jsx)(`pre`,{className:`max-h-96 overflow-auto border border-ps-fg/15 bg-black/30 p-3 text-xs leading-relaxed text-ps-bright`,children:o.source})]})}var l$=[{id:`abstract`,title:`Abstract`,paragraphs:[`Devil's Advocate ($LUCIFER) is a hard-capped ERC-20 on Base. Its economic life sits in the token, the mine, and the pyre. A wallet is listed for a handmade NFT only after it has mined 2,500 solutions and burned 250,000 LUCIFER. Supply enters through proof-of-work mining and a team allocation paid to the treasury at launch. Supply leaves through burn. Burns do not reopen the cap.`,`Nothing in this system is upgradeable. Only LuciferMine can mint, and only for a valid solution. No admin key can mint, freeze, tax, or blacklist. The guardian can pause mining and nothing else, and can renounce.`]},{id:`token`,title:`Token`,paragraphs:[`Name Devil's Advocate, symbol LUCIFER. ERC-20, 18 decimals, Base mainnet. Max supply 100,000,000 on cumulative minted supply. The constructor mints 35,000,000 to the treasury. LuciferMine may mint only the remaining 65,000,000, and only as mining rewards. Burns do not reopen mint room.`]},{id:`mine`,title:`Mining`,paragraphs:[`The miner submits a nonce when keccak(challenge, miner, nonce) is at or under the target. The first valid submission rotates the challenge.`,`Reward starts at 100 LUCIFER and halves every 325,000 solutions. That series approaches 65,000,000 and the mint refuses anything past it. Difficulty retargets every 256 solutions toward a 10-minute solve, clamped to a 4× move. Genesis target is 2^232.`]},{id:`burn`,title:`Pyre`,paragraphs:[`The pyre burns LUCIFER and stores a receipt: burner, amount, timestamp, and a note of at most 140 bytes. Receipts are public. There is no reward for burning. The utility is a smaller supply and a permanent line on the pyre.`,`A burn with no note is the same supply change. Both count toward the handmade mark.`]},{id:`team`,title:`Team`,paragraphs:[`script/Deploy.s.sol deploys the system in one transaction and mints 35,000,000 LUCIFER, 35% of supply, to TREASURY. GUARDIAN receives the mining pause key. Both default to 0xC7877934601C38c1A95DF130dBCd7d9898c55e49 and can be overridden with environment variables at deploy time. The treasury holds the full amount as soon as that transaction confirms. 3,500,000 of it plus 0.25 ETH seeds the Uniswap V3 pool on Base at the 1% tier, and that LP position is sent to the dead address: the launch liquidity is locked forever and its fees are unreachable by anyone, including the treasury.`]},{id:`marks`,title:`Marks`,paragraphs:[`LuciferMarks records accepted solutions and pyre burns. A wallet is marked only when both are done: 2,500 solutions and 250,000 LUCIFER burned. The Marked event fires once and the list is public. The NFT is made by hand and sent to that address. The contracts do not mint the NFT.`]},{id:`legal`,title:`Notice`,paragraphs:[`$LUCIFER is an experimental meme token. It can go to zero. Nothing here is investment, legal, or tax advice. Mining rewards may be regulated where you live. Read the contracts before you send value.`]}];function u$(){let[e,t]=(0,B.useState)(l$[0].id),n=l$.find(t=>t.id===e)??l$[0];return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Devil's Advocate ($LUCIFER) White Paper`}),(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm`,children:`November 2026 — Xebb n' Co.`}),(0,V.jsx)(`div`,{className:`flex flex-wrap gap-2`,children:l$.map(e=>(0,V.jsx)(`button`,{type:`button`,onClick:()=>t(e.id),className:`min-h-11 border px-3 py-2 text-sm ${e.id===n.id?`border-ps-gold text-ps-gold`:`border-ps-fg/25 text-ps-fg`}`,children:e.title},e.id))}),(0,V.jsxs)(`article`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h3`,{className:`text-ps-info font-bold`,children:n.title}),n.paragraphs.map(e=>(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:e},e.slice(0,24)))]})]})}function d$(){return(0,V.jsxs)(`div`,{className:`flex flex-col items-start gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold`,children:`Token cover and emblem`}),(0,V.jsx)(GQ,{className:`size-56 border border-ps-fg/30 sm:size-72`,alt:`Devil's Advocate emblem: a grinning blond kid with red horns and a pitchfork in a grey hoodie, ringed in green.`}),(0,V.jsx)(`p`,{className:`max-w-xl text-sm leading-relaxed text-pretty`,children:`The Devil's Advocate mascot is the mark for this host and for $LUCIFER. It sits on the token cover, the host icon, and the banner: the kid, the horns, the pitchfork, the green ring.`})]})}function f$Preview(){let e=K_(),t=Q_(),n=H_();return(0,V.jsxs)(`div`,{children:[(0,V.jsx)(`h2`,{className:`text-ps-bright mb-2 font-bold`,children:`Session`}),(0,V.jsx)($,{k:`Network`,v:`Base · not deployed`}),(0,V.jsx)($,{k:`Wallet`,v:n.address??`not connected`,tone:`gold`}),(0,V.jsx)($,{k:`Contracts`,v:`ERC-20 · 18 decimals · 4 contracts`}),(0,V.jsx)($,{k:`Preview balance`,v:`${s_(e.ledger.balance,4)} LUCIFER`,tone:`gold`}),(0,V.jsx)($,{k:`Withdrawn`,v:`${s_(e.ledger.withdrawn,4)} LUCIFER`}),(0,V.jsx)($,{k:`Handmade mark`,v:e.ledger.mined/100+1e-9>=2500&&e.ledger.burned+1e-9>=25e4?`earned`:`working`,tone:`gold`}),(0,V.jsx)($,{k:`Ledger`,v:`${e.ledger.qualified.length} wallet${e.ledger.qualified.length===1?``:`s`}`}),(0,V.jsx)($,{k:`Mined in preview`,v:`${s_(e.ledger.mined,4)} LUCIFER`}),(0,V.jsx)($,{k:`Burned in preview`,v:`${s_(e.ledger.burned,4)} LUCIFER`,tone:`bad`}),(0,V.jsx)($,{k:`Miner`,v:t.running?`${c_(t.hashrate)} H/s`:`stopped`,tone:`info`})]})}function p$({points:e,pnl:t}){let n=e.length>0?e:[{t:Date.now()-6e4,pnl:0},{t:Date.now(),pnl:0}],r=t>=0;return(0,V.jsxs)(`div`,{className:`flex flex-col gap-2`,children:[(0,V.jsx)($,{k:`PNL`,v:`${r?`+`:`−`}$${s_(Math.abs(t),2)}`,tone:r?`ok`:`bad`}),(0,V.jsx)(`div`,{className:`border-ps-fg/20 h-44 w-full border`,children:(0,V.jsx)(sE,{width:`100%`,height:`100%`,children:(0,V.jsxs)(jq,{data:n,margin:{top:12,right:12,left:0,bottom:4},children:[(0,V.jsx)(GG,{dataKey:`t`,tickFormatter:e=>new Date(e).toLocaleTimeString([],{hour:`2-digit`,minute:`2-digit`}),stroke:`var(--color-ps-fg)`,tick:{fill:`var(--color-ps-fg)`,fontSize:11},minTickGap:28}),(0,V.jsx)(cK,{stroke:`var(--color-ps-fg)`,tick:{fill:`var(--color-ps-fg)`,fontSize:11},width:52,tickFormatter:e=>`$${Number(e).toFixed(0)}`}),(0,V.jsx)(MU,{y:0,stroke:`var(--color-ps-fg)`,strokeDasharray:`3 3`}),(0,V.jsx)(HT,{contentStyle:{background:`var(--color-ps-bg)`,border:`1px solid var(--color-ps-fg)`,fontSize:12},labelFormatter:e=>new Date(Number(e)).toLocaleTimeString(),formatter:e=>[`$${Number(e).toFixed(2)}`,`PNL`]}),(0,V.jsx)(OG,{type:`monotone`,dataKey:`pnl`,stroke:r?`var(--color-ps-gold)`:`var(--color-ps-bad)`,dot:!1,strokeWidth:2,isAnimationActive:!1})]})})})]})}function m$(){let e=(0,B.useSyncExternalStore)(nJ,rJ,rJ),t=(0,B.useSyncExternalStore)(SQ,CQ,CQ),[n,r]=(0,B.useState)(`0.01`),[i,a]=(0,B.useState)(``),[o,s]=(0,B.useState)(null),[c,l]=(0,B.useState)(!1),[ownerIn,setOwnerIn]=(0,B.useState)(``),[hist,setHist]=(0,B.useState)(null),[termsOpen,setTermsOpen]=(0,B.useState)(!1),[agree,setAgree]=(0,B.useState)(!1);(0,B.useEffect)(()=>{iJ(),TQ(),AQ();let e=__xebbLocal.getItem(`xebb-keel-wallet`);e&&a(e),__xebbLocal.getItem(CBW_KEY)===`1`&&void cbwConnect(!0)},[]);let u=t.address||wQ(),cb=t.cbw||{},wd=i.trim()||(cb.on?cb.main||``:``),d=E_(wd),f=eJ(e),p=f-e.startNav,m=Kq(e.book),h=tJ(e);async function g(){l(!0),s(`Approve the send in your wallet.`);try{let e=k_()[0]?.provider,t=``;if(e){let n=await e.request({method:`eth_requestAccounts`});t=Array.isArray(n)&&typeof n[0]==`string`?n[0]:``}else{let n=await C_();e=n.provider,t=n.address}if(!e||!E_(t))throw Error(`The wallet did not return an address.`);a(t),__xebbLocal.setItem(`xebb-keel-wallet`,t);let r=await jQ(e,t,n);s(`Sent ${n} ETH to the desk. ${r}`)}catch(e){s(`${L_(e)} You can also send ETH on Base to the desk address.`)}finally{l(!1)}}return(0,V.jsxs)(`div`,{className:`flex flex-col gap-3`,children:[(0,V.jsx)(`h2`,{className:`text-ps-bright font-bold text-balance`,children:`Invoke-AgenticTrading`}),(0,V.jsx)(`p`,{className:`text-sm leading-relaxed text-pretty`,children:`Two ways to fund it. Connect Coinbase Wallet: the bot trades from an app sub account inside your Coinbase Wallet, pulling USDC (and gas) from your main balance through a spend permission you grant once, capped by the budget you set here; after that first approval every trade runs with no popups. Or Deposit: your wallet sends real ETH on Base to a desk key held in this browser, which turns it into USDC cash. Either way the desk runs the exact paper rules on real pools, one tick a minute, in whichever mode the paper book is set to. Flow (default): buy when buyers dominate the last 5 minutes and the hour with volume accelerating and price rising, 25% of equity each (max 4), 6% stop, 4% trail once up 6%, out when flow flips to selling. Classic: up 2.5% from the first-seen reference = buy, full cash split, unlimited positions, sell 2.5% under entry. 5/10: up 5% = buy, -10% stop, 5% trail once up 10%. Inferno (fast, high risk): a coin breaks out 3%+ over 30 minutes at a new high with two up ticks, no breadth gate, a third of equity per entry, at most 3 open, 4-10% volatility stop, a third off at +5% (stop to breakeven), another third at +12.5%, then a 5% trail, 60-tick time stop, 10-tick cooldown, 25% daily loss cap. Devil (patient): 5%+ over an hour, 40% of the book must be up, 3x fee floor, 8-20% stop, thirds off at +12% and +30%, 150-tick time stop, 20% daily cap. It watches Uniswap V2, V3 and V4 for brand-new pools, runs a contract check on each (GoPlus scan or on-chain owner check, tax, honeypot, blacklist, mint, holder concentration, aggregator round trip), and only buys a launch at 10% of equity (at most 2) after it is up 20% off its first print. Launch swaps route through the KyberSwap aggregator.`}),(0,V.jsx)(KQ,{children:`This spends real money on volatile memecoins and brand-new launches with no human in the loop. The contract check lowers the odds of a honeypot; it does not remove them, and most new tokens still go to zero. Expect losses. The desk key stays in this browser. Copy it before you clear site data. Closing the page stops new trades.`}),typeof window<`u`&&window.__xebbStorageVolatile?(0,V.jsx)(KQ,{children:`This preview blocks browser storage. The desk key below lives in memory only and is LOST on reload or tab close. Do NOT deposit here. Use the published site, or Reveal key and save it before sending anything.`}):null,(0,V.jsxs)(`div`,{className:`border border-ps-gold/40 bg-black/20 p-3 flex flex-col gap-2`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:`Coinbase Wallet`}),cb.on?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)($,{k:`Sub account`,v:cbwShort(cb.sub),tone:`gold`}),(0,V.jsx)($,{k:`Main wallet`,v:`${cbwShort(cb.main)} · $${s_(cb.mainUsdc||0,2)} USDC`}),(0,V.jsx)(qQ,{label:`Budget the bot may pull from the main wallet`,value:String(cb.budget??25),onChange:e=>cbwSetBudget(e),suffix:`USDC`}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Trades are sent from the sub account as one atomic batch (approve + swap). Coinbase fills any USDC or ETH shortfall from your main wallet through the spend permission. Keep a little ETH on Base in the main wallet for gas. Withdraw moves the sub account's coins and USDC to the main wallet unless you type another address below.`}),(0,V.jsxs)(`div`,{className:`border-t border-ps-fg/15 pt-2`,children:[(0,V.jsxs)(`div`,{className:`flex items-center justify-between gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright text-sm font-bold`,children:`Spend permissions`}),(0,V.jsx)(JQ,{tone:`plain`,disabled:cb.busy,onClick:()=>void cbwPerms(),children:`Refresh`})]}),(cb.perms||[]).length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:cb.permsAt?`None granted yet. The first trade asks for one.`:`Loading…`}):(0,V.jsx)(`ul`,{className:`flex flex-col gap-1`,children:cb.perms.map(e=>(0,V.jsxs)(`li`,{className:`flex flex-wrap items-center justify-between gap-2 border-b border-ps-fg/10 py-1 text-sm`,children:[(0,V.jsxs)(`span`,{className:e.live?`text-ps-gold`:`text-ps-fg/60`,children:[e.token,` · `,s_(e.allowance,e.token===`USDC`?2:5),` per `,e.periodDays>=1?`${s_(e.periodDays,0)} day${e.periodDays>=2?`s`:``}`:`${Math.round(e.periodDays*24)} h`,e.live?``:` · inactive`]}),(0,V.jsx)(JQ,{tone:`bad`,disabled:cb.busy||!!t.busy,onClick:()=>cbwRevoke(e.hash).then(()=>s(`Permission revoked.`)).catch(e=>s(L_(e))),children:`Revoke`})]},e.hash))}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Revoke is the kill switch: the sub account cancels its own permission on-chain, no popup, and the bot can no longer pull from your main wallet.`})]}),(0,V.jsxs)(`div`,{className:`border-t border-ps-fg/15 pt-2 flex flex-col gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright text-sm font-bold`,children:`24/7 worker`}),(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Keeps trading with these exact rules while this tab is closed. Four steps, all here: make the worker its own key, add that key as a second owner of the sub account (one Coinbase approval), copy the .env, run the worker on any always-on machine.`}),(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 text-sm`,children:`1.`}),cb.workerAddr?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)(`span`,{className:`text-ps-bright font-mono text-sm break-all`,children:cb.workerAddr}),(0,V.jsx)(t$,{address:cb.workerAddr}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>{workerKeyForget(),s(`Worker key removed from this browser.`)},children:`Forget key`})]}):(0,V.jsx)(JQ,{onClick:()=>{workerKeyGen(),s(`Worker key made. It lives in this browser until you click Forget key.`)},children:`Generate worker key`})]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 text-sm`,children:`2.`}),(0,V.jsx)(JQ,{disabled:cb.busy||!!t.busy||!cb.workerAddr,onClick:()=>cbwAddOwner(cb.workerAddr).then(()=>s(`Worker added as an owner of the sub account.`)).catch(e=>s(L_(e))),children:`Add worker as owner`}),(0,V.jsx)(`input`,{value:ownerIn,onChange:e=>setOwnerIn(e.target.value),spellCheck:!1,placeholder:`or paste another owner address`,className:`border-ps-fg/25 text-ps-bright min-h-11 min-w-0 flex-1 border bg-black/25 px-2 font-mono text-sm`}),(0,V.jsx)(JQ,{tone:`plain`,disabled:cb.busy||!!t.busy||!E_(ownerIn.trim()),onClick:()=>cbwAddOwner(ownerIn).then(()=>{s(`Owner added.`),setOwnerIn(``)}).catch(e=>s(L_(e))),children:`Add`})]}),cb.workerAddr?(0,V.jsxs)(`div`,{className:`flex flex-col gap-1`,children:[(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 text-sm`,children:`3. The worker's .env, filled from this desk (budget, risk, mode, paymaster, Telegram, cloud):`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>{navigator.clipboard.writeText(cb.workerEnv||``).then(()=>s(`.env copied. Paste it into the worker folder as .env.`))},children:`Copy .env`})]}),(0,V.jsx)(`pre`,{className:`border-ps-fg/20 text-ps-fg/85 max-h-48 overflow-auto border bg-black/40 p-2 font-mono text-xs leading-relaxed whitespace-pre`,children:(cb.workerEnv||``).replace(/(OWNER_PRIVATE_KEY=0x)[0-9a-fA-F]+/,`$1…hidden, included when you copy`)})]}):null,(0,V.jsxs)(`p`,{className:`text-ps-fg/70 text-sm`,children:[`4. `,(0,V.jsx)(`a`,{href:`./devils-advocate-worker.zip`,className:`text-ps-gold underline`,children:`Download the worker`}),` (Node 20). Unzip, drop the .env in, then `,(0,V.jsx)(`code`,{className:`text-ps-bright`,children:`npm install && npm run tick:dry`}),` to watch one dry tick, and `,(0,V.jsx)(`code`,{className:`text-ps-bright`,children:`DRY_RUN=0 npm start`}),` to go live. Dockerfile and hosting notes are in its README. Revoke above stops it at any time.`]}),(0,V.jsx)(KQ,{children:`The worker key is a hot key. It is generated and stored in this browser only, never sent anywhere, and it can spend the sub account once added as owner. Fund through the budget and spend permission, not by sending coins to the worker.`})]}),(0,V.jsx)(`div`,{children:(0,V.jsx)(JQ,{tone:`plain`,disabled:cb.busy||!!t.busy,onClick:()=>void cbwDisconnect(),children:`Disconnect Coinbase Wallet`})})]}):(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm`,children:`Connect and the bot trades from an app sub account inside your Coinbase Wallet, funded from your main balance through a spend permission. The first trade opens one approval in Coinbase Wallet; grant the ongoing permission there and every trade after runs with no popups. Budget caps how much it may pull.`}),cbwBlockedHost()?(0,V.jsxs)(V.Fragment,{children:[(0,V.jsx)(`p`,{className:`text-ps-bad text-sm leading-relaxed`,children:`This host (pplx.app) sends a Cross-Origin-Opener-Policy header that cuts the Coinbase sign-in popup off from the page, so the connection can never finish here. The same app is mirrored on GitHub Pages without that header. Open it there to connect and trade; the paper book and everything else work on both.`}),(0,V.jsx)(`div`,{children:(0,V.jsx)(`a`,{href:CBW_MIRROR,className:`inline-block min-h-11 border border-ps-gold px-3 py-2 text-sm text-ps-gold hover:bg-ps-gold/10`,children:`Open the Coinbase-ready mirror →`})})]}):(0,V.jsx)(`div`,{children:(0,V.jsx)(JQ,{disabled:!!t.busy,onClick:()=>void cbwConnect(!1),children:cb.busy?(cb.status||`Connecting…`)+` (click to cancel)`:`Connect Coinbase Wallet`})})]}),(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 mb-1 block`,children:`Paymaster URL (optional, gasless trades)`}),(0,V.jsx)(`input`,{value:cb.pmDraft??cb.paymaster??``,onChange:e=>cbwSetPaymaster(e.target.value),spellCheck:!1,placeholder:`https://api.developer.coinbase.com/rpc/v1/base/…`,className:`border-ps-fg/25 text-ps-bright min-h-11 w-full border bg-black/25 px-2 font-mono text-sm`})]}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`A Coinbase Developer Platform paymaster sponsors gas so the sub account never needs ETH. Applies on the next connect.`}),cb.status&&!cb.busy?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:cb.status}):null]}),(0,V.jsxs)(`div`,{className:`border border-ps-fg/20 bg-black/20 p-3 flex gap-4`,children:[(0,V.jsxs)(`div`,{className:`flex flex-col items-center gap-1 shrink-0`,children:[(0,V.jsx)(`span`,{className:`text-ps-bad text-xs`,children:`HIGH`}),(0,V.jsx)(`input`,{type:`range`,min:0,max:100,step:1,value:t.risk??50,"aria-label":`Risk`,onChange:e=>setKeelRisk(e.target.value),style:{writingMode:`vertical-lr`,direction:`rtl`,height:`11rem`,width:`2rem`,accentColor:`var(--color-ps-gold)`}}),(0,V.jsx)(`span`,{className:`text-ps-ok text-xs`,children:`LOW`})]}),(0,V.jsxs)(`div`,{className:`flex flex-col gap-1 min-w-0`,children:[(0,V.jsxs)(`h3`,{className:`text-ps-bright text-sm font-bold`,children:[`Risk `,t.risk??50,` · `,riskLabel(t.risk??50)]}),(0,V.jsx)(`p`,{className:`text-ps-fg/80 text-sm leading-relaxed`,children:`Slide up for bigger positions, more of them, wider stops and looser entries; down for the opposite. 50 is the mode as designed. Paper and live share the dial and the mode, so what you see in paper is what live does.`}),(0,V.jsx)(`p`,{className:`text-ps-gold text-sm leading-relaxed`,children:riskSummary()})]})]}),(0,V.jsx)($,{k:cb.on?`Sub account`:`Desk`,v:u||`preparing`,tone:`gold`}),(0,V.jsx)($,{k:`On desk`,v:`${t.eth} ETH · $${s_(t.cash??0,2)} cash${t.tokens.map(e=>` · ${e.amount} ${e.symbol}`).join(``)}`}),(0,V.jsx)($,{k:`Live book`,v:`${(t.book??[]).length} open · $${s_(t.nav??0,2)}`}),(0,V.jsx)($,{k:`Next tick`,v:`${Math.max(0,Math.ceil(((t.nextAt||0)-(t.clock||0))/1e3))}s${t.busy?` · ${t.busy}`:``}${t.marketAt?` · prices ${Math.max(0,Math.round(((t.clock||0)-t.marketAt)/1e3))}s old · ETH $${s_(t.ethUsd||0,0)}`:``}`}),(0,V.jsx)($,{k:`Live`,v:t.busy||(t.armed?`Armed · Base`:`Stopped`),tone:t.armed?`gold`:`bright`}),(0,V.jsx)(p$,{points:t.points,pnl:t.pnl}),t.error?(0,V.jsx)(`p`,{className:`text-ps-bad text-sm`,children:t.error}):null,(0,V.jsxs)(`div`,{className:`flex items-center gap-2`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright min-w-0 flex-1 truncate font-mono text-sm`,children:u||`Desk address is preparing`}),u?(0,V.jsx)(t$,{address:u}):null]}),cb.on?null:(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Deposit asks your wallet to send. Or paste this address into any wallet and send ETH on Base yourself.`}),cb.on?null:(0,V.jsx)(qQ,{label:`Amount to deposit`,value:n,onChange:r,suffix:`ETH`}),(0,V.jsxs)(`label`,{className:`block text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/80 mb-1 block`,children:`Withdraw to this wallet`}),(0,V.jsx)(`input`,{value:i,onChange:e=>{a(e.target.value),__xebbLocal.setItem(`xebb-keel-wallet`,e.target.value.trim())},spellCheck:!1,autoCapitalize:`none`,placeholder:cb.on?cb.main||`0x… your main wallet`:`0x… filled in when you deposit`,className:`border-ps-fg/25 text-ps-bright min-h-11 w-full border bg-black/25 px-2 font-mono text-sm`})]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[cb.on?null:(0,V.jsx)(JQ,{disabled:c||!!t.busy,onClick:()=>void g(),children:`Deposit`}),(0,V.jsx)(JQ,{disabled:!!t.busy,onClick:()=>void VQ().then(e=>s(e[e.length-1]??`Look finished.`)).catch(e=>s(L_(e))),children:`LOOK`}),(0,V.jsx)(JQ,{disabled:!!t.busy,onClick:()=>{t.armed||t.terms?UQ(!t.armed):setTermsOpen(!0)},children:t.armed?`Stop live`:`Trade live`}),(0,V.jsx)(JQ,{tone:`bad`,disabled:!d||!!t.busy,onClick:()=>{WQ(wd).then(e=>s(e[e.length-1]??`Withdrawn.`)).catch(e=>s(L_(e)))},children:`Withdraw`}),cb.on?null:(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>t.revealed?DQ():EQ(),children:t.revealed?`Hide key`:`Reveal key`})]}),termsOpen&&!t.terms?(0,V.jsxs)(`div`,{className:`border border-ps-bad/60 bg-black/30 p-3 flex flex-col gap-2`,children:[(0,V.jsx)(`h3`,{className:`text-ps-bad text-sm font-bold`,children:`Before you trade live`}),(0,V.jsx)(`ul`,{className:`text-ps-fg/85 list-disc pl-5 text-sm leading-relaxed`,children:[`This software is provided as is, with no warranty. It is not financial, investment, tax or legal advice.`,`It trades volatile memecoins and brand-new tokens automatically. You can lose everything you fund it with, including the full spend-permission allowance.`,`Xebb n' Co. never holds your keys or funds. The desk key stays in your browser; the Coinbase sub account is controlled by your Coinbase Wallet. Nobody can reverse a trade for you.`,`You are responsible for the laws, taxes and reporting that apply where you live, and for confirming this use is permitted there.`,`Market data comes from third parties (DexScreener, Uniswap, KyberSwap, Coinbase) and can be wrong, late or unavailable.`].map((e,t)=>(0,V.jsx)(`li`,{children:e},t))}),(0,V.jsxs)(`label`,{className:`flex items-center gap-2 text-sm`,children:[(0,V.jsx)(`input`,{type:`checkbox`,checked:agree,onChange:e=>setAgree(e.target.checked),className:`size-4 accent-[var(--color-ps-gold)]`}),(0,V.jsx)(`span`,{children:`I have read this and accept the risk.`})]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[(0,V.jsx)(JQ,{disabled:!agree,onClick:()=>{termsAccept(),setTermsOpen(!1),UQ(!0)},children:`Accept and trade live`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>setTermsOpen(!1),children:`Not now`})]})]}):null,(0,V.jsxs)(`div`,{className:`border border-ps-fg/20 bg-black/20 p-3 flex flex-col gap-2`,children:[(0,V.jsxs)(`div`,{className:`flex flex-wrap items-center justify-between gap-2`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright text-sm font-bold`,children:[`Cloud history `,(0,V.jsx)(`span`,{className:`text-ps-fg/60 font-normal`,children:t.cloud?.on?`· on · ${t.cloud.saved} saved this session${t.cloud.err?` · ${t.cloud.err}`:``}`:`· off`})]}),(0,V.jsxs)(`div`,{className:`flex gap-2`,children:[(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>sbFills(cb.on?cb.sub:u,`live`).then(e=>setHist(e)).catch(e=>s(L_(e))),children:`Load history`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:sbToggle,children:t.cloud?.on?`Turn off`:`Turn on`})]})]}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Live fills, paper fills, PnL points and the per-minute order-flow tape are saved to a public Devil's Advocate ledger keyed by desk address, so history survives this browser and the Flow strategy can be backtested on real data. Turn it off if you do not want your fills public.`}),hist?hist.length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`No cloud fills for this desk yet.`}):(0,V.jsx)(`ul`,{children:hist.map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-1 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/60`,children:new Date(e.at).toLocaleString([],{month:`short`,day:`numeric`,hour:`2-digit`,minute:`2-digit`})+` `}),(0,V.jsx)(`span`,{className:e.side===`buy`?`text-ps-gold`:`text-ps-ok`,children:`${e.side} ${e.symbol} $${s_(+e.usd||0,2)}`}),(0,V.jsx)(`span`,{className:`text-ps-fg/80 block`,children:e.note})]},e.id))}):null]}),(0,V.jsxs)(`div`,{className:`border border-ps-fg/20 bg-black/20 p-3 flex flex-col gap-2`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright text-sm font-bold`,children:[`Telegram alerts `,(0,V.jsx)(`span`,{className:`text-ps-fg/60 font-normal`,children:t.tg?.token&&t.tg?.chat?`· on${t.tg.err?` · ${t.tg.err}`:``}`:`· off`})]}),(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Every live fill, stop, halt and arm/disarm is sent to you. Make a bot with @BotFather, paste its token, start a chat with it, and paste your chat id (from @userinfobot). Both stay in this browser.`}),(0,V.jsxs)(`div`,{className:`grid gap-2 sm:grid-cols-2`,children:[(0,V.jsx)(`input`,{value:t.tg?.token??``,onChange:e=>tgSet(e.target.value,void 0),spellCheck:!1,type:`password`,placeholder:`bot token 123456:ABC…`,className:`border-ps-fg/25 text-ps-bright min-h-11 min-w-0 border bg-black/25 px-2 font-mono text-sm`}),(0,V.jsx)(`input`,{value:t.tg?.chat??``,onChange:e=>tgSet(void 0,e.target.value),spellCheck:!1,placeholder:`chat id`,className:`border-ps-fg/25 text-ps-bright min-h-11 min-w-0 border bg-black/25 px-2 font-mono text-sm`})]}),(0,V.jsx)(`div`,{children:(0,V.jsx)(JQ,{tone:`plain`,disabled:!(t.tg?.token&&t.tg?.chat),onClick:()=>{tgSend(`Test from the desk. Alerts are working.`),s(`Test sent.`)},children:`Send test`})})]}),t.revealed&&!cb.on?(0,V.jsxs)(`p`,{className:`text-ps-bad break-all font-mono text-sm`,children:[`Desk key, not your wallet phrase: `,t.revealed]}):(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:cb.on?`Coinbase Wallet signs for the sub account. Withdraw moves its coins and USDC to the address above.`:`The key spends the desk. Withdraw sends the desk balance to the address above.`}),o?(0,V.jsx)(`p`,{className:`text-ps-fg text-sm`,children:o}):null,(0,V.jsx)(`h3`,{className:`text-ps-bright pt-1 text-sm font-bold`,children:`Live tape`}),(t.tape??[]).length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Live fills and decisions land here once the desk is armed.`}):(0,V.jsx)(`ul`,{children:t.tape.slice(0,10).map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/60`,children:new Date(e.at).toLocaleTimeString([],{hour:`2-digit`,minute:`2-digit`})+` `}),(0,V.jsx)(`span`,{className:e.tone===`ok`?`text-ps-ok`:e.tone===`bad`?`text-ps-bad`:e.tone===`gold`?`text-ps-gold`:`text-ps-fg`,children:e.text})]},`${e.at}-${e.text.slice(0,20)}`))}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-3 text-sm font-bold`,children:`Paper`}),(0,V.jsxs)(`p`,{className:`text-ps-fg/80 text-sm`,children:[`Play money, real prices. Starts at $`,150,`. The paper book holds the same coins as the live desk and prices them from the same Uniswap V3 and KyberSwap quotes on Base, once a minute, including vetted new launches. Fills are simulated at the quoted price with a modelled cost (pool fee plus 0.3% slippage; 3% on fresh launches) and the rules are identical to live. Five modes, switched with the button below and shared with the live desk. Flow (default): order flow. Every minute it reads the buy and sell counts and volume for every coin from DexScreener, and buys when at least 65% of the last 5 minutes' trades were buys (8+ trades), the hour is net buying, 5-minute volume is running 1.5x the hourly pace, price is up at least 0.5% in 5 minutes and up on the hour, with $100k+ liquidity and $20k+ hourly volume. 25% of equity per coin, max 4, 6% stop, 4% trail once up 6%, out when the flow flips to 65% sells, 45-tick time stop, 25% daily cap. Classic: the original 2.5 book, up 2.5% from where the coin was first seen = buy, full cash split across everything that qualifies, unlimited positions, sell 2.5% under entry. 5/10: up 5% = buy, -10% stop, 5% trail once up 10%. Inferno: fast and high risk, 30-minute breakouts, no breadth gate, a third of equity per position, quick exits. Devil: patient, one-hour breakouts, 40% breadth gate, bigger targets. Replayed over the last 27 hours of real Base prices: Inferno 41 trades, 51% wins, -5% (+3% in the first half, -25% in the falling second half); Devil 14 trades, 79% wins, +13.5%; the old rules -8.2%. Reset puts it back.`]}),(0,V.jsx)($,{k:`Paper`,v:e.armed?`Running`:`Stopped`,tone:e.armed?`gold`:`bright`}),(0,V.jsx)($,{k:`PNL`,v:`${p>=0?`+`:`−`}$${s_(Math.abs(p),2)}`,tone:p>=0?`ok`:`bad`}),(0,V.jsx)($,{k:`Cash book`,v:`${h.length} open · $${s_(f,2)}`}),(0,V.jsx)($,{k:`Next tick`,v:`${Math.max(0,Math.ceil(((e.nextAt||0)-(e.clock||0))/1e3))}s · tick ${e.tick||0}`}),(0,V.jsxs)(`p`,{className:`text-sm leading-relaxed`,children:[(0,V.jsx)(`span`,{className:`text-ps-fg/70`,children:`In the book: `}),m.map(e=>(0,V.jsxs)(`span`,{className:h.includes(e)?`text-ps-gold`:`text-ps-fg/80`,children:[e,` `]},e))]}),(0,V.jsxs)(`div`,{className:`flex flex-wrap gap-2`,children:[(0,V.jsx)(JQ,{onClick:()=>lJ(!e.armed),children:e.armed?`Stop paper`:`Start paper`}),(0,V.jsx)(JQ,{disabled:f<=1,onClick:dJ,children:`LOOK`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>uJ(e.book===`10x`?`1x`:`10x`),children:e.book===`10x`?`Book 1x`:`Book 10x`}),(0,V.jsx)(JQ,{tone:`plain`,onClick:()=>setKeelMode(keelMode===`flow`?`classic`:keelMode===`classic`?`fiveten`:keelMode===`fiveten`?`inferno`:keelMode===`inferno`?`devil`:`flow`),children:keelMode===`flow`?`Mode: Flow (order flow)`:keelMode===`classic`?`Mode: Classic (2.5)`:keelMode===`fiveten`?`Mode: 5/10`:keelMode===`inferno`?`Mode: Inferno (fast)`:`Mode: Devil (patient)`}),(0,V.jsx)(JQ,{tone:`bad`,onClick:sJ,children:`Reset $150`})]}),(0,V.jsx)(`h3`,{className:`text-ps-bright pt-1 text-sm font-bold`,children:`Paper tape`}),e.fills.length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/70 text-sm`,children:`Paper fills land here while paper is running.`}):(0,V.jsx)(`ul`,{children:e.fills.slice(0,12).map(e=>(0,V.jsxs)(`li`,{className:`border-b border-ps-fg/10 py-2 text-sm`,children:[(0,V.jsx)(`span`,{className:`text-ps-gold`,children:e.from}),(0,V.jsx)(`span`,{className:`text-ps-fg`,children:` → `}),(0,V.jsx)(`span`,{className:`text-ps-bright`,children:e.to}),(0,V.jsxs)(`span`,{className:`text-ps-fg`,children:[` · $`,s_(e.nav,2)]}),e.fee>0?(0,V.jsxs)(`span`,{className:`text-ps-fg/70`,children:[` · fee $`,s_(e.fee,2)]}):null,(0,V.jsx)(`span`,{className:`text-ps-fg/80 block`,children:e.note})]},`${e.at}-${e.from}-${e.to}`))})]})}function h$({text:e}){return(0,V.jsx)(`pre`,{className:`text-ps-bad text-sm leading-relaxed whitespace-pre-wrap`,children:e})}var g$=[{name:`Get-Help`,kind:`help`,blurb:`Commands`},{name:`Start-Welcome`,kind:`welcome`,blurb:`Banner`},{name:`Invoke-LuciferMiner`,kind:`mine`,blurb:`Mine`},{name:`Invoke-LuciferBurn`,kind:`burn`,blurb:`Burn`},{name:`Get-Art`,kind:`marks`,blurb:`Art`},{name:`Get-Tokenomics`,kind:`tokenomics`,blurb:`Supply`},{name:`Get-Contract`,kind:`contracts`,blurb:`Source`},{name:`Get-WhitePaper`,kind:`paper`,blurb:`Paper`},{name:`Connect-Wallet`,kind:`wallet`,blurb:`Withdraw`},{name:`Invoke-AgenticTrading`,kind:`keel`,blurb:`Trade`},{name:`Get-Status`,kind:`status`,blurb:`Ledger`},{name:`Invoke-Deploy`,kind:`deploy`,blurb:`Launch`}],_$={help:`help`,"get-help":`help`,welcome:`welcome`,"get-welcome":`welcome`,"start-welcome":`welcome`,mine:`mine`,"start-luciferminer":`mine`,"start-xebbminer":`mine`,"invoke-luciferminer":`mine`,"invoke-xebbminer":`mine`,"start-miner":`mine`,burn:`burn`,"invoke-luciferburn":`burn`,"invoke-xebbburn":`burn`,"invoke-burn":`burn`,marks:`marks`,art:`marks`,"get-marks":`marks`,"get-art":`marks`,tokenomics:`tokenomics`,"get-tokenomics":`tokenomics`,contracts:`contracts`,contract:`contracts`,"get-contract":`contracts`,paper:`paper`,whitepaper:`paper`,"get-whitepaper":`paper`,wallet:`wallet`,connect:`wallet`,"connect-wallet":`wallet`,withdraw:`wallet`,"invoke-luciferwithdraw":`wallet`,"invoke-xebbwithdraw":`wallet`,keel:`keel`,"start-keel":`keel`,"invoke-keel":`keel`,"invoke-agentictrading":`keel`,status:`status`,"get-status":`status`,deploy:`deploy`,"invoke-deploy":`deploy`,launch:`deploy`,"invoke-launch":`deploy`};function v$(e){return`term : The term '${e}' is not recognized as the name of a cmdlet, function, script file, or operable program.
 Check the spelling, or run Get-Help.
 At line:1 char:1
 + ${e}
 + ${`~`.repeat(Math.min(Math.max(e.length,1),28))}
     + CategoryInfo          : ObjectNotFound: (${e}:String) [], CommandNotFoundException
-    + FullyQualifiedErrorId : CommandNotFoundException`}function y$(e){let t=e.trim();if(!t)return{error:``,command:``};let n=t.split(/\s+/),r=n[0].toLowerCase(),i=n.slice(1).join(` `);if(r===`clear`||r===`clear-host`||r===`cls`)return{clear:!0};if(r===`reset-previewledger`||r===`reset-preview`)return{reset:!0};let a=_$[r];if(!a)return{error:v$(n[0]),command:t};let o=g$.find(e=>e.kind===a)?.name??n[0];return{kind:a,command:i?`${o} ${i}`:o,arg:i||void 0}}function b$({active:e,onTitle:t}){let n=K_(),[r,i]=(0,B.useState)([{id:`boot`,kind:`welcome`,command:`Start-Welcome`}]),a=(0,B.useRef)(r),[o,s]=(0,B.useState)(``),c=(0,B.useRef)([]),l=(0,B.useRef)(-1),u=(0,B.useRef)(1),d=(0,B.useRef)(null),f=(0,B.useRef)(null),p=(0,B.useRef)(null),[m,h]=(0,B.useState)(`boot`);function g(e){h(e)}function _(e){a.current=e,i(e)}function v(e){let t=`b${u.current++}`;_([...a.current,{...e,id:t}]),g(t)}function y(e){let t=a.current,n=t.find(t=>t.kind===e.kind);n?(g(n.id),(n.command!==e.command||n.arg!==e.arg||n.text!==e.text)&&_(t.map(t=>t.id===n.id?{...t,command:e.command,arg:e.arg,text:e.text}:t))):v(e)}function b(e){let t=y$(e);if(`clear`in t)_([]);else if(`reset`in t){let e=n.reset();p.current=e.detail,y({kind:`status`,command:`Reset-PreviewLedger`})}else if(`error`in t){if(!t.command)return;y({kind:`error`,command:t.command,text:t.error})}else t.kind===`help`?y({kind:`welcome`,command:`Start-Welcome`}):y({kind:t.kind,command:t.command,arg:t.arg})}(0,B.useEffect)(()=>{if(!e)return;let t=()=>b(`Connect-Wallet`);return window.addEventListener(`xebb-open-wallet`,t),()=>window.removeEventListener(`xebb-open-wallet`,t)},[e]);function x(e){let t=e.trim();t&&(c.current.push(t),l.current=c.current.length,s(``),b(t))}function S(e){if(e.key===`Enter`)e.preventDefault(),x(o);else if(e.key===`ArrowUp`){if(e.preventDefault(),c.current.length===0)return;l.current=Math.max(0,l.current-1),s(c.current[l.current]??``)}else if(e.key===`ArrowDown`){if(e.preventDefault(),l.current>=c.current.length-1){l.current=c.current.length,s(``);return}l.current+=1,s(c.current[l.current]??``)}else if(e.key===`Tab`){e.preventDefault();let t=g$.filter(e=>e.name.toLowerCase().startsWith(o.trim().toLowerCase()));t.length===1&&s(t[0].name)}else e.key===`l`&&e.ctrlKey&&(e.preventDefault(),i([]))}let C=r.find(e=>e.id===m)?.command??`PowerShell`,w=(0,B.useRef)(t);return w.current=t,(0,B.useEffect)(()=>{w.current(C)},[C]),(0,B.useEffect)(()=>{e&&f.current?.focus()},[e]),(0,V.jsxs)(`div`,{className:e?`flex min-h-0 flex-1 flex-col`:`hidden`,hidden:!e,children:[(0,V.jsx)(`div`,{ref:d,className:`bg-ps-bg min-h-0 flex-1 overflow-y-auto px-3 py-3 sm:px-4`,children:(0,V.jsxs)(`div`,{className:`mx-auto flex max-w-4xl flex-col gap-6`,children:[r.length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Scrollback cleared. Get-Help lists the host.`}):null,r.map(e=>(0,V.jsxs)(`article`,{"data-block":e.id,className:e.id===m?`ps-rise`:`hidden`,hidden:e.id!==m,children:[(0,V.jsxs)(`p`,{className:`text-sm break-words`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright`,children:`PS C:\\DevilsAdvocate> `}),(0,V.jsx)(`span`,{className:`text-ps-gold`,children:e.command})]}),(0,V.jsx)(`div`,{className:`mt-3`,children:(0,V.jsx)(x$,{block:e,onRun:e=>x(e),resetDetail:e.command.startsWith(`Reset-`)?p.current:null})})]},e.id))]})}),(0,V.jsx)(`div`,{className:`bg-ps-bg shrink-0 border-t border-ps-fg/15`,children:(0,V.jsx)(`form`,{className:`flex items-center gap-2 px-3 py-2`,onSubmit:e=>{e.preventDefault(),x(o)},children:(0,V.jsxs)(`label`,{className:`min-w-0 flex-1`,children:[(0,V.jsx)(`span`,{className:`sr-only`,children:`PowerShell command`}),(0,V.jsxs)(`span`,{className:`flex min-h-11 items-center gap-2`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright shrink-0 text-sm`,children:[(0,V.jsx)(`span`,{className:`sm:hidden`,children:`PS>`}),(0,V.jsx)(`span`,{className:`hidden sm:inline`,children:`PS C:\\DevilsAdvocate>`})]}),(0,V.jsx)(`input`,{ref:f,suppressHydrationWarning:!0,value:o,onChange:e=>s(e.target.value),onKeyDown:S,spellCheck:!1,autoCapitalize:`off`,autoCorrect:`off`,placeholder:`Get-Help`,className:`text-ps-bright caret-transparent placeholder:text-ps-fg/40 min-w-0 flex-1 bg-transparent text-sm outline-none`}),(0,V.jsx)(`span`,{className:`ps-caret bg-ps-gold inline-block h-4 w-2`,"aria-hidden":!0})]})]})})})]})}function x$({block:e,onRun:t,resetDetail:n}){return e.kind===`error`?(0,V.jsx)(h$,{text:e.text??``}):e.kind===`welcome`?(0,V.jsx)(QQ,{onRun:t}):e.kind===`mine`?(0,V.jsx)(i$,{}):e.kind===`burn`?(0,V.jsx)(o$,{}):e.kind===`marks`?(0,V.jsx)(r$,{}):e.kind===`tokenomics`?(0,V.jsx)(s$,{}):e.kind===`contracts`?(0,V.jsx)(c$,{initial:e.arg},e.arg??`default`):e.kind===`paper`?(0,V.jsx)(u$,{}):e.kind===`emblem`?(0,V.jsx)(d$,{}):e.kind===`wallet`?(0,V.jsx)(a$,{}):e.kind===`keel`?(0,V.jsx)(m$,{}):(0,V.jsxs)(`div`,{className:`flex flex-col gap-2`,children:[n?(0,V.jsx)(`p`,{className:`text-ps-ok text-sm`,children:n}):null,(0,V.jsx)(f$,{})]})}function S$(){return(0,V.jsx)(V_,{children:(0,V.jsx)(G_,{children:(0,V.jsx)(Z_,{children:(0,V.jsx)(w$,{})})})})}function C$(){let e=H_();return e.address?(0,V.jsx)(`span`,{className:`text-ps-gold my-1 mr-2 flex min-h-10 items-center px-2 text-sm`,children:e.short}):(0,V.jsx)(`button`,{type:`button`,disabled:e.busy,onClick:()=>void e.connect(),className:`text-ps-gold hover:bg-ps-fg/10 my-1 mr-2 min-h-10 shrink-0 px-3 text-sm disabled:opacity-40`,children:e.busy?`Connecting`:`Connect`})}function w$(){let e=(0,B.useRef)(1),[t,n]=(0,B.useState)([{id:`t1`}]),[r,i]=(0,B.useState)(`t1`),[a,o]=(0,B.useState)({t1:`PowerShell`}),s=(0,B.useCallback)((e,t)=>{o(n=>n[e]===t?n:{...n,[e]:t})},[]);function c(){let t=`t${++e.current}`;n(e=>[...e,{id:t}]),i(t)}function l(e){n(t=>{if(t.length<2)return t;let n=t.filter(t=>t.id!==e);return i(r=>{if(r!==e)return r;let i=t.findIndex(t=>t.id===e);return n[Math.max(0,i-1)].id}),n})}return(0,V.jsx)(`div`,{className:`bg-ps-chrome h-dvh md:p-3`,children:(0,V.jsxs)(`section`,{className:`border-ps-fg/15 flex h-full min-h-0 flex-col overflow-hidden md:rounded-lg md:border`,children:[(0,V.jsxs)(`header`,{className:`bg-ps-tab flex h-12 shrink-0 items-stretch`,children:[(0,V.jsxs)(`div`,{className:`flex min-w-0 flex-1 items-end gap-1 overflow-x-auto px-1`,children:[t.map(e=>{let n=e.id===r;return(0,V.jsxs)(`div`,{className:`flex h-10 min-w-0 max-w-52 items-stretch rounded-t-md ${n?`bg-ps-bg border-ps-gold border-b-2`:`bg-transparent`}`,children:[(0,V.jsxs)(`button`,{type:`button`,onClick:()=>i(e.id),className:`flex min-w-0 items-center gap-2 px-3 text-left`,children:[(0,V.jsx)(GQ,{className:`size-5 shrink-0`,alt:``}),(0,V.jsx)(`span`,{className:`truncate text-sm ${n?`text-ps-bright`:`text-ps-fg/70`}`,children:a[e.id]??`PowerShell`})]}),t.length>1?(0,V.jsx)(`button`,{type:`button`,"aria-label":`Close ${a[e.id]??`tab`}`,onClick:()=>l(e.id),className:`text-ps-fg/60 hover:text-ps-bright min-w-8 px-1 text-sm`,children:`✕`}):null]},e.id)}),(0,V.jsx)(`button`,{type:`button`,"aria-label":`New tab`,onClick:c,className:`text-ps-bright hover:bg-ps-fg/10 mb-1 min-h-10 min-w-11 rounded-md px-3 text-lg`,children:`+`})]}),(0,V.jsx)(C$,{})]}),t.map(e=>(0,V.jsx)(b$,{active:e.id===r,onTitle:t=>s(e.id,t)},e.id))]})})}var T$=t({component:()=>E$});function E$(){return(0,V.jsx)(S$,{})}export{P as C,Ni as S,fc as _,Th as a,as as b,wh as c,E$ as component,Hc as d,Uc as f,pc as g,dc as h,Ah as i,Ll as l,Dc as m,jh as n,Eh as o,Gc as p,kh as r,Dh as s,T$ as t,ql as u,js as v,It as w,es as x,As as y};
+    + FullyQualifiedErrorId : CommandNotFoundException`}function y$(e){let t=e.trim();if(!t)return{error:``,command:``};let n=t.split(/\s+/),r=n[0].toLowerCase(),i=n.slice(1).join(` `);if(r===`clear`||r===`clear-host`||r===`cls`)return{clear:!0};if(r===`reset-previewledger`||r===`reset-preview`)return{reset:!0};let a=_$[r];if(!a)return{error:v$(n[0]),command:t};let o=g$.find(e=>e.kind===a)?.name??n[0];return{kind:a,command:i?`${o} ${i}`:o,arg:i||void 0}}function b$({active:e,onTitle:t}){let n=K_(),[r,i]=(0,B.useState)([{id:`boot`,kind:`welcome`,command:`Start-Welcome`}]),a=(0,B.useRef)(r),[o,s]=(0,B.useState)(``),c=(0,B.useRef)([]),l=(0,B.useRef)(-1),u=(0,B.useRef)(1),d=(0,B.useRef)(null),f=(0,B.useRef)(null),p=(0,B.useRef)(null),[m,h]=(0,B.useState)(`boot`);function g(e){h(e)}function _(e){a.current=e,i(e)}function v(e){let t=`b${u.current++}`;_([...a.current,{...e,id:t}]),g(t)}function y(e){let t=a.current,n=t.find(t=>t.kind===e.kind);n?(g(n.id),(n.command!==e.command||n.arg!==e.arg||n.text!==e.text)&&_(t.map(t=>t.id===n.id?{...t,command:e.command,arg:e.arg,text:e.text}:t))):v(e)}function b(e){let t=y$(e);if(`clear`in t)_([]);else if(`reset`in t){let e=n.reset();p.current=e.detail,y({kind:`status`,command:`Reset-PreviewLedger`})}else if(`error`in t){if(!t.command)return;y({kind:`error`,command:t.command,text:t.error})}else t.kind===`help`?y({kind:`welcome`,command:`Start-Welcome`}):y({kind:t.kind,command:t.command,arg:t.arg})}(0,B.useEffect)(()=>{if(!e)return;let t=()=>b(`Connect-Wallet`);return window.addEventListener(`xebb-open-wallet`,t),()=>window.removeEventListener(`xebb-open-wallet`,t)},[e]);function x(e){let t=e.trim();t&&(c.current.push(t),l.current=c.current.length,s(``),b(t))}function S(e){if(e.key===`Enter`)e.preventDefault(),x(o);else if(e.key===`ArrowUp`){if(e.preventDefault(),c.current.length===0)return;l.current=Math.max(0,l.current-1),s(c.current[l.current]??``)}else if(e.key===`ArrowDown`){if(e.preventDefault(),l.current>=c.current.length-1){l.current=c.current.length,s(``);return}l.current+=1,s(c.current[l.current]??``)}else if(e.key===`Tab`){e.preventDefault();let t=g$.filter(e=>e.name.toLowerCase().startsWith(o.trim().toLowerCase()));t.length===1&&s(t[0].name)}else e.key===`l`&&e.ctrlKey&&(e.preventDefault(),i([]))}let C=r.find(e=>e.id===m)?.command??`PowerShell`,w=(0,B.useRef)(t);return w.current=t,(0,B.useEffect)(()=>{w.current(C)},[C]),(0,B.useEffect)(()=>{e&&f.current?.focus()},[e]),(0,V.jsxs)(`div`,{className:e?`flex min-h-0 flex-1 flex-col`:`hidden`,hidden:!e,children:[(0,V.jsx)(`div`,{ref:d,className:`bg-ps-bg min-h-0 flex-1 overflow-y-auto px-3 py-3 sm:px-4`,children:(0,V.jsxs)(`div`,{className:`mx-auto flex max-w-4xl flex-col gap-6`,children:[r.length===0?(0,V.jsx)(`p`,{className:`text-ps-fg/60 text-sm`,children:`Scrollback cleared. Get-Help lists the host.`}):null,r.map(e=>(0,V.jsxs)(`article`,{"data-block":e.id,className:e.id===m?`ps-rise`:`hidden`,hidden:e.id!==m,children:[(0,V.jsxs)(`p`,{className:`text-sm break-words`,children:[(0,V.jsx)(`span`,{className:`text-ps-bright`,children:`PS C:\\DevilsAdvocate> `}),(0,V.jsx)(`span`,{className:`text-ps-gold`,children:e.command})]}),(0,V.jsx)(`div`,{className:`mt-3`,children:(0,V.jsx)(x$,{block:e,onRun:e=>x(e),resetDetail:e.command.startsWith(`Reset-`)?p.current:null})})]},e.id))]})}),(0,V.jsx)(`div`,{className:`bg-ps-bg shrink-0 border-t border-ps-fg/15`,children:(0,V.jsx)(`form`,{className:`flex items-center gap-2 px-3 py-2`,onSubmit:e=>{e.preventDefault(),x(o)},children:(0,V.jsxs)(`label`,{className:`min-w-0 flex-1`,children:[(0,V.jsx)(`span`,{className:`sr-only`,children:`PowerShell command`}),(0,V.jsxs)(`span`,{className:`flex min-h-11 items-center gap-2`,children:[(0,V.jsxs)(`span`,{className:`text-ps-bright shrink-0 text-sm`,children:[(0,V.jsx)(`span`,{className:`sm:hidden`,children:`PS>`}),(0,V.jsx)(`span`,{className:`hidden sm:inline`,children:`PS C:\\DevilsAdvocate>`})]}),(0,V.jsx)(`input`,{ref:f,suppressHydrationWarning:!0,value:o,onChange:e=>s(e.target.value),onKeyDown:S,spellCheck:!1,autoCapitalize:`off`,autoCorrect:`off`,placeholder:`Get-Help`,className:`text-ps-bright caret-transparent placeholder:text-ps-fg/40 min-w-0 flex-1 bg-transparent text-sm outline-none`}),(0,V.jsx)(`span`,{className:`ps-caret bg-ps-gold inline-block h-4 w-2`,"aria-hidden":!0})]})]})})})]})}function x$({block:e,onRun:t,resetDetail:n}){return e.kind===`error`?(0,V.jsx)(h$,{text:e.text??``}):e.kind===`welcome`?(0,V.jsx)(QQ,{onRun:t}):e.kind===`mine`?(0,V.jsx)(i$,{}):e.kind===`burn`?(0,V.jsx)(o$,{}):e.kind===`marks`?(0,V.jsx)(r$,{}):e.kind===`tokenomics`?(0,V.jsx)(s$,{}):e.kind===`contracts`?(0,V.jsx)(c$,{initial:e.arg},e.arg??`default`):e.kind===`paper`?(0,V.jsx)(u$,{}):e.kind===`emblem`?(0,V.jsx)(d$,{}):e.kind===`wallet`?(0,V.jsx)(a$,{}):e.kind===`deploy`?(0,V.jsx)(LuDeployWizard,{}):e.kind===`keel`?(0,V.jsx)(m$,{}):(0,V.jsxs)(`div`,{className:`flex flex-col gap-2`,children:[n?(0,V.jsx)(`p`,{className:`text-ps-ok text-sm`,children:n}):null,(0,V.jsx)(f$,{})]})}function S$(){return(0,V.jsx)(V_,{children:(0,V.jsx)(G_,{children:(0,V.jsx)(Z_,{children:(0,V.jsx)(w$,{})})})})}function C$(){let e=H_();return e.address?(0,V.jsx)(`span`,{className:`text-ps-gold my-1 mr-2 flex min-h-10 items-center px-2 text-sm`,children:e.short}):(0,V.jsx)(`button`,{type:`button`,disabled:e.busy,onClick:()=>void e.connect(),className:`text-ps-gold hover:bg-ps-fg/10 my-1 mr-2 min-h-10 shrink-0 px-3 text-sm disabled:opacity-40`,children:e.busy?`Connecting`:`Connect`})}function w$(){let e=(0,B.useRef)(1),[t,n]=(0,B.useState)([{id:`t1`}]),[r,i]=(0,B.useState)(`t1`),[a,o]=(0,B.useState)({t1:`PowerShell`}),s=(0,B.useCallback)((e,t)=>{o(n=>n[e]===t?n:{...n,[e]:t})},[]);function c(){let t=`t${++e.current}`;n(e=>[...e,{id:t}]),i(t)}function l(e){n(t=>{if(t.length<2)return t;let n=t.filter(t=>t.id!==e);return i(r=>{if(r!==e)return r;let i=t.findIndex(t=>t.id===e);return n[Math.max(0,i-1)].id}),n})}return(0,V.jsx)(`div`,{className:`bg-ps-chrome h-dvh md:p-3`,children:(0,V.jsxs)(`section`,{className:`border-ps-fg/15 flex h-full min-h-0 flex-col overflow-hidden md:rounded-lg md:border`,children:[(0,V.jsxs)(`header`,{className:`bg-ps-tab flex h-12 shrink-0 items-stretch`,children:[(0,V.jsxs)(`div`,{className:`flex min-w-0 flex-1 items-end gap-1 overflow-x-auto px-1`,children:[t.map(e=>{let n=e.id===r;return(0,V.jsxs)(`div`,{className:`flex h-10 min-w-0 max-w-52 items-stretch rounded-t-md ${n?`bg-ps-bg border-ps-gold border-b-2`:`bg-transparent`}`,children:[(0,V.jsxs)(`button`,{type:`button`,onClick:()=>i(e.id),className:`flex min-w-0 items-center gap-2 px-3 text-left`,children:[(0,V.jsx)(GQ,{className:`size-5 shrink-0`,alt:``}),(0,V.jsx)(`span`,{className:`truncate text-sm ${n?`text-ps-bright`:`text-ps-fg/70`}`,children:a[e.id]??`PowerShell`})]}),t.length>1?(0,V.jsx)(`button`,{type:`button`,"aria-label":`Close ${a[e.id]??`tab`}`,onClick:()=>l(e.id),className:`text-ps-fg/60 hover:text-ps-bright min-w-8 px-1 text-sm`,children:`✕`}):null]},e.id)}),(0,V.jsx)(`button`,{type:`button`,"aria-label":`New tab`,onClick:c,className:`text-ps-bright hover:bg-ps-fg/10 mb-1 min-h-10 min-w-11 rounded-md px-3 text-lg`,children:`+`})]}),(0,V.jsx)(C$,{})]}),t.map(e=>(0,V.jsx)(b$,{active:e.id===r,onTitle:t=>s(e.id,t)},e.id))]})})}var T$=t({component:()=>E$});function E$(){return(0,V.jsx)(S$,{})}export{P as C,Ni as S,fc as _,Th as a,as as b,wh as c,E$ as component,Hc as d,Uc as f,pc as g,dc as h,Ah as i,Ll as l,Dc as m,jh as n,Eh as o,Gc as p,kh as r,Dh as s,T$ as t,ql as u,js as v,It as w,es as x,As as y};
