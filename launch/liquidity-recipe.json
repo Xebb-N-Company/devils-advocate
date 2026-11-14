@@ -1,0 +1,204 @@
+{
+  "chainId": 8453,
+  "sender": "0xC7877934601C38c1A95DF130dBCd7d9898c55e49",
+  "parameters": {
+    "LP_TOKENS": "3500000000000000000000000",
+    "LP_ETH": "250000000000000000",
+    "LP_BURN_TO": "0x000000000000000000000000000000000000dEaD",
+    "FEE": 10000,
+    "TICK_SPACING": 200,
+    "TICK_LOWER": -887200,
+    "TICK_UPPER": 887200,
+    "SLIPPAGE_BPS": 100,
+    "DEADLINE_SECONDS": 900
+  },
+  "addresses": {
+    "WETH": "0x4200000000000000000000000000000000000006",
+    "NonfungiblePositionManager": "0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1",
+    "UniswapV3Factory": "0x33128a8fC17869897dcE68Ed026d694621f6FDfD",
+    "SwapRouter02": "0x2626664c2603336E57B271c5C0b26F421741e481",
+    "dead": "0x000000000000000000000000000000000000dEaD"
+  },
+  "placeholders": {
+    "{{TOKEN}}": "Lucifer address (20 bytes, from the deploy receipt contractAddress)",
+    "{{TOKEN0}}/{{TOKEN1}}": "WETH and TOKEN sorted ascending by address (see ordering)",
+    "{{AMOUNT0}}/{{AMOUNT1}}": "LP_ETH / LP_TOKENS matched to token0/token1 order",
+    "{{AMOUNT0_MIN}}/{{AMOUNT1_MIN}}": "amount * 9900 / 10000 (integer division)",
+    "{{SQRT_PRICE_X96}}": "computed at runtime from the two amounts (see ordering.js)",
+    "{{DEADLINE}}": "latest block.timestamp (or Date.now()/1000) + 900, decimal seconds",
+    "{{TOKEN_ID}}": "LP NFT id read from the mint receipt (see tokenId)",
+    "note": "In dataTemplate every placeholder stands for one 32-byte ABI word: left-pad the value to 64 hex chars (addresses: 24 zeros + 40 hex; negative int24 -887200 is two's complement = ffff\u2026f27560)."
+  },
+  "ordering": {
+    "rule": "Uniswap sorts by address: token0 = min(TOKEN, WETH), token1 = max(TOKEN, WETH). WETH is 0x4200\u20260006, so TOKEN is token1 iff TOKEN > 0x4200000000000000000000000000000000000006 as a 160-bit integer (true for roughly 3/4 of addresses, and true for the predicted address 0xDfBd\u20266064).",
+    "sqrtPriceX96": "sqrtPriceX96 = floor(sqrt(amount1 / amount0) * 2^96) = isqrt((amount1 << 192) / amount0), with amount0/amount1 in token0/token1 order. This is exactly LuciferLiquidity.sqrtPriceX96(amount0, amount1) in script/Liquidity.s.sol.",
+    "js": "launch/liquidity-math.mjs (BigInt; run `node launch/liquidity-math.mjs <token> <lpTokens> <lpEthWei>` for a JSON of token0, token1, amount0, amount1, sqrtPriceX96)",
+    "jsInline": "const sqrtPriceX96=(a0,a1)=>{const n=(a1<<192n)/a0;let x=n,y=(x+1n)>>1n;while(y<x){x=y;y=(x+n/x)>>1n;}return x;}; const tokenIsToken1=BigInt(token)>BigInt(WETH); const [t0,t1,a0,a1]=tokenIsToken1?[WETH,token,LP_ETH,LP_TOKENS]:[token,WETH,LP_TOKENS,LP_ETH];",
+    "exampleForPredictedAddress": {
+      "tokenIs0": false,
+      "token0": "0x4200000000000000000000000000000000000006",
+      "token1": "0xDfBd0f10397B0b994775d7A95601641570da6064",
+      "amount0": "250000000000000000",
+      "amount1": "3500000000000000000000000",
+      "sqrtPriceX96": "296444639512023442986825350815037"
+    }
+  },
+  "tokenId": {
+    "how": "In the mint receipt, find the log with address == NonfungiblePositionManager, topics[0] == Transfer(address,address,uint256) = 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef and topics[1] == 0x000\u2026000 (from = zero address). tokenId = BigInt(topics[3]). Alternative: decode the IncreaseLiquidity(uint256 indexed tokenId,\u2026) log (topic 0x3067048beee31b25b2f1681f88dac838c8bba36af25bfb2b7cf7473a5847e35f), or decode the mint return data (tokenId, liquidity, amount0, amount1) from eth_call simulation.",
+    "exampleTokenIdOnFork": "6573439"
+  },
+  "deadlineRule": "deadline = current block timestamp + 900 s. Compute right before sending the mint tx; if the user is slow to sign, rebuild the calldata (the NPM reverts with 'Transaction too old').",
+  "slippageRule": "amount0Min = amount0 * 9900 / 10000, amount1Min = amount1 * 9900 / 10000 (1% floor, integer math). Since the pool is created and initialized in the previous step at exactly this price and has no other liquidity, the mint uses \u2248100% of both amounts (fork: 3,499,999.999999999999996443 LUCIFER + 0.24999999999999995 WETH; dust of 3,557 wei LUCIFER and ~50 wei WETH stays in the wallet).",
+  "preconditions": [
+    "Lucifer deployed, treasury balanceOf == LP_TOKENS (3.5M liquid)",
+    "wallet ETH \u2265 0.25 + fees (see ethNeeded)",
+    "steps are sent strictly in order, each after the previous receipt has status 1"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "label": "Wrap 0.25 ETH into WETH",
+      "to": "0x4200000000000000000000000000000000000006",
+      "value": "250000000000000000",
+      "function": "deposit()",
+      "args": [],
+      "dataTemplate": "0xd0e30db0",
+      "exampleData": "0xd0e30db0",
+      "gasEstimate": {
+        "forkGasUsed": 44866,
+        "suggestedGasLimit": 56082,
+        "l1DataFeeWeiAtFork": 5108399179
+      }
+    },
+    {
+      "step": 2,
+      "label": "Approve LUCIFER to the position manager",
+      "to": "{{TOKEN}}",
+      "value": "0",
+      "function": "approve(address,uint256)",
+      "args": [
+        "0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1",
+        "3500000000000000000000000"
+      ],
+      "dataTemplate": "0x095ea7b300000000000000000000000003a520b32c04bf3beef7beb72e919cf822ed34f100000000000000000000000000000000000000000002e5276153cd3fb3800000",
+      "exampleData": "0x095ea7b300000000000000000000000003a520b32c04bf3beef7beb72e919cf822ed34f100000000000000000000000000000000000000000002e5276153cd3fb3800000",
+      "gasEstimate": {
+        "forkGasUsed": 46426,
+        "suggestedGasLimit": 58032,
+        "l1DataFeeWeiAtFork": 5108399179
+      }
+    },
+    {
+      "step": 3,
+      "label": "Approve WETH to the position manager",
+      "to": "0x4200000000000000000000000000000000000006",
+      "value": "0",
+      "function": "approve(address,uint256)",
+      "args": [
+        "0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1",
+        "250000000000000000"
+      ],
+      "dataTemplate": "0x095ea7b300000000000000000000000003a520b32c04bf3beef7beb72e919cf822ed34f100000000000000000000000000000000000000000000000003782dace9d90000",
+      "exampleData": "0x095ea7b300000000000000000000000003a520b32c04bf3beef7beb72e919cf822ed34f100000000000000000000000000000000000000000000000003782dace9d90000",
+      "gasEstimate": {
+        "forkGasUsed": 46031,
+        "suggestedGasLimit": 57538,
+        "l1DataFeeWeiAtFork": 5108399179
+      }
+    },
+    {
+      "step": 4,
+      "label": "Create + initialize the 1% LUCIFER/WETH pool",
+      "to": "0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1",
+      "value": "0",
+      "function": "createAndInitializePoolIfNecessary(address,address,uint24,uint160)",
+      "args": [
+        "{{TOKEN0}}",
+        "{{TOKEN1}}",
+        10000,
+        "{{SQRT_PRICE_X96}}"
+      ],
+      "dataTemplate": "0x13ead562{{TOKEN0}}{{TOKEN1}}0000000000000000000000000000000000000000000000000000000000002710{{SQRT_PRICE_X96}}",
+      "exampleData": "0x13ead5620000000000000000000000004200000000000000000000000000000000000006000000000000000000000000dfbd0f10397b0b994775d7a95601641570da606400000000000000000000000000000000000000000000000000000000000027100000000000000000000000000000000000000e9da84a7fe6e6b4c9ae36329d3d",
+      "gasEstimate": {
+        "forkGasUsed": 4613559,
+        "suggestedGasLimit": 5766948,
+        "l1DataFeeWeiAtFork": 5108399179
+      },
+      "returns": "address pool (also readable via UniswapV3Factory.getPool(TOKEN, WETH, 10000))"
+    },
+    {
+      "step": 5,
+      "label": "Mint the full-range position to the treasury",
+      "to": "0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1",
+      "value": "0",
+      "function": "mint((address,address,uint24,int24,int24,uint256,uint256,uint256,uint256,address,uint256))",
+      "args": [
+        {
+          "token0": "{{TOKEN0}}",
+          "token1": "{{TOKEN1}}",
+          "fee": 10000,
+          "tickLower": -887200,
+          "tickUpper": 887200,
+          "amount0Desired": "{{AMOUNT0}}",
+          "amount1Desired": "{{AMOUNT1}}",
+          "amount0Min": "{{AMOUNT0_MIN}}",
+          "amount1Min": "{{AMOUNT1_MIN}}",
+          "recipient": "0xC7877934601C38c1A95DF130dBCd7d9898c55e49",
+          "deadline": "{{DEADLINE}}"
+        }
+      ],
+      "dataTemplate": "0x88316456{{TOKEN0}}{{TOKEN1}}0000000000000000000000000000000000000000000000000000000000002710fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2766000000000000000000000000000000000000000000000000000000000000d89a0{{AMOUNT0}}{{AMOUNT1}}{{AMOUNT0_MIN}}{{AMOUNT1_MIN}}000000000000000000000000c7877934601c38c1a95df130dbcd7d9898c55e49{{DEADLINE}}",
+      "exampleArgs": {
+        "amount0Min": "247500000000000000",
+        "amount1Min": "3465000000000000000000000",
+        "deadline": 1794666825
+      },
+      "exampleData": "0x883164560000000000000000000000004200000000000000000000000000000000000006000000000000000000000000dfbd0f10397b0b994775d7a95601641570da60640000000000000000000000000000000000000000000000000000000000002710fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2766000000000000000000000000000000000000000000000000000000000000d89a000000000000000000000000000000000000000000000000003782dace9d9000000000000000000000000000000000000000000000002e5276153cd3fb3800000000000000000000000000000000000000000000000000000036f4bf04de8c00000000000000000000000000000000000000000000002ddbe06c10b3243a00000000000000000000000000000c7877934601c38c1a95df130dbcd7d9898c55e49000000000000000000000000000000000000000000000000000000006af87149",
+      "gasEstimate": {
+        "forkGasUsed": 597242,
+        "suggestedGasLimit": 746552,
+        "l1DataFeeWeiAtFork": 7481935123
+      },
+      "returns": "(uint256 tokenId, uint128 liquidity, uint256 amount0, uint256 amount1); read tokenId from the Transfer log (see tokenId)"
+    },
+    {
+      "step": 6,
+      "label": "Burn the LP NFT (send it to 0x\u2026dEaD)",
+      "to": "0x03a520b32C04BF3bEEf7BEb72E919cf822Ed34f1",
+      "value": "0",
+      "function": "safeTransferFrom(address,address,uint256)",
+      "args": [
+        "0xC7877934601C38c1A95DF130dBCd7d9898c55e49",
+        "0x000000000000000000000000000000000000dEaD",
+        "{{TOKEN_ID}}"
+      ],
+      "dataTemplate": "0x42842e0e000000000000000000000000c7877934601c38c1a95df130dbcd7d9898c55e49000000000000000000000000000000000000000000000000000000000000dead{{TOKEN_ID}}",
+      "exampleData": "0x42842e0e000000000000000000000000c7877934601c38c1a95df130dbcd7d9898c55e49000000000000000000000000000000000000000000000000000000000000dead0000000000000000000000000000000000000000000000000000000000644d7f",
+      "gasEstimate": {
+        "forkGasUsed": 95316,
+        "suggestedGasLimit": 119145,
+        "l1DataFeeWeiAtFork": 5108399179
+      },
+      "postcheck": "NonfungiblePositionManager.ownerOf(tokenId) == 0x\u2026dEaD; Lucifer.balanceOf(treasury) is dust (< 1e4 wei)"
+    }
+  ],
+  "postDeployChecks": {
+    "pool": "factory.getPool(TOKEN, WETH, 10000) != 0 and pool.slot0().sqrtPriceX96 == {{SQRT_PRICE_X96}}",
+    "liquidity": "pool.liquidity() > 0 (fork: 935414346693485346395)",
+    "testBuy": "optional: 0.01 WETH via SwapRouter02.exactInputSingle((WETH, TOKEN, 10000, recipient, 0.01e18, 0, 0)) bought 133320507887649095806074 wei LUCIFER on the fork (\u2248133,320 LUCIFER)"
+  },
+  "forkReplay": {
+    "script": "launch/fork-replay.sh",
+    "results": "launch/fork-replay-results.json",
+    "foundryTest": "test/Launch.fork.t.sol",
+    "totalGasUsedAllSteps": 9315019,
+    "ethNeeded": {
+      "lpEth": "0.25",
+      "l2ExecutionFeeEth": "5.5959612496647e-05",
+      "l1DataFeeEth": "5.31963827937e-07",
+      "totalEth": "0.2500564915763246",
+      "recommendedWalletBalanceEth": "0.30"
+    }
+  }
+}
