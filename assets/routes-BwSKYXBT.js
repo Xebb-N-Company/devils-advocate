@@ -3231,14 +3231,14 @@ async function luCheckCode(kit, token) {
     starts = d.immutableStarts || (d.immutableReferences || []).map((r) => r.start);
   if (d.deployedBytecodeLength && bytes.length !== d.deployedBytecodeLength)
     throw Error(
-      `Deployed code is ${bytes.length} bytes; the artifact expects ${d.deployedBytecodeLength}. Stop: this is not the audited build.`,
+      `Deployed code is ${bytes.length} bytes; the artifact expects ${d.deployedBytecodeLength}. Stop: this is not the tested build.`,
     );
   for (let s of starts) bytes.fill(0, s, s + 32);
   if (luBytesToHex(Zg(bytes)) !== d.keccak256.toLowerCase())
     throw Error(
-      "Deployed code does not hash to the artifact's value. Stop: this is not the audited build.",
+      "Deployed code does not hash to the artifact's value. Stop: this is not the tested build.",
     );
-  return "matches the audited build";
+  return "matches the tested build (not audited)";
 }
 async function luHasCode(address) {
   let code = await XZ.getCode({ address });
